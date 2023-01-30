@@ -3,6 +3,7 @@ package matteot92.prenotauncambiolook.model.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,10 +35,10 @@ public class Ordine {
 	private LocalTime orario;
 	@Column(nullable=false)
 	private Integer quantita;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_servizio")
 	private Servizio servizio;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_utente")
 	private Utente utente;
 	

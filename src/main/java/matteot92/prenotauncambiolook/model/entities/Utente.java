@@ -2,6 +2,7 @@ package matteot92.prenotauncambiolook.model.entities;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -39,7 +40,9 @@ public class Utente {
 			columnDefinition = "bit default 0")
 	private Boolean isAdmin;
 	@OneToMany(mappedBy = "utente",
-			   fetch = FetchType.EAGER)
+			   fetch = FetchType.EAGER,
+			   cascade = CascadeType.ALL,
+			   orphanRemoval = true)
 	private Set<Ordine> ordini;
 
 }

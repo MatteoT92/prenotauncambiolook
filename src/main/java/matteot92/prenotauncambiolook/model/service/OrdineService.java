@@ -30,10 +30,11 @@ public class OrdineService {
 		return repository.findById(codice).get();
 	}
 	
-	public Ordine creaOrdine(LocalDate data, LocalTime orario, Utente utente, Servizio servizio) {
+	public Ordine salvaOrdine(LocalDate data, LocalTime orario, Integer quantita, Utente utente, Servizio servizio) {
 		Ordine ordine = new Ordine();
 		ordine.setData(data);
 		ordine.setOrario(orario);
+		ordine.setQuantita(quantita);
 		ordine.setUtente(utente);
 		ordine.setServizio(servizio);
 		return repository.save(ordine);
