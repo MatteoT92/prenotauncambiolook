@@ -60,7 +60,7 @@ public class OrdineService {
 	public void rimuoviOrdine(Ordine ordine) {
 		repository.delete(ordine);
 	}
-	
+
 	public List<Ordine> ordiniGiornata(LocalDate data) {
 		return repository.findByData(data);
 	}
@@ -68,5 +68,5 @@ public class OrdineService {
 	public List<Ordine> ordiniGiornata(LocalDate data, LocalTime orario) {
 		return repository.findByDataAndOrario(data, orario);
 	}
-	
+
 }
