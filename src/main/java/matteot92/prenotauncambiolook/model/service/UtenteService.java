@@ -34,6 +34,7 @@ public class UtenteService {
 	}
 	
 	public Utente registraUtente(Utente utente) {
+		utente.setIsAdmin(false);
 		return repository.save(utente);
 	}
 	

@@ -36,8 +36,7 @@ public class Utente {
 	private String email;
 	@Column(nullable=false)
 	private String password;
-	@Column(nullable=false,
-			columnDefinition = "bit default 0")
+	@Column(nullable=false)
 	private Boolean isAdmin;
 	@OneToMany(mappedBy = "utente",
 			   fetch = FetchType.EAGER,
