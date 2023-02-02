@@ -13,5 +13,5 @@ public interface OrdineRepository extends CrudRepository<Ordine, Long> {
 
 	public List<Ordine> findByData(LocalDate data);
 	public List<Ordine> findByDataAndOrario(LocalDate data, LocalTime orario);
-
+	
 }

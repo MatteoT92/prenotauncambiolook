@@ -8,71 +8,92 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import matteot92.prenotauncambiolook.model.entities.Ordine;
 import matteot92.prenotauncambiolook.model.entities.Utente;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
 
 @Controller
+@SessionAttributes({"username"})
 public class UtenteController {
 
 	private UtenteService utenteService;
-	
+
 	@Autowired
 	public UtenteController(UtenteService utenteService) {
 		this.utenteService = utenteService;
 	}
-	
+
 	@GetMapping("/")
 	public String indexGet() {
 		return "index";
 	}
-	
+
 	@PostMapping("/")
 	public String indexPost() {
 		return "index";
 	}
-	
+
 	@GetMapping("/login")
 	public String loginGet() {
 		return "login";
 	}
 	
+	@GetMapping("/home")
+	public String homeGet() {
+		return "home";
+	}
+
+	@PostMapping("/home")
+	public String homePost() {
+		return "home";
+	}
+
 	@PostMapping("/login")
 	public String loginPost(@ModelAttribute("utente") Utente utente, Model model) {
-		String view = "index";
+		String view = "redirect:/home";
 		if (utenteService.isRegistrato(utente)) { // verifica se l'utente è già registrato
 			if (utenteService.isAdmin(utente)) { // poi controlla se ha il ruolo di amministratore
 				model.addAttribute("username", utente.getUsername());
 				view = "redirect:/admin/pannello";
 			} else {
-				model.addAttribute("msg", "Login effettuato con successo");
 				model.addAttribute("username", utente.getUsername());
 			}
 		} else {
-			model.addAttribute("msg", "Non sei registrato! Effettua prima la registrazione");
 			view = "redirect:/sign";
 		}
 		return view;
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		session = request.getSession();
+		return "index";
+	}
+
 	@GetMapping("/sign")
 	public String sign() {
 		return "sign";
 	}
-	
+
 	@PostMapping("/sign")
 	public String registraUtente(@ModelAttribute("utente") Utente utente, Model model) {
 		utenteService.registraUtente(utente);
-		model.addAttribute("msg", "Ciao " + utente.getUsername());
 		model.addAttribute("username", utente.getUsername());
-		return "index";
+		return "redirect:/login";
 	}
-	
+
 	@GetMapping("/password")
 	public String password() {
 		return "password";
 	}
-	
+
 	@PostMapping("/password")
 	public String modificaPassword(@ModelAttribute("utente") Utente utente, Model model) {
 		Utente utenteCercato = utenteService.cercaUtente(utente.getUsername(), utente.getEmail());
@@ -80,14 +101,14 @@ public class UtenteController {
 			utenteService.modificaPassword(utenteCercato, utente.getPassword());
 			model.addAttribute("username", utente.getUsername());
 		}
-		return "redirect:/login";
+		return "redirect:/home";
 	}
-	
+
 	@GetMapping("/admin/password")
 	public String passwordAdmin() {
 		return "admin/password";
 	}
-	
+
 	@PostMapping("/admin/password")
 	public String modificaPasswordAdmin(@ModelAttribute("utente") Utente utente, Model model) {
 		Utente utenteCercato = utenteService.cercaUtente(utente.getUsername(), utente.getEmail());
@@ -97,15 +118,33 @@ public class UtenteController {
 		}
 		return "redirect:/admin/pannello";
 	}
-	
+
 	@GetMapping("/admin/utenti")
 	public List<Utente> utentiRegistrati(Model model) {
 		model.addAttribute("utenti", utenteService.utentiRegistrati());
 		return utenteService.utentiRegistrati();
 	}
-	
+
 	@GetMapping("/admin/pannello")
 	public String pannelloAmministratore() {
 		return "admin/pannello";
+	}
+	
+	@GetMapping("/ordini")
+	@ResponseBody
+	public List<Ordine> iMieiOrdini(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		Utente utente = utenteService.cercaUtenteDaUsername(username);
+		return (List<Ordine>) utente.getOrdini();
+	}
+	
+	@GetMapping("/cancellati")
+	public String disiscriviti(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		Utente utente = utenteService.cercaUtenteDaUsername(username);
+		utenteService.rimuoviUtente(utente);
+		return "index";
 	}
 }

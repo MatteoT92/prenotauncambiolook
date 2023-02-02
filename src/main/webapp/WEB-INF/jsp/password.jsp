@@ -5,8 +5,12 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Prenota Un Cambio Look</title>
+		<link rel="stylesheet" href="/css/style.css">
 	</head>
 	<body>
+		<header>
+			<h1>Prenota Un Cambio Look</h1>
+		</header>
 		<form method="post" action="/password", modelAttribute="utente">
 		    <span>Username : </span><br>
 		    <input type="text" name="username" /><br>

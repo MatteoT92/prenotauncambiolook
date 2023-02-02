@@ -69,5 +69,13 @@ public class OrdineService {
 	public List<Ordine> ordiniGiornata(LocalDate data, LocalTime orario) {
 		return repository.findByDataAndOrario(data, orario);
 	}
+	
+	public Integer prenotazioniPerGiornata(LocalDate data) {
+		return ordiniGiornata(data).size();
+	}
+	
+	public Integer prenotazioniPerGiornata(LocalDate data, LocalTime orario) {
+		return ordiniGiornata(data, orario).size();
+	}
 
 }

@@ -58,5 +58,5 @@ public class UtenteService {
 	public Utente cercaUtenteDaEmail(String email) {
 		return repository.findByEmail(email).get();
 	}
-	
+
 }

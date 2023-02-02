@@ -7,7 +7,12 @@
 		<title>Prenota Un Cambio Look</title>
 	</head>
 	<body>
-		<p>Benvenuto Admin</p>
+		<div>
+			<span>Username: </span><% HttpSession hs=request.getSession();
+								      String sesstionAttr=(String)session.getAttribute("username");
+								      out.println(sesstionAttr);
+								  	%>
+		</div>
 		<span><a href="/">Home</a></span>
 		<span><a href="/admin/utenti">Utenti</a></span>
 		<span><a href="/admin/servizi">Servizi</a></span>
