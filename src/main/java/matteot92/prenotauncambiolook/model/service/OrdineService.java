@@ -71,11 +71,11 @@ public class OrdineService {
 	}
 	
 	public Integer prenotazioniPerGiornata(LocalDate data) {
-		return ordiniGiornata(data).size();
+		return repository.getPrenotazioniByData(data);
 	}
 	
 	public Integer prenotazioniPerGiornata(LocalDate data, LocalTime orario) {
-		return ordiniGiornata(data, orario).size();
+		return repository.getPrenotazioniByDataAndOrario(data, orario);
 	}
 
 }

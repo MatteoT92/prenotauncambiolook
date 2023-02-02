@@ -8,11 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import matteot92.prenotauncambiolook.model.entities.Servizio;
 import matteot92.prenotauncambiolook.model.service.ServizioService;
 
 @Controller
+@SessionAttributes({"servizi", "descrizione", "prezzo"})
 public class ServizioController {
 
 	private ServizioService servizioService;

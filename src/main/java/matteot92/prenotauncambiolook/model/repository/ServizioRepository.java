@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 import matteot92.prenotauncambiolook.model.entities.Servizio;
 
 @Repository
-public interface ServizioRepository extends CrudRepository<Servizio, String> {
+public interface ServizioRepository extends CrudRepository<Servizio, Long> {
 
+	public Servizio findByDescrizione(String descrizione);
 	public List<Servizio> findByPrezzo(Double prezzo);
+	public Servizio findByDescrizioneAndPrezzo(String descrizione, Double prezzo);
 
 }

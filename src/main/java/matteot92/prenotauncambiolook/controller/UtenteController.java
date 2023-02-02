@@ -1,5 +1,7 @@
 package matteot92.prenotauncambiolook.controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,24 +10,30 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import matteot92.prenotauncambiolook.model.entities.Ordine;
+import matteot92.prenotauncambiolook.model.entities.Servizio;
 import matteot92.prenotauncambiolook.model.entities.Utente;
+import matteot92.prenotauncambiolook.model.service.OrdineService;
+import matteot92.prenotauncambiolook.model.service.ServizioService;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
 
 @Controller
-@SessionAttributes({"username"})
+@SessionAttributes({"username", "utenti", "ordini", "timestamp"})
 public class UtenteController {
 
 	private UtenteService utenteService;
+	private ServizioService servizioService;
+	private OrdineService ordineService;
 
 	@Autowired
-	public UtenteController(UtenteService utenteService) {
+	public UtenteController(UtenteService utenteService, ServizioService servizioService, OrdineService ordineService) {
 		this.utenteService = utenteService;
+		this.servizioService = servizioService;
+		this.ordineService = ordineService;
 	}
 
 	@GetMapping("/")
@@ -131,12 +139,12 @@ public class UtenteController {
 	}
 	
 	@GetMapping("/ordini")
-	@ResponseBody
-	public List<Ordine> iMieiOrdini(Model model, HttpServletRequest request) {
+	public String iMieiOrdini(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		Utente utente = utenteService.cercaUtenteDaUsername(username);
-		return (List<Ordine>) utente.getOrdini();
+		model.addAttribute("ordini", utente.getOrdini());
+		return "ordini";
 	}
 	
 	@GetMapping("/cancellati")
@@ -146,5 +154,17 @@ public class UtenteController {
 		Utente utente = utenteService.cercaUtenteDaUsername(username);
 		utenteService.rimuoviUtente(utente);
 		return "index";
+	}
+	
+	@PostMapping("/ordina")
+	public String effettuaOrdine(@ModelAttribute("ordine") Ordine ordine, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		Utente utente = utenteService.cercaUtenteDaUsername(username);
+		String descrizione = (String) session.getAttribute("descrizione");
+		String prezzo = (String) session.getAttribute("prezzo");
+		Servizio servizio = servizioService.cercaServizioPerDescrizionePrezzo(descrizione, Double.valueOf(prezzo));
+		//ordineService.salvaOrdine(data, orario, quantita, utente, servizio);
+		return "ordini";
 	}
 }

@@ -48,12 +48,20 @@ public class ServizioService {
 		repository.delete(servizio);
 	}
 	
-	public Servizio cercaServizio(String codice) {
+	public Servizio cercaServizio(Long codice) {
 		return repository.findById(codice).get();
 	}
 	
-	public List<Servizio> serviziAventePrezzo(Double prezzo) {
+	public Servizio cercaServizioPerDescrizione(String descrizione) {
+		return repository.findByDescrizione(descrizione);
+	}
+	
+	public List<Servizio> cercaServizioPerPrezzo(Double prezzo) {
 		return repository.findByPrezzo(prezzo);
 	}
 	
+	public Servizio cercaServizioPerDescrizionePrezzo(String descrizione, Double prezzo) {
+		return repository.findByDescrizioneAndPrezzo(descrizione, prezzo);
+	}
+
 }

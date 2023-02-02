@@ -9,8 +9,6 @@
 	<body>
 		<label><b>Crea nuovo servizio:</b></label><br><br>
 		<form method="post" action="/admin/servizi", modelAttribute="servizio">
-			<span>Codice : </span><br>
-			<input type="text" name="id" /><br>
 			<span>Descrizione : </span><br>
 			<input type="text" name="descrizione" /><br>
 			<span>Prezzo : </span><br>

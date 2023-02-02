@@ -1,9 +1,5 @@
 @charset "ISO-8859-1";
 
-body {
-	margin: 0;
-}
-
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	transition: 0.3s;
@@ -15,26 +11,34 @@ img {
 	border-radius: 5px 5px 0 0;
 }
 
-h1 {
-	text-align: center;
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("/img/salone.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+    text-align: center;
 }
 
 .log-container {
-	margin: 10px auto;
-	width: 200px;
-	height: 200px;
-	position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.log {
-	position: absolute;
-	width: 30px;
-	height: 30px;
-	top: 50%;
-	left: 50%;
-	margin: -15px 0 0 -15px;
+.ask {
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
 }
-
 
 .navbar {
   width: 100%;
@@ -56,10 +60,6 @@ h1 {
   background-color: #000;
 }
 
-.navbar a.active {
-  background-color: #04AA6D;
-}
-
 @media screen and (max-width: 500px) {
   .navbar a {
     float: none;
@@ -70,5 +70,32 @@ h1 {
 }
 
 #user {
-	
+	width: 150px;
+	position: absolute;
+	top: 200px;
+	left: 1000px;
+}
+
+#user a {
+  float: left;
+  padding: 12px;
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
