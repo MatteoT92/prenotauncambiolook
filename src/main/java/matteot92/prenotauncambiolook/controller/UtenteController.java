@@ -156,7 +156,7 @@ public class UtenteController {
 		return "index";
 	}
 	
-	@PostMapping("/ordina")
+	@PostMapping("/ordine")
 	public String effettuaOrdine(@ModelAttribute("ordine") Ordine ordine, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
@@ -164,7 +164,9 @@ public class UtenteController {
 		String descrizione = (String) session.getAttribute("descrizione");
 		String prezzo = (String) session.getAttribute("prezzo");
 		Servizio servizio = servizioService.cercaServizioPerDescrizionePrezzo(descrizione, Double.valueOf(prezzo));
-		//ordineService.salvaOrdine(data, orario, quantita, utente, servizio);
-		return "ordini";
+		if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) <= 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
+			ordineService.salvaOrdine(ordine.getData(), ordine.getOrario(), ordine.getQuantita(), utente, servizio);
+		}
+		return "servizi";
 	}
 }

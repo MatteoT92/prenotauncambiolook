@@ -14,7 +14,7 @@
 		<header>
 			<h1>Prenota Un Cambio Look</h1>
 		</header>
-		<jsp:useBean id="servizi" type="java.util.List" scope="request"/>
+		<jsp:useBean id="servizi" type="java.util.List" scope="session"/>
 		<%
 		  for(Iterator it = servizi.iterator(); it.hasNext(); ){
 		    Servizio servizio = (Servizio)it.next();
@@ -34,8 +34,8 @@
 			        %>
 			        <h4>Prezzo <% out.println(prezzo); %> Euro</h4>
 		        </div>
-		       	<form method="post" modelAttribute="ordine">
-		       		<span>Data : </span><input type="data" name="data"/>
+		       	<form method="post" modelAttribute="ordine" action="/ordine">
+		       		<span>Data : </span><input type="date" name="data"/>
 		       		<% 
 		       		String data = request.getParameter("data");
 		       		session.setAttribute("data", data);
