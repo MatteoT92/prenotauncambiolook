@@ -19,7 +19,7 @@
 		  for(Iterator it = servizi.iterator(); it.hasNext(); ){
 		    Servizio servizio = (Servizio)it.next();
 		%>
-		<div class="card">
+		<div class="card d-inline-block">
 		    <img src="/img/ph.png" alt="Servizio Estetico" style="width:10%">
 		    <div class="container">
 		    	<div>

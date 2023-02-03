@@ -164,7 +164,7 @@ public class UtenteController {
 		String descrizione = (String) session.getAttribute("descrizione");
 		String prezzo = (String) session.getAttribute("prezzo");
 		Servizio servizio = servizioService.cercaServizioPerDescrizionePrezzo(descrizione, Double.valueOf(prezzo));
-		if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) <= 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
+		if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) < 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
 			ordineService.salvaOrdine(ordine.getData(), ordine.getOrario(), ordine.getQuantita(), utente, servizio);
 		}
 		return "servizi";
