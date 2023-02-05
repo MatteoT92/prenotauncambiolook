@@ -12,9 +12,8 @@
 		<header>
 			<h1>Prenota Un Cambio Look</h1>
 		</header>
-		<br><br>
 		<div class="log-container">
-			<form method="post" action="/login", modelAttribute="utente" class="log">
+			<form method="post" action="/login" modelAttribute="utente" class="log">
 			    <span>Username</span><br>
 			    <input type="text" name="username" /><br>
 			    <span>Email</span><br>

@@ -14,11 +14,11 @@
 		</header>
 		<div class="log-container">
 			<form method="post" action="/home" modelAttribute="utente" class="log">
-			    <span>Username : </span><br>
+			    <span>Username</span><br>
 			    <input type="text" name="username" /><br>
-			    <span>Email : </span><br>
+			    <span>Email</span><br>
 			    <input type="text" name="email" /><br>
-			    <span>Nuova Password : </span><br>
+			    <span>Nuova Password</span><br>
 			    <input type="password" name="password" /><br>
 			    <br>
 			    <input type="submit" value="Conferma"/>

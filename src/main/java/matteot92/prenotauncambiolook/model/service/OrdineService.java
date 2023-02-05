@@ -78,5 +78,9 @@ public class OrdineService {
 	public Integer prenotazioniPerGiornata(LocalDate data, LocalTime orario) {
 		return repository.getPrenotazioniByDataAndOrario(data, orario);
 	}
+	
+	public List<Ordine> prenotazioniPerCliente(Utente cliente) {
+		return repository.findByUtente(cliente);
+	}
 
 }

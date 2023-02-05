@@ -25,7 +25,7 @@
 		<div class="container d-flex">
 			<div class="row">
 				<div class="col">
-					<div id="user">
+					<div class="user">
 						<a href="/ordini">I miei ordini</a><br>
 						<a href="/password">Modifica Password</a><br>
 						<a href="/cancellati">Cancellati</a><br>

@@ -22,7 +22,7 @@ import matteot92.prenotauncambiolook.model.service.ServizioService;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
 
 @Controller
-@SessionAttributes({"username", "utenti", "ordini", "timestamp"})
+@SessionAttributes({"username", "utenti", "ordini"})
 public class UtenteController {
 
 	private UtenteService utenteService;
@@ -127,14 +127,19 @@ public class UtenteController {
 		return "redirect:/admin/pannello";
 	}
 
-	@GetMapping("/admin/utenti")
+	@GetMapping("/admin/clienti")
 	public List<Utente> utentiRegistrati(Model model) {
 		model.addAttribute("utenti", utenteService.utentiRegistrati());
 		return utenteService.utentiRegistrati();
 	}
 
 	@GetMapping("/admin/pannello")
-	public String pannelloAmministratore() {
+	public String pannelloAdminGet() {
+		return "admin/pannello";
+	}
+	
+	@PostMapping("/admin/pannello")
+	public String pannelloAdminPost() {
 		return "admin/pannello";
 	}
 	
@@ -143,7 +148,7 @@ public class UtenteController {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		Utente utente = utenteService.cercaUtenteDaUsername(username);
-		model.addAttribute("ordini", utente.getOrdini());
+		model.addAttribute("ordini", ordineService.prenotazioniPerCliente(utente));
 		return "ordini";
 	}
 	

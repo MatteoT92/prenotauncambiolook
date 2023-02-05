@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*"%>
+<%@ page language="java" import="matteot92.prenotauncambiolook.model.entities.Ordine" %>
 <!DOCTYPE html>
-<html>
+	<html>
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Prenota Un Cambio Look</title>
@@ -23,15 +25,31 @@
 															%></a>
 			</div>
 		</header>
-		<div class="container d-flex">
-			<div class="row">
-				<div class="col">
-					<div class="user">
-						<a href="/admin/password">Modifica Password</a><br>
-						<a href="/logout">Logout</a><br>
-					</div>
-				</div>
-			</div>
-		</div>
+		<jsp:useBean id="appuntamenti" type="java.util.List" scope="request"/>
+		<table>
+		    <tr>
+		        <th>ID Ordine</th>
+		        <th>Data</th>
+		        <th>Orario</th>
+		        <th>Quantità</th>
+		        <th>Cliente</th>
+		        <th>Servizio</th>
+		    </tr>
+		<%
+		  for(Iterator it = appuntamenti.iterator(); it.hasNext(); ){
+		    Ordine ordine = (Ordine)it.next();
+		%>
+		    <tr>
+		    	<td><%= ordine.getId() %></td>
+			    <td><%= ordine.getData() %></td>
+			    <td><%= ordine.getOrario() %></td>
+			    <td><%= ordine.getQuantita() %></td>
+			    <td><%= ordine.getUtente().getUsername() %></td>
+			    <td><%= ordine.getServizio().getDescrizione() %></td>
+			</tr>
+		<%
+		  }
+		%>
+		</table>
 	</body>
 </html>

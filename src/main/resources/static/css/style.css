@@ -57,7 +57,7 @@ header {
 }
 
 .navbar a:hover {
-  background-color: #000;
+  background-color: #555;
 }
 
 @media screen and (max-width: 500px) {
@@ -69,19 +69,25 @@ header {
   }
 }
 
-#user {
+.user {
 	width: 150px;
 	position: absolute;
 	top: 200px;
-	left: 1000px;
+	left: 1150px;
 }
 
-#user a {
+.user a {
   float: left;
   padding: 12px;
   color: black;
   text-decoration: none;
   font-size: 20px;
+  font-weight: bold;
+}
+
+.user a:hover {
+  color: blue;
+  font-weight: bold;
 }
 
 table {
@@ -98,4 +104,33 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.navbar2 {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar2 a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width: 20%; /* Five links of equal widths */
+  text-align: center;
+}
+
+.navbar2 a:hover {
+  background-color: #000;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar2 a {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
 }
