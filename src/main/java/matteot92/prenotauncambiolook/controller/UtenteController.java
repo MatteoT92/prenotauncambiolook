@@ -1,7 +1,5 @@
 package matteot92.prenotauncambiolook.controller;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +12,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import matteot92.prenotauncambiolook.model.entities.Ordine;
-import matteot92.prenotauncambiolook.model.entities.Servizio;
 import matteot92.prenotauncambiolook.model.entities.Utente;
 import matteot92.prenotauncambiolook.model.service.OrdineService;
 import matteot92.prenotauncambiolook.model.service.ServizioService;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
 
 @Controller
-@SessionAttributes({"username", "utenti", "ordini"})
+@SessionAttributes({"username", "utenti"})
 public class UtenteController {
 
 	private UtenteService utenteService;
@@ -143,15 +139,6 @@ public class UtenteController {
 		return "admin/pannello";
 	}
 	
-	@GetMapping("/ordini")
-	public String iMieiOrdini(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		Utente utente = utenteService.cercaUtenteDaUsername(username);
-		model.addAttribute("ordini", ordineService.prenotazioniPerCliente(utente));
-		return "ordini";
-	}
-	
 	@GetMapping("/cancellati")
 	public String disiscriviti(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -161,17 +148,4 @@ public class UtenteController {
 		return "index";
 	}
 	
-	@PostMapping("/ordine")
-	public String effettuaOrdine(@ModelAttribute("ordine") Ordine ordine, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		Utente utente = utenteService.cercaUtenteDaUsername(username);
-		String descrizione = (String) session.getAttribute("descrizione");
-		String prezzo = (String) session.getAttribute("prezzo");
-		Servizio servizio = servizioService.cercaServizioPerDescrizionePrezzo(descrizione, Double.valueOf(prezzo));
-		if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) < 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
-			ordineService.salvaOrdine(ordine.getData(), ordine.getOrario(), ordine.getQuantita(), utente, servizio);
-		}
-		return "servizi";
-	}
 }

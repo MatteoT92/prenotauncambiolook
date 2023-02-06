@@ -38,11 +38,14 @@
 		    Ordine ordine = (Ordine)it.next();
 		%>
 		    <tr>
-		    	<td><%= ordine.getId() %></td>
-			    <td><%= ordine.getData() %></td>
-			    <td><%= ordine.getOrario() %></td>
-			    <td><%= ordine.getQuantita() %></td>
-			    <td><%= ordine.getServizio().getDescrizione() %></td>
+			    <form action="/rimuovi-ordine" method="post" modelAttribute="ordine">
+			    	<td><input type="number" name="id" value="<%= ordine.getId() %>" readonly/></td>
+				    <td><input type="date" name="data" value="<%= ordine.getData() %>" readonly/></td>
+				    <td><input type="time" name="orario" value="<%= ordine.getOrario() %>" readonly/></td>
+				    <td><input type="number" name="quantita" value="<%= ordine.getQuantita() %>" readonly/></td>
+				    <td><%= ordine.getServizio().getDescrizione() %></td>
+				    <td><input type="submit" value="Rimuovi" class="btn btn-danger"></td>
+				</form>
 			</tr>
 		<%
 		  }
