@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -148,4 +149,13 @@ public class UtenteController {
 		return "index";
 	}
 	
+	@RequestMapping("/chat")
+	public String chat() {
+		return "chat";
+	}
+	
+	@RequestMapping("/admin/chat")
+	public String chatAdmin() {
+		return "admin/chat";
+	}
 }

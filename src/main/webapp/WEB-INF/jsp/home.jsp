@@ -15,7 +15,7 @@
 			<div class="navbar">
 			   <a href="/home"><i class="fa fa-fw fa-home"></i> Home</a> 
 			   <a href="/servizi"><i class="fa fa-fw fa-search"></i> Servizi</a> 
-			   <a href=""><i class="fa fa-fw fa-envelope"></i> Contattaci</a>
+			   <a href="/chat"><i class="fa fa-fw fa-envelope"></i> Contattaci</a>
 			   <a href=""><i class="fa fa-fw fa-user"></i> <%
 															String username = (String) session.getAttribute("username");
 															out.println(username);
