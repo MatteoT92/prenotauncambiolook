@@ -19,6 +19,7 @@
 			   <a href="/admin/servizi"><i class="fa fa-fw fa-search"></i> Servizi</a> 
 			   <a href="/admin/ordini"><i class="fa fa-fw fa-search"></i> Ordini</a>
 			   <a href="/admin/clienti"><i class="fa fa-fw fa-search"></i> Clienti</a>
+			   <a href="/admin/chat"><i class="fa fa-fw fa-envelope"></i> Chat</a>
 			   <a href=""><i class="fa fa-fw fa-user"></i> <%
 															String username = (String) session.getAttribute("username");
 															out.println(username);

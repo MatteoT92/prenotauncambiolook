@@ -34,12 +34,12 @@ public class OrdineController {
 		this.servizioService = servizioService;
 	}
 	
-	@GetMapping("/admin/ordini")
-	public List<Ordine> listaPrenotazioni(Model model) {
-		model.addAttribute("appuntamenti", ordineService.listaOrdini());
-		return ordineService.listaOrdini();
-	}
+	// UTENTE CLIENTE
 	
+	/**
+	 * Metodo che mostra per l'utente cliente in sessione
+	 * tutti i suoi ordini effettuati
+	 */
 	@GetMapping("/ordini")
 	public String iMieiOrdini(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -49,6 +49,14 @@ public class OrdineController {
 		return "ordini";
 	}
 	
+	/**
+	 * Metodo che consente all'utente cliente in sessione
+	 * di effettuare un ordine, scegliendo fra i servizi disponibili,
+	 * inserendo data con orario e quantità.
+	 * L'ordine verrà poi salvato sul database solo se per quella data e orario
+	 * non vi sono già 3 prenotazioni effettuate (siccome vi sono solo 3 parrucchieri disponibili).
+	 * L'utente verrà reindirizzato sulla pagina dei servizi offerti dal salone
+	 */
 	@PostMapping("/ordine")
 	public String effettuaOrdine(@ModelAttribute("ordine") Ordine ordine, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -63,10 +71,27 @@ public class OrdineController {
 		return "servizi";
 	}
 	
+	/**
+	 * Metodo che consente ad un utente cliente di poter rimuovere un ordine
+	 * da lui precedentemente effettuato.
+	 * Il cliente verrà reindirizzato sulla pagina dei suoi ordini
+	 */
 	@PostMapping("/rimuovi-ordine")
 	public String rimuoviOrdine(@ModelAttribute("ordine") Ordine ordine) {
 		ordineService.rimuoviOrdine(ordine);
 		return "redirect:/ordini";
 	}
 
+	// UTENTE ADMIN
+	
+	/**
+	 * Metodo che mostra ad un utente admin la lista degli ordini
+	 * effettuati da tutti i suoi clienti
+	 */
+	@GetMapping("/admin/ordini")
+	public List<Ordine> listaPrenotazioni(Model model) {
+		model.addAttribute("appuntamenti", ordineService.listaOrdini());
+		return ordineService.listaOrdini();
+	}
+	
 }

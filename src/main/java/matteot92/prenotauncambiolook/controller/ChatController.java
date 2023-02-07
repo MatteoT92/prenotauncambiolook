@@ -14,7 +14,13 @@ import java.util.Date;
 @Controller
 @SessionAttributes({"username"})
 public class ChatController {
+	
+	// UTENTE CLIENTE
 
+	/**
+	 * Metodo che consente ad un utente cliente di poter inviare un messaggio
+	 * sul canale topic/chat utilizzando il WebSocket
+	 */
     @MessageMapping("/chat")
     @SendTo("/topic/chat")
     public MessageToSend send(ChatMessage message) throws Exception {
@@ -23,10 +29,15 @@ public class ChatController {
         outMessage.setSender(message.getSender());
         outMessage.setText(message.getText());
         outMessage.setTime(new SimpleDateFormat("HH:mm dd-MM-yyyy").format(new Date()));
-        
         return outMessage;
     }
     
+    // UTENTE ADMIN
+    
+    /**
+	 * Metodo che consente ad un utente admin di poter inviare un messaggio
+	 * sul canale topic/chat utilizzando il WebSocket
+	 */
     @MessageMapping("/admin/chat")
     @SendTo("/topic/chat")
     public MessageToSend sendAdmin(ChatMessage message) throws Exception {
@@ -35,7 +46,6 @@ public class ChatController {
         outMessage.setSender(message.getSender());
         outMessage.setText(message.getText());
         outMessage.setTime(new SimpleDateFormat("HH:mm dd-MM-yyyy").format(new Date()));
-        
         return outMessage;
     }
     

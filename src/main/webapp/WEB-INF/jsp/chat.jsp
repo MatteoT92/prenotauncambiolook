@@ -28,7 +28,7 @@
         <div class="container2">
             <div class="connect-container">
                 <div class="input-container">
-                    <input type="text" id="sender" />
+                    <input type="text" id="sender" value="<%= username %>" />
                 </div>
                 <div>
                     <button id="button-connect" onclick="connect();">

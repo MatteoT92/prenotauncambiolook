@@ -24,20 +24,36 @@ public class ServizioController {
 		this.servizioService = servizioService;
 	}
 	
+	// UTENTE CLIENTE
+	
+	/**
+	 * Metodo che mostra ad un utente cliente tutti i servizi offerti dal salone
+	 */
 	@GetMapping("/servizi")
 	public List<Servizio> serviziDisponibili(Model model) {
 		model.addAttribute("servizi", servizioService.serviziOfferti());
 		return servizioService.serviziOfferti();
 	}
 	
+	// UTENTE ADMIN
+	
+	/**
+	 * Metodo che reindirizza un utente admin sulla pagina dei servizi
+	 */
 	@GetMapping("/admin/servizi")
 	public String servizi() {
 		return "admin/servizi";
 	}
 	
+	/**
+	 * Metodo che permette ad un admin di poter aggiungere nuovi servizi compilando il form
+	 * e il nuovo servizio verrà salvato sul database.
+	 * L'admin verrà poi reindirizzato sulla pagina del pannello di controllo
+	 */
 	@PostMapping("/admin/servizi")
 	public String aggiungiServizio(@ModelAttribute("servizio") Servizio servizio) {
 		servizioService.aggiungiServizio(servizio);
 		return "redirect:/admin/pannello";
 	}
+	
 }
