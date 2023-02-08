@@ -81,6 +81,18 @@ public class OrdineController {
 		ordineService.rimuoviOrdine(ordine);
 		return "redirect:/ordini";
 	}
+	
+	// Metodo che reindirizza alla pagina per effettuare il pagamento di un ordine
+	@GetMapping("/pagamento")
+	public String pagamento() {
+		return "pagamento";
+	}
+	
+	// Metodo che effettua il pagamento di un ordine e reindirizza alla pagina dei servizi disponibili
+	@PostMapping("/pagamento")
+	public String effettuaPagamento(@ModelAttribute("ordine") Ordine ordine) {
+		return "redirect:/servizi";
+	}
 
 	// UTENTE ADMIN
 	

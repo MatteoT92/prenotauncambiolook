@@ -14,7 +14,7 @@
 			<h1>Prenota Un Cambio Look</h1>
 		</header>
 		<div class="log-container">
-			<form method="post" action="/login" modelAttribute="utente" class="log">
+			<form method="post" action="/login" modelAttribute="utente" class="col">
 			    <span>Username</span><br>
 			    <input type="text" name="username" /><br>
 			    <span>Email</span><br>
@@ -24,6 +24,19 @@
 			    <br>
 			    <input type="submit" value="Accedi"/>
 			</form>
+			<div class="col">
+				<div class="row">
+					<a href="#" class="btn" style="background-color:blue; color:white; padding:2%; margin:2%;">
+			          <i class="fa fa-facebook fa-fw"></i><strong> Login con Facebook</strong>
+			        </a>
+			        <a href="#" class="btn" style="background-color:#007fff; color:white; padding:2%; margin:2%;">
+			          <i class="fa fa-twitter fa-fw"></i><strong> Login con Twitter</strong>
+			        </a>
+			        <a href="#" class="btn" style="background-color:red; color:white; padding:2%; margin:2%;">
+			          <i class="fa fa-google fa-fw"></i><strong> Login con Google</strong>
+			        </a>
+				</div>
+		    </div>
 		</div>
 		<br><br>
 		<div class="ask">
