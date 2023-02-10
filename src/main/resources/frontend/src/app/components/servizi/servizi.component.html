@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<ng-template>
+  <div class="servizi">
+    <div class="card d-inline-block" *ngFor="let servizio of servizi" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
+      <div class="container d-inline">
+        <img src="/assets/img/ph.png" alt="Servizio Estetico" style="width:10%" class="d-inline">
+        <h4><b>{{servizio.descrizione}}</b></h4>
+        <h4>{{servizio.prezzo}} EURO</h4>
+        <form method="post" modelAttribute="ordine" action="/ordine">
+          <span>Data : </span><input type="date" name="data"/>
+          <span>Orario : </span><input type="time" name="orario"/>
+          <span>Quantità : </span><input type="number" name="quantita"/>
+          <input type="submit" value="Ordina" class="btn btn-success">
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
