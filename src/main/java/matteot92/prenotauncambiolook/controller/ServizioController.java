@@ -33,6 +33,7 @@ public class ServizioController {
 	 * Metodo che mostra ad un utente cliente tutti i servizi offerti dal salone
 	 */
 	@GetMapping("/servizi")
+	@CrossOrigin(origins = "http://localhost:4200/servizi")
 	public List<Servizio> serviziDisponibili(Model model) {
 		model.addAttribute("servizi", servizioService.serviziOfferti());
 		return servizioService.serviziOfferti();
