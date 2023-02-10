@@ -3,6 +3,8 @@ package matteot92.prenotauncambiolook.model.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +25,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
+@JsonPropertyOrder({ "id", "data", "orario", "quantita", "servizio", "utente"})
 public class Ordine {
 	
 	@Id

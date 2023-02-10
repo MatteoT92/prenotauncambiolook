@@ -6,26 +6,20 @@ import { ServizioApiService } from 'src/app/services/servizio-api.service';
 @Component({
   selector: 'app-servizi',
   templateUrl: './servizi.component.html',
-  styleUrls: ['./servizi.component.css'],
-  template: `
-    {{ servizi }}
-  `
+  styleUrls: ['./servizi.component.css']
 })
 export class ServiziComponent implements OnInit {
 
-  servizi: any;
+  servizi?: Servizio[];
 
   constructor(private api: ServizioApiService) {
 
   }
 
   ngOnInit() {
-    /*
-    this.api.serviziDisponibili().subscribe((servizi: any) => {
-      this.servizi = Object.keys(servizi).map((key) => {return servizi[key]});
-    });
-    */
+
    this.serviziDisponibili();
+
   }
 
   serviziDisponibili(): void {

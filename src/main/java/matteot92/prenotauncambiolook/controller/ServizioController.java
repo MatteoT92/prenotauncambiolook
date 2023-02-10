@@ -3,13 +3,18 @@ package matteot92.prenotauncambiolook.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import matteot92.prenotauncambiolook.model.entities.Servizio;
 import matteot92.prenotauncambiolook.model.service.ServizioService;
@@ -32,11 +37,18 @@ public class ServizioController {
 	/**
 	 * Metodo che mostra ad un utente cliente tutti i servizi offerti dal salone
 	 */
-	@GetMapping("/servizi")
+	@RequestMapping(value = "/servizi", method = {RequestMethod.GET, RequestMethod.POST})
 	@CrossOrigin(origins = "http://localhost:4200/servizi")
-	public List<Servizio> serviziDisponibili(Model model) {
-		model.addAttribute("servizi", servizioService.serviziOfferti());
-		return servizioService.serviziOfferti();
+	public String serviziDisponibili() {
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(servizioService.serviziOfferti());
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 	
 	// UTENTE ADMIN

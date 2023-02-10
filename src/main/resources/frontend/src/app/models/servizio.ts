@@ -5,6 +5,5 @@ export class Servizio {
   id?: number;
   descrizione?: string;
   prezzo?: number;
-  ordini?: Ordine[];
 
 }

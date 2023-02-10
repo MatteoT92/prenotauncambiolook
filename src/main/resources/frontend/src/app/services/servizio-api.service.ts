@@ -12,7 +12,6 @@ export class ServizioApiService {
   constructor(private http: HttpClient) {}
 
   serviziDisponibili() {
-    console.log(this.http.get<Servizio[]>(this.serviziUrl))
     return this.http.get<Servizio[]>(this.serviziUrl);
   }
 

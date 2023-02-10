@@ -3,6 +3,7 @@ package matteot92.prenotauncambiolook.model.entities;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,6 +25,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
+@JsonPropertyOrder({ "id", "username", "email", "password", "isAdmin"})
 public class Utente {
 	
 	@Id
@@ -41,7 +43,7 @@ public class Utente {
 	@Column(nullable=false)
 	private Boolean isAdmin;
 	@OneToMany(mappedBy = "utente",
-			   fetch = FetchType.EAGER,
+			   fetch = FetchType.LAZY,
 			   cascade = CascadeType.ALL,
 			   orphanRemoval = true)
 	@JsonIgnore
