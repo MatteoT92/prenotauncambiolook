@@ -3,6 +3,8 @@ package matteot92.prenotauncambiolook.controller;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import matteot92.prenotauncambiolook.model.entities.ChatMessage;
@@ -11,8 +13,10 @@ import matteot92.prenotauncambiolook.model.entities.MessageToSend;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Controller
+//@Controller
+@RestController
 @SessionAttributes({"username"})
+@CrossOrigin(origins = "http://localhost:4200")
 public class ChatController {
 	
 	// UTENTE CLIENTE
