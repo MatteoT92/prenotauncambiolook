@@ -2,6 +2,8 @@ package matteot92.prenotauncambiolook.model.entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,6 +44,7 @@ public class Utente {
 			   fetch = FetchType.EAGER,
 			   cascade = CascadeType.ALL,
 			   orphanRemoval = true)
+	@JsonIgnore
 	private Set<Ordine> ordini;
 
 }
