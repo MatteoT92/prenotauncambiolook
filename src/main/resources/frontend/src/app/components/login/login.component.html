@@ -1,1 +1,31 @@
-<p>login works!</p>
+<div class="log-container">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="col">
+      <span>Username</span><br>
+      <input type="text" name="username" required ngModel/><br>
+      <span>Email</span><br>
+      <input type="text" name="email" required email ngModel/><br>
+      <span>Password</span><br>
+      <input type="password" name="password" required ngModel/><br>
+      <br>
+      <input type="submit" value="Accedi"/>
+  </form>
+  <div class="col">
+    <div class="row">
+      <a href="#" class="btn" style="background-color:blue; color:white; padding:2%; margin:2%;">
+            <i class="fa fa-facebook fa-fw"></i><strong> Login con Facebook</strong>
+          </a>
+          <a href="#" class="btn" style="background-color:#007fff; color:white; padding:2%; margin:2%;">
+            <i class="fa fa-twitter fa-fw"></i><strong> Login con Twitter</strong>
+          </a>
+          <a href="#" class="btn" style="background-color:red; color:white; padding:2%; margin:2%;">
+            <i class="fa fa-google fa-fw"></i><strong> Login con Google</strong>
+          </a>
+    </div>
+    </div>
+</div>
+<br><br>
+<div class="ask">
+  <span>Non sei registrato? </span><a routerLink="sign">Registrati</a>
+  <br><br>
+  <span>Password dimenticata? </span><a href="/password">Recuperala</a>
+</div>

@@ -14,5 +14,6 @@ public interface UtenteRepository extends CrudRepository<Utente, Long> {
 	public Optional<Utente> findByEmail(String email);
 	public Optional<Utente> findByUsername(String username);
 	public Optional<Utente> findByUsernameAndEmail(String username, String email);
+	public Optional<Utente> findByUsernameAndEmailAndPassword(String username, String email, String password);
 	
 }

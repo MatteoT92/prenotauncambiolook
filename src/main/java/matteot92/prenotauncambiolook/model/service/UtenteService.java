@@ -28,11 +28,11 @@ public class UtenteService {
 	}
 	
 	/**
-	 * Metodo che consente di verificare, tramite username e email, se l'utente
+	 * Metodo che consente di verificare, tramite username, email e password, se l'utente
 	 * è registrato sul sito oppure no.
 	 */
 	public Boolean isRegistrato(Utente utenteDaVerificare) {
-		Optional<Utente> utente = repository.findByUsernameAndEmail(utenteDaVerificare.getUsername(), utenteDaVerificare.getEmail());
+		Optional<Utente> utente = repository.findByUsernameAndEmailAndPassword(utenteDaVerificare.getUsername(), utenteDaVerificare.getEmail(), utenteDaVerificare.getPassword());
 		return (!utente.isEmpty()) ? true : false;
 	}
 	
@@ -72,10 +72,10 @@ public class UtenteService {
 	}
 	
 	/**
-	 * Metodo che recupera un utente dal database in base all'username e email
+	 * Metodo che recupera un utente dal database in base all'username, email e password
 	 */
-	public Utente cercaUtente(String username, String email) {
-		return repository.findByUsernameAndEmail(username, email).get();
+	public Utente cercaUtente(String username, String email, String password) {
+		return repository.findByUsernameAndEmailAndPassword(username, email, password).get();
 	}
 	
 	/**
