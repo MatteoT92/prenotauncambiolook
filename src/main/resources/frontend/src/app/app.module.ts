@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SideRightUserMenuComponent } from './components/side-right-user-menu/side-right-user-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ServiziComponent } from "./components/servizi/servizi.component";
 import { LoginComponent } from "./components/login/login.component";
@@ -21,7 +20,6 @@ import { ChatComponent } from './components/chat/chat.component';
         AppComponent,
         NavbarComponent,
         HeaderComponent,
-        SideRightUserMenuComponent,
         HomeComponent,
         LoginComponent,
         SignComponent,

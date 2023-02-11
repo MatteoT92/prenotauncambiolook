@@ -46,8 +46,7 @@ public class UtenteController {
 	/**
 	 * Metodo che presi in input i dati del form
 	 * verifica se l'utente è registrato
-	 * poi verifica se è un utente cliente o admin
-	 * e reindirizza sulla home page corrispondente allo status
+	 * e reindirizza i dati dell'utente trovato al component Angular
 	 */
 	@PostMapping("/login")
 	@CrossOrigin(origins = "http://localhost:4200/login")
