@@ -23,9 +23,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit(loginForm: NgForm) {
     this.api.login(loginForm.value.username, loginForm.value.email, loginForm.value.password)
-    .subscribe((data: Utente) => {
+    .subscribe((data: any) => {
       this.utente = data;
-      if (this.utente != null || undefined) {
+      if (this.utente != null || this.utente != undefined) {
+        sessionStorage.setItem('utente', this.utente.username);
+        if (this.utente.isAdmin) {
+          sessionStorage.setItem('tipo', 'admin');
+        } else {
+          sessionStorage.setItem('tipo', 'cliente');
+        }
         this.router.navigate(['/home']);
       }
     })

@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: "sign", component: SignComponent},
   {path: "logout", component: HomeComponent},
   {path: "chat", component: ChatComponent},
-  {path: "", component: HomeComponent},
+  {path: "", component: HomeComponent, pathMatch: 'full'},
   {path: "**", component: HomeComponent}
 ];
 
