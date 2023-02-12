@@ -5,13 +5,13 @@
     <a href="/admin/ordini"><i class="fa fa-fw fa-search"></i> Ordini</a>
     <a href="/admin/clienti"><i class="fa fa-fw fa-search"></i> Clienti</a>
     <a href="/admin/chat"><i class="fa fa-fw fa-envelope"></i> Chat</a>
-    <a href=""><i class="fa fa-fw fa-user"></i> {{username}}</a>
+    <a><i class="fa fa-fw fa-user"></i> {{username}}</a>
   </div>
   <div class="navbar" *ngSwitchCase="['cliente']">
     <a routerLink="/home"><i class="fa fa-fw fa-home"></i> Home</a>
     <a routerLink="/servizi"><i class="fa fa-fw fa-search"></i> Servizi</a>
     <a routerLink="/chat"><i class="fa fa-fw fa-envelope"></i> Contattaci</a>
-    <a routerLink="/login"><i class="fa fa-fw fa-user"></i> {{username}}</a>
+    <a><i class="fa fa-fw fa-user"></i> {{username}}</a>
   </div>
   <div class="navbar" *ngSwitchDefault>
     <a routerLink="/home"><i class="fa fa-fw fa-home"></i> Home</a>

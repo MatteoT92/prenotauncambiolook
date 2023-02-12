@@ -84,10 +84,19 @@ public class UtenteController {
 	 * e reindirizzandolo sulla pagina per il login
 	 */
 	@PostMapping("/sign")
-	public String registraUtente(@ModelAttribute("utente") Utente utente, Model model) {
-		utenteService.registraUtente(utente);
-		model.addAttribute("username", utente.getUsername());
-		return "redirect:/login";
+	@CrossOrigin(origins = "http://localhost:4200/sign")
+	public String registraUtente(@RequestBody Utente utenteDaForm) {
+		ObjectMapper mapper = new ObjectMapper();
+		utenteService.registraUtente(utenteDaForm);
+		Utente utente = utenteService.cercaUtente(utenteDaForm.getUsername(), utenteDaForm.getEmail());
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(utente);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 
 	/**

@@ -72,6 +72,13 @@ public class UtenteService {
 	}
 	
 	/**
+	 * Metodo che recupera un utente dal database in base all'username e email
+	 */
+	public Utente cercaUtente(String username, String email) {
+		return repository.findByUsernameAndEmail(username, email).get();
+	}
+	
+	/**
 	 * Metodo che recupera un utente dal database in base all'username, email e password
 	 */
 	public Utente cercaUtente(String username, String email, String password) {

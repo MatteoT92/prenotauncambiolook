@@ -9,16 +9,12 @@ import { UtenteApiService } from 'src/app/services/utente-api.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   utente?: Utente;
 
   constructor(private api: UtenteApiService, private router: Router) {
 
-  }
-
-  ngOnInit(): void {
-    console.log(this.utente);
   }
 
   onSubmit(loginForm: NgForm) {
