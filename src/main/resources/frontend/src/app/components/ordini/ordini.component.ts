@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Ordine } from 'src/app/models/ordine';
+import { OrdineApiService } from 'src/app/services/ordine-api.service';
 
 @Component({
   selector: 'app-ordini',
@@ -7,4 +11,33 @@ import { Component } from '@angular/core';
 })
 export class OrdiniComponent {
 
+  ordini?: Ordine[];
+
+  constructor(private api: OrdineApiService, private router: Router) {
+
+  }
+
+  ngOnInit() {
+   this.iMieiOrdini();
+  }
+
+  iMieiOrdini(): void {
+    this.api.iMieiOrdini()
+      .subscribe({
+        next: (data) => {
+          this.ordini = data;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+/*
+  onSubmit(rimuoviOrdineForm: NgForm) {
+    this.api.rimuoviOrdine(rimuoviOrdineForm.value.id)
+    .subscribe((data: any) => {
+      console.log(data);
+      this.router.navigate(['/ordini']);
+    })
+  }
+*/
 }

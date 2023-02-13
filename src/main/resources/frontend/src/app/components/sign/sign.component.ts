@@ -25,4 +25,5 @@ export class SignComponent {
       this.router.navigate(['/login']);
     })
   }
+  
 }

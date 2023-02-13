@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignComponent } from './components/sign/sign.component';
 import { OrdiniComponent } from './components/ordini/ordini.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { RightMenuComponent } from './components/right-menu/right-menu.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,8 @@ import { ChatComponent } from './components/chat/chat.component';
         SignComponent,
         ServiziComponent,
         OrdiniComponent,
-        ChatComponent
+        ChatComponent,
+        RightMenuComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -34,7 +37,8 @@ import { ChatComponent } from './components/chat/chat.component';
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatCardModule
     ]
 })
 export class AppModule { }

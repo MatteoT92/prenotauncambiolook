@@ -42,11 +42,12 @@ public class Utente {
 	private String password;
 	@Column(nullable=false)
 	private Boolean isAdmin;
+	/*
 	@OneToMany(mappedBy = "utente",
 			   fetch = FetchType.LAZY,
 			   cascade = CascadeType.ALL,
 			   orphanRemoval = true)
 	@JsonIgnore
 	private Set<Ordine> ordini;
-
+*/
 }

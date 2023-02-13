@@ -36,11 +36,12 @@ public class Servizio {
 	private String descrizione;
 	@Column(nullable=false)
 	private Double prezzo;
+	/*
 	@OneToMany(mappedBy = "servizio",
 			   fetch = FetchType.LAZY,
 			   cascade = CascadeType.ALL, 
 			   orphanRemoval = true)
 	@JsonIgnore
 	private Set<Ordine> ordini;
-
+*/
 }

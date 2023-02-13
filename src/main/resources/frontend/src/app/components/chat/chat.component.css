@@ -1,0 +1,103 @@
+#disconnect {
+	display: none;
+}
+
+#button-connect, #button-disconnect {
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+}
+
+#button-connect {
+	background-color: green;
+}
+
+#button-disconnect {
+	background-color: #d32f2f;
+}
+
+.container2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100vh;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.connect-container {
+	display: flex;
+	align-items: center;
+}
+
+#chat-container {
+	flex-basis: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+#messages-container {
+	flex-basis: 60%;
+	overflow: auto;
+	margin-left: 5px;
+	margin-right: 5px;
+	border: 1px solid #000000;
+	background-color: #ffffff;
+}
+
+.new-message {
+	display: flex;
+}
+
+.new-message-box {
+	padding: 5px;
+	margin: 5px;
+	border: 1px solid #c6c6c6;
+	border-radius: 3px;
+}
+
+.new-message-box .details-container {
+	font-size: 12px;
+	text-align: right;
+}
+
+.new-message.left {
+	justify-content: flex-start;
+}
+
+.new-message.left .new-message-box {
+	background-color: #ffccbc;
+}
+
+.new-message.right .new-message-box {
+	background-color: #b2dfdb;
+}
+
+.new-message.right {
+	justify-content: flex-end;
+}
+
+.send-message-container {
+	display: flex;
+	align-items: center;
+}
+
+.input-container {
+	flex-basis: 100%;
+}
+
+.input-container input {
+	width: 100%;
+}
+
+.connect-container>div, .send-message-container>div {
+	padding: 5px;
+}
+
+#button-sendmessage {
+	background-color: green;
+	color: white;
+	border: none;
+	cursor: pointer;
+}

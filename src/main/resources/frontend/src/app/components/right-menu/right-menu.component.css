@@ -1,0 +1,21 @@
+.right-menu {
+  float: right;
+  padding-top: 50px;
+  padding-right: 50px;
+}
+
+a {
+  margin-bottom: 50px;
+  display: block;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-size: medium;
+  padding: 10px;
+  border-radius: 50%;
+
+}
+
+a:hover {
+  background-color: yellow;
+}

@@ -3,14 +3,22 @@ package matteot92.prenotauncambiolook.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -21,9 +29,7 @@ import matteot92.prenotauncambiolook.model.service.OrdineService;
 import matteot92.prenotauncambiolook.model.service.ServizioService;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
 
-//@Controller
 @RestController
-@SessionAttributes({"appuntamenti", "ordini"})
 @CrossOrigin(origins = "http://localhost:4200")
 public class OrdineController {
 
@@ -44,13 +50,22 @@ public class OrdineController {
 	 * Metodo che mostra per l'utente cliente in sessione
 	 * tutti i suoi ordini effettuati
 	 */
-	@GetMapping("/ordini")
-	public String iMieiOrdini(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
+	@RequestMapping(value = "/ordini", method = {RequestMethod.GET, RequestMethod.POST})
+	@CrossOrigin(origins = "http://localhost:4200/ordini")
+	public String iMieiOrdini(@RequestParam(name = "username") String username) {
+		System.out.print(username);
 		Utente utente = utenteService.cercaUtenteDaUsername(username);
-		model.addAttribute("ordini", ordineService.prenotazioniPerCliente(utente));
-		return "ordini";
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(ordineService.prenotazioniPerCliente(utente));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.out.print(json);
+		return json;
 	}
 	
 	/**
@@ -81,9 +96,20 @@ public class OrdineController {
 	 * Il cliente verrà reindirizzato sulla pagina dei suoi ordini
 	 */
 	@PostMapping("/rimuovi-ordine")
-	public String rimuoviOrdine(@ModelAttribute("ordine") Ordine ordine) {
+	@CrossOrigin(origins = "http://localhost:4200/rimuovi-ordine")
+	public String rimuoviOrdine(@RequestBody Ordine ordine) {
+		ordine = ordineService.cercaOrdine(ordine.getId());
 		ordineService.rimuoviOrdine(ordine);
-		return "redirect:/ordini";
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(ordine);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 	
 	// Metodo che reindirizza alla pagina per effettuare il pagamento di un ordine

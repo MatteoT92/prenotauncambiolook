@@ -16,10 +16,8 @@ export class ServiziComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
    this.serviziDisponibili();
-
   }
 
   serviziDisponibili(): void {

@@ -1,16 +1,19 @@
 <app-navbar></app-navbar>
-<div class="servizi">
-    <div class="card d-inline-block" *ngFor="let servizio of servizi" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
-      <div class="container d-inline">
-        <img src="/assets/img/ph.png" alt="Servizio Estetico" style="width:10%" class="d-inline">
-        <h4><b>{{servizio.descrizione}}</b></h4>
-        <h4>{{servizio.prezzo}} EURO</h4>
-        <form method="post" modelAttribute="ordine" action="/ordine">
-          <span>Data : </span><input type="date" name="data"/>
-          <span>Orario : </span><input type="time" name="orario"/>
-          <span>Quantità : </span><input type="number" name="quantita"/>
-          <input type="submit" value="Ordina" class="btn btn-success">
-        </form>
-      </div>
-    </div>
-</div>
+<mat-card class="card">
+  <mat-card-header *ngFor="let servizio of servizi">
+    <mat-card-title-group>
+      <mat-card-title>{{servizio.descrizione}}</mat-card-title>
+      <mat-card-subtitle>{{servizio.prezzo}} EURO</mat-card-subtitle>
+      <img mat-card-md-image src="/assets/img/ph.png"  alt="Servizio Estetico">
+      <form method="post" modelAttribute="ordine" action="/ordine">
+        <span>Data : </span><input type="date" name="data"/>
+        <span>Orario : </span><input type="time" name="orario"/>
+        <span>Quantità : </span><input type="number" name="quantita"/>
+        <input type="submit" value="Ordina" class="btn btn-success">
+      </form>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+
+  </mat-card-content>
+</mat-card>
