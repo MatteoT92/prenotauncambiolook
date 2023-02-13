@@ -53,7 +53,6 @@ public class OrdineController {
 	@RequestMapping(value = "/ordini", method = {RequestMethod.GET, RequestMethod.POST})
 	@CrossOrigin(origins = "http://localhost:4200/ordini")
 	public String iMieiOrdini(@RequestParam(name = "username") String username) {
-		System.out.print(username);
 		Utente utente = utenteService.cercaUtenteDaUsername(username);
 		ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -64,7 +63,6 @@ public class OrdineController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.print(json);
 		return json;
 	}
 	

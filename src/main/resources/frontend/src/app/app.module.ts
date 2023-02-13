@@ -16,6 +16,7 @@ import { SignComponent } from './components/sign/sign.component';
 import { OrdiniComponent } from './components/ordini/ordini.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { RightMenuComponent } from './components/right-menu/right-menu.component';
+import { PasswordComponent } from './components/password/password.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { RightMenuComponent } from './components/right-menu/right-menu.component
         ServiziComponent,
         OrdiniComponent,
         ChatComponent,
-        RightMenuComponent
+        RightMenuComponent,
+        PasswordComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

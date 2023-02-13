@@ -12,7 +12,6 @@ const routes: Routes = [
   {path: "servizi", component: ServiziComponent},
   {path: "login", component: LoginComponent},
   {path: "sign", component: SignComponent},
-  {path: "logout", component: HomeComponent},
   {path: "chat", component: ChatComponent},
   {path: "ordini", component: OrdiniComponent},
   {path: "", component: HomeComponent, pathMatch: 'full'},

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine';
+import { Servizio } from 'src/app/models/servizio';
 import { OrdineApiService } from 'src/app/services/ordine-api.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { OrdineApiService } from 'src/app/services/ordine-api.service';
 })
 export class OrdiniComponent {
 
-  ordini?: Ordine[];
+  ordini: Ordine[] = [];
+  servizio?: Servizio;
 
   constructor(private api: OrdineApiService, private router: Router) {
 
@@ -31,6 +33,7 @@ export class OrdiniComponent {
         error: (e) => console.error(e)
       });
   }
+
 /*
   onSubmit(rimuoviOrdineForm: NgForm) {
     this.api.rimuoviOrdine(rimuoviOrdineForm.value.id)
