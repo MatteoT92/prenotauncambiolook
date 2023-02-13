@@ -61,18 +61,6 @@ public class UtenteController {
 		}
 		return json;
 	}
-	
-	/**
-	 * Metodo che effettua il logout dell'utente
-	 * e cancella la sessione ricreandone una nuova
-	 */
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.invalidate();
-		session = request.getSession();
-		return "index";
-	}
 
 	/**
 	 * Metodo che effettua la registrazione di un utente
@@ -101,13 +89,24 @@ public class UtenteController {
 	 * e reindirizzando l'utente sulla home page
 	 */
 	@PostMapping("/password")
-	public String modificaPassword(@ModelAttribute("utente") Utente utente, Model model) {
-		Utente utenteCercato = utenteService.cercaUtente(utente.getUsername(), utente.getEmail(), utente.getPassword());
+	@CrossOrigin(origins = "http://localhost:4200/password")
+	public String modificaPassword(@RequestBody Utente utente) {
+		System.out.print(utente);
+		Utente utenteCercato = utenteService.cercaUtenteDaUsername(utente.getUsername());
+		System.out.print(utenteCercato);
 		if (utenteCercato != null) {
 			utenteService.modificaPassword(utenteCercato, utente.getPassword());
-			model.addAttribute("username", utente.getUsername());
 		}
-		return "redirect:/home";
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(utenteCercato);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.out.print(json);
+		return json;
 	}
 	
 	/**

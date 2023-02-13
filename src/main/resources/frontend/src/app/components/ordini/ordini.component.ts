@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine';
-import { Servizio } from 'src/app/models/servizio';
 import { OrdineApiService } from 'src/app/services/ordine-api.service';
 
 @Component({
@@ -10,16 +8,15 @@ import { OrdineApiService } from 'src/app/services/ordine-api.service';
   templateUrl: './ordini.component.html',
   styleUrls: ['./ordini.component.css']
 })
-export class OrdiniComponent {
+export class OrdiniComponent implements OnInit {
 
-  ordini: Ordine[] = [];
-  servizio?: Servizio;
+  ordini!: Ordine[];
 
   constructor(private api: OrdineApiService, private router: Router) {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
    this.iMieiOrdini();
   }
 
@@ -28,7 +25,6 @@ export class OrdiniComponent {
       .subscribe({
         next: (data) => {
           this.ordini = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });

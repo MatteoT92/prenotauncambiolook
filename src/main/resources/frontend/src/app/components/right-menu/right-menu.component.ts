@@ -16,9 +16,11 @@ export class RightMenuComponent {
   }
 
   logout() {
-    sessionStorage.removeItem('utente');
-    sessionStorage.removeItem('tipo');
-    this.router.navigate(['/login']);
+    this.api.logout();
+  }
+
+  modificaPassword(nuovaPassword: string) {
+    this.api.modificaPassword(nuovaPassword);
   }
 
 }
