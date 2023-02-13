@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +44,7 @@ public class UtenteController {
 	/**
 	 * Metodo che presi in input i dati del form
 	 * verifica se l'utente è registrato
-	 * e reindirizza i dati dell'utente trovato al component Angular
+	 * e reindirizza l'utente sulla home del sito come utente registrato
 	 */
 	@PostMapping("/login")
 	@CrossOrigin(origins = "http://localhost:4200/login")
@@ -91,9 +93,7 @@ public class UtenteController {
 	@PostMapping("/password")
 	@CrossOrigin(origins = "http://localhost:4200/password")
 	public String modificaPassword(@RequestBody Utente utente) {
-		System.out.print(utente);
 		Utente utenteCercato = utenteService.cercaUtenteDaUsername(utente.getUsername());
-		System.out.print(utenteCercato);
 		if (utenteCercato != null) {
 			utenteService.modificaPassword(utenteCercato, utente.getPassword());
 		}
@@ -105,22 +105,28 @@ public class UtenteController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.print(json);
 		return json;
 	}
 	
 	/**
 	 * Metodo che consente ad un utente in sessione di potersi disiscrivere dal sito
 	 * rimuovendone i dati dal database
-	 * e reindirizzandolo sulla pagina index
+	 * e reindirizzandolo sulla pagina home
 	 */
-	@GetMapping("/cancellati")
-	public String disiscriviti(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		Utente utente = utenteService.cercaUtenteDaUsername(username);
+	@PostMapping("/disiscriviti")
+	@CrossOrigin(origins = "http://localhost:4200/disiscriviti")
+	public String disiscriviti(@RequestBody Utente utenteDaRimuovere) {
+		Utente utente = utenteService.cercaUtenteDaUsername(utenteDaRimuovere.getUsername());
 		utenteService.rimuoviUtente(utente);
-		return "index";
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(utente);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 	
 	// UTENTE ADMIN

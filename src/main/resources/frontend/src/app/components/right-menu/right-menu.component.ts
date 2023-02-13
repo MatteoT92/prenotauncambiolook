@@ -23,4 +23,9 @@ export class RightMenuComponent {
     this.api.modificaPassword(nuovaPassword);
   }
 
+  disiscrizione() {
+    this.api.disiscrizione().subscribe();
+    this.logout();
+  }
+
 }

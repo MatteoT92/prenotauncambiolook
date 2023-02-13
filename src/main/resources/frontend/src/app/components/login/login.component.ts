@@ -29,6 +29,8 @@ export class LoginComponent {
           sessionStorage.setItem('tipo', 'cliente');
         }
         this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/sign']);
       }
     })
   }
