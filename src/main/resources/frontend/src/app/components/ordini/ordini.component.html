@@ -12,7 +12,7 @@
       <td>{{ordine.data}}</td>
       <td>{{ordine.orario}}</td>
       <td>{{ordine.quantita}}</td>
-      <td>{{ordine.servizio}}</td>
+      <td>{{catalogo.get(ordine.servizio)}}</td>
     <!--
     <form #rimuoviOrdineForm="ngForm" (ngSubmit)="onSubmit(rimuoviOrdineForm)">
       <td><input type="number" name="id" value="{{ordine.id}}" readonly ngModel/></td>
