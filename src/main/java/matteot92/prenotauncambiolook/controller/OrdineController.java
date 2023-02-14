@@ -43,9 +43,7 @@ public class OrdineController {
 		this.utenteService = utenteService;
 		this.servizioService = servizioService;
 	}
-	
-	// UTENTE CLIENTE
-	
+
 	/**
 	 * Metodo che mostra per l'utente cliente in sessione
 	 * tutti i suoi ordini effettuati
@@ -121,17 +119,24 @@ public class OrdineController {
 	public String effettuaPagamento(@ModelAttribute("ordine") Ordine ordine) {
 		return "redirect:/servizi";
 	}
-
-	// UTENTE ADMIN
 	
 	/**
 	 * Metodo che mostra ad un utente admin la lista degli ordini
 	 * effettuati da tutti i suoi clienti
 	 */
-	@GetMapping("/admin/ordini")
-	public List<Ordine> listaPrenotazioni(Model model) {
-		model.addAttribute("appuntamenti", ordineService.listaOrdini());
-		return ordineService.listaOrdini();
+	@RequestMapping(value = "/prenotazioni", method = {RequestMethod.GET, RequestMethod.POST})
+	@CrossOrigin(origins = "http://localhost:4200/ordini")
+	public String listaPrenotazioni() {
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(ordineService.listaOrdini());
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 	
 }

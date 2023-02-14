@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatComponent } from './components/chat/chat.component';
+import { ClientiComponent } from './components/clienti/clienti.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { OrdiniComponent } from './components/ordini/ordini.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: "sign", component: SignComponent},
   {path: "chat", component: ChatComponent},
   {path: "ordini", component: OrdiniComponent},
+  {path: "clienti", component: ClientiComponent},
   {path: "password", component: PasswordComponent},
   {path: "", component: HomeComponent, pathMatch: 'full'},
   {path: "**", component: HomeComponent}

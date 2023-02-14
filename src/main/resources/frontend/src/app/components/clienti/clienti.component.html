@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<table>
+  <tr>
+      <th>ID Cliente</th>
+      <th>Username</th>
+      <th>Email</th>
+  </tr>
+  <tr *ngFor="let utente of utenti">
+    <td>{{utente.id}}</td>
+    <td>{{utente.username}}</td>
+    <td>{{utente.email}}</td>
+  </tr>
+</table>

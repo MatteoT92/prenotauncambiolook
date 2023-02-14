@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine';
 import { OrdineApiService } from 'src/app/services/ordine-api.service';
 import { ServizioApiService } from 'src/app/services/servizio-api.service';
+import { UtenteApiService } from 'src/app/services/utente-api.service';
 
 @Component({
   selector: 'app-ordini',
@@ -11,18 +12,24 @@ import { ServizioApiService } from 'src/app/services/servizio-api.service';
 })
 export class OrdiniComponent implements OnInit {
 
+  isAdmin = sessionStorage.getItem('tipo');
   ordini!: Ordine[];
+  prenotazioni!: Ordine[];
   catalogo!: Map<number, string>;
+  utenti!: Map<number, string>;
 
-  constructor(private api: OrdineApiService, private apiServizi: ServizioApiService, private router: Router) {
+  constructor(private api: OrdineApiService,
+              private apiServizi: ServizioApiService,
+              private apiUtenti: UtenteApiService,
+              private router: Router) {
 
   }
 
   ngOnInit(): void {
    this.iMieiOrdini();
+   this.listaPrenotazioni();
    this.serviziCatalogo();
-   console.log(this.ordini);
-   console.log(this.catalogo);
+   this.utentiRegistrati();
   }
 
   iMieiOrdini(): void {
@@ -46,6 +53,29 @@ export class OrdiniComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
+  }
+
+  utentiRegistrati(): void {
+    this.apiUtenti.listaUtenti()
+    .subscribe({
+      next: (data) => {
+        this.utenti = new Map<number, string>();
+        data.forEach(element => {
+          this.utenti.set(element.id, element.username);
+        });
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+  listaPrenotazioni() {
+    this.api.listaPrenotazioni()
+    .subscribe({
+      next: (data) => {
+        this.prenotazioni = data;
+      },
+      error: (e) => console.error(e)
+    })
   }
 
 /*

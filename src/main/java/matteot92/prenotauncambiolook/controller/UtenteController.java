@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,9 +40,7 @@ public class UtenteController {
 		this.servizioService = servizioService;
 		this.ordineService = ordineService;
 	}
-	
-	// UTENTE CLIENTE
-	
+
 	/**
 	 * Metodo che presi in input i dati del form
 	 * verifica se l'utente è registrato
@@ -88,7 +88,7 @@ public class UtenteController {
 	/**
 	 * Metodo che effettua la modifica della password dell'utente in sessione
 	 * salvandone la modifica su database
-	 * e reindirizzando l'utente sulla home page
+	 * e reindirizzando l'utente sulla home del sito
 	 */
 	@PostMapping("/password")
 	@CrossOrigin(origins = "http://localhost:4200/password")
@@ -111,7 +111,7 @@ public class UtenteController {
 	/**
 	 * Metodo che consente ad un utente in sessione di potersi disiscrivere dal sito
 	 * rimuovendone i dati dal database
-	 * e reindirizzandolo sulla pagina home
+	 * e reindirizzandolo sulla home del sito
 	 */
 	@PostMapping("/disiscriviti")
 	@CrossOrigin(origins = "http://localhost:4200/disiscriviti")
@@ -129,30 +129,21 @@ public class UtenteController {
 		return json;
 	}
 	
-	// UTENTE ADMIN
-
-	/**
-	 * Metodo che effettua la modifica della password dell'utente admin in sessione
-	 * salvandone la modifica su database
-	 * e reindirizzando l'utente sulla pagina del pannello di controllo
-	 */
-	@PostMapping("/admin/password")
-	public String modificaPasswordAdmin(@ModelAttribute("utente") Utente utente, Model model) {
-		Utente utenteCercato = utenteService.cercaUtente(utente.getUsername(), utente.getEmail(), utente.getPassword());
-		if (utenteCercato != null && utenteService.isAdmin(utenteCercato)) {
-			utenteService.modificaPassword(utenteCercato, utente.getPassword());
-			model.addAttribute("username", utente.getUsername());
-		}
-		return "redirect:/admin/pannello";
-	}
-
 	/**
 	 * Metodo che mostra per l'utente admin tutti gli utenti cliente registrati
 	 */
-	@GetMapping("/admin/clienti")
-	public List<Utente> utentiRegistrati(Model model) {
-		model.addAttribute("utenti", utenteService.utentiRegistrati());
-		return utenteService.utentiRegistrati();
+	@RequestMapping(value = "/clienti", method = {RequestMethod.GET, RequestMethod.POST})
+	@CrossOrigin(origins = "http://localhost:4200/clienti")
+	public String utentiRegistrati() {
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(utenteService.utentiRegistrati());
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 	
 }

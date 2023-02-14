@@ -17,6 +17,7 @@ import { OrdiniComponent } from './components/ordini/ordini.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { RightMenuComponent } from './components/right-menu/right-menu.component';
 import { PasswordComponent } from './components/password/password.component';
+import { ClientiComponent } from './components/clienti/clienti.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { PasswordComponent } from './components/password/password.component';
         OrdiniComponent,
         ChatComponent,
         RightMenuComponent,
-        PasswordComponent
+        PasswordComponent,
+        ClientiComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

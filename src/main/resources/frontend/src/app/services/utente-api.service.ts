@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Utente } from '../models/utente';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class UtenteApiService {
   private signUrl = 'http://localhost:8081/sign';
   private passwordUrl = 'http://localhost:8081/password';
   private disiscrizioneUrl = 'http://localhost:8081/disiscriviti';
+  private utentiUrl = 'http://localhost:8081/clienti';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -34,6 +36,10 @@ export class UtenteApiService {
 
   disiscrizione() {
     return this.http.post(this.disiscrizioneUrl, {"username": sessionStorage.getItem('utente')});
+  }
+
+  listaUtenti() {
+    return this.http.get<Utente[]>(this.utentiUrl);
   }
 
 }
