@@ -17,12 +17,18 @@ export class OrdineApiService {
     return this.http.get<Ordine[]>(this.ordiniUrl+'?username='+sessionStorage.getItem('utente'));
   }
 
+  /*
   rimuoviOrdine(id: number) {
     return this.http.delete(this.rimuoviOrdineUrl);
   }
+  */
 
   listaPrenotazioni() {
     return this.http.get<Ordine[]>(this.prenotazioniUrl);
+  }
+
+  aggiungiOrdine(data: Date, orario: Date, quantita: number, servizio: number, utente: number) {
+    return this.http.post<Ordine>(this.ordiniUrl, {"data": data, "orario": orario, "quantita": quantita, "servizio": servizio, "utente": utente});
   }
 
 }

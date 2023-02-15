@@ -1,13 +1,9 @@
 package matteot92.prenotauncambiolook.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,9 +42,9 @@ public class OrdineController {
 
 	/**
 	 * Metodo che mostra per l'utente cliente in sessione
-	 * tutti i suoi ordini effettuati
+	 * tutti i suoi ordini da lui effettuati
 	 */
-	@RequestMapping(value = "/ordini", method = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/ordini")
 	@CrossOrigin(origins = "http://localhost:4200/ordini")
 	public String iMieiOrdini(@RequestParam(name = "username") String username) {
 		Utente utente = utenteService.cercaUtenteDaUsername(username);
@@ -72,18 +68,26 @@ public class OrdineController {
 	 * non vi sono già 3 prenotazioni effettuate (siccome vi sono solo 3 parrucchieri disponibili).
 	 * L'utente verrà reindirizzato sulla pagina dei servizi offerti dal salone
 	 */
-	@PostMapping("/ordine")
-	public String effettuaOrdine(@ModelAttribute("ordine") Ordine ordine, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		Utente utente = utenteService.cercaUtenteDaUsername(username);
-		String descrizione = (String) session.getAttribute("descrizione");
-		String prezzo = (String) session.getAttribute("prezzo");
-		Servizio servizio = servizioService.cercaServizioPerDescrizionePrezzo(descrizione, Double.valueOf(prezzo));
+	@PostMapping("/ordini")
+	@CrossOrigin(origins = "http://localhost:4200/ordini")
+	public String effettuaOrdine(@RequestBody Ordine ordine) {
+		System.err.println(ordine);
+		Utente utente = utenteService.cercaUtenteDaId(ordine.getUtente());
+		Servizio servizio = servizioService.cercaServizio(ordine.getServizio());
 		if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) < 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
 			ordineService.salvaOrdine(ordine.getData(), ordine.getOrario(), ordine.getQuantita(), utente, servizio);
 		}
-		return "servizi";
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(ordine);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.err.println(json);
+		return json;
 	}
 	
 	/**

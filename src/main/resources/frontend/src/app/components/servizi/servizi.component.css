@@ -1,4 +1,12 @@
 .card {
-  max-width: 400px;
+  max-width: 500px;
   margin-bottom: 8px;
+}
+
+.log-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-flex;
 }

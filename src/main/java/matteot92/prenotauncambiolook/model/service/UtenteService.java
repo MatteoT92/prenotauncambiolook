@@ -98,5 +98,12 @@ public class UtenteService {
 	public Utente cercaUtenteDaEmail(String email) {
 		return repository.findByEmail(email).get();
 	}
+	
+	/**
+	 * Metodo che recupera un utente dal database in base all'id
+	 */
+	public Utente cercaUtenteDaId(Long id) {
+		return repository.findById(id).get();
+	}
 
 }

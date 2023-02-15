@@ -1,19 +1,34 @@
 <app-navbar></app-navbar>
-<mat-card class="card">
-  <mat-card-header *ngFor="let servizio of servizi">
-    <mat-card-title-group>
-      <mat-card-title>{{servizio.descrizione}}</mat-card-title>
-      <mat-card-subtitle>{{servizio.prezzo}} EURO</mat-card-subtitle>
-      <img mat-card-md-image src="/assets/img/ph.png"  alt="Servizio Estetico">
-      <form method="post" modelAttribute="ordine" action="/ordine">
-        <span>Data : </span><input type="date" name="data"/>
-        <span>Orario : </span><input type="time" name="orario"/>
-        <span>Quantità : </span><input type="number" name="quantita"/>
-        <input type="submit" value="Ordina" class="btn btn-success">
-      </form>
-    </mat-card-title-group>
-  </mat-card-header>
-  <mat-card-content>
-
-  </mat-card-content>
-</mat-card>
+<div [ngSwitch]="isAdmin">
+  <div *ngSwitchCase="['cliente']">
+    <mat-card class="card" *ngFor="let servizio of servizi">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>{{servizio.descrizione}}</mat-card-title>
+          <mat-card-subtitle>{{servizio.prezzo}} EURO</mat-card-subtitle>
+          <img mat-card-md-image src="/assets/img/ph.png"  alt="Servizio Estetico">
+          <form #ordinaForm="ngForm" (ngSubmit)="onSubmit(ordinaForm)">
+            <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
+            <span>Orario : </span><input type="time" name="orario" ngModel required/><br><br>
+            <span>Quantità : </span><input type="number" name="quantita" ngModel required/><br><br>
+            <input type="hidden" ngModel={{servizio.id}} name="servizio" required/>
+            <input type="hidden" ngModel={{utenti.get(user)}} name="utente" required/>
+            <input type="submit" value="Ordina" class="btn btn-success">
+          </form>
+        </mat-card-title-group>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <div *ngSwitchCase="['admin']">
+    <div class="log-container">
+			<form #aggiungiServizioForm="ngForm" (ngSubmit)="onSubmitAdmin(aggiungiServizioForm)">
+				<h2><b>Crea nuovo servizio:</b></h2><br><br>
+				<span>Descrizione</span><br>
+				<input type="text" name="descrizione" ngModel required/><br>
+				<span>Prezzo</span><br>
+			    <input type="number" name="prezzo" ngModel required/><br>
+			    <br>
+			    <input type="submit" value="Aggiungi"/>
+			</form>
+		</div>
+</div>

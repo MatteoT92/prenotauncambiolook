@@ -15,4 +15,8 @@ export class ServizioApiService {
     return this.http.get<Servizio[]>(this.serviziUrl);
   }
 
+  aggiungiServizio(descrizione: string, prezzo: number) {
+    return this.http.post<Servizio>(this.serviziUrl, {"descrizione": descrizione, "prezzo": prezzo});
+  }
+
 }
