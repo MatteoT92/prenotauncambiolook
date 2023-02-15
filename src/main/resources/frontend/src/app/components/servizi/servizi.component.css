@@ -1,6 +1,7 @@
 .card {
   max-width: 500px;
-  margin-bottom: 8px;
+  margin: 8px;
+  padding: 16px;
 }
 
 .log-container {
