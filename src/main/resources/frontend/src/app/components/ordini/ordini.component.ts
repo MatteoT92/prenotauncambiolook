@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine';
 import { OrdineApiService } from 'src/app/services/ordine-api.service';
@@ -81,8 +81,7 @@ export class OrdiniComponent implements OnInit {
   rimuovi(id: number) {
     this.api.rimuoviOrdine(id)
     .subscribe((data: any) => {
-      console.log(data);
-      this.router.navigate(['/ordini']);
+      window.location.reload(); // effettua il refresh della pagina
     })
   }
 
