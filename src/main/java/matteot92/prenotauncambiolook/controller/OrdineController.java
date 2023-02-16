@@ -1,5 +1,7 @@
 package matteot92.prenotauncambiolook.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -99,7 +101,11 @@ public class OrdineController {
 	@CrossOrigin(origins = "http://localhost:4200/ordini")
 	public String rimuoviOrdine(@PathVariable(value = "id") Long id) {
 		Ordine ordine = ordineService.cercaOrdine(id);
-		ordineService.rimuoviOrdine(ordine);
+		LocalDateTime oggi = LocalDateTime.now();
+		LocalDateTime prenotazione = LocalDateTime.of(ordine.getData(), ordine.getOrario());
+		if (oggi.compareTo(prenotazione) <= 0) { // verifica che la data della prenotazione non sia già passata
+			ordineService.rimuoviOrdine(ordine); // se deve ancora avvenire permette al cliente di disdire appuntamento
+		}
 		ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
