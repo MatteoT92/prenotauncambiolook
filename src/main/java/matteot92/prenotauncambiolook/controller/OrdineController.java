@@ -2,8 +2,10 @@ package matteot92.prenotauncambiolook.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,7 +73,6 @@ public class OrdineController {
 	@PostMapping("/ordini")
 	@CrossOrigin(origins = "http://localhost:4200/ordini")
 	public String effettuaOrdine(@RequestBody Ordine ordine) {
-		System.err.println(ordine);
 		Utente utente = utenteService.cercaUtenteDaId(ordine.getUtente());
 		Servizio servizio = servizioService.cercaServizio(ordine.getServizio());
 		if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) < 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
@@ -86,7 +87,6 @@ public class OrdineController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.err.println(json);
 		return json;
 	}
 	
@@ -95,10 +95,10 @@ public class OrdineController {
 	 * da lui precedentemente effettuato.
 	 * Il cliente verrà reindirizzato sulla pagina dei suoi ordini
 	 */
-	@PostMapping("/rimuovi-ordine")
-	@CrossOrigin(origins = "http://localhost:4200/rimuovi-ordine")
-	public String rimuoviOrdine(@RequestBody Ordine ordine) {
-		ordine = ordineService.cercaOrdine(ordine.getId());
+	@DeleteMapping("/ordini/{id}")
+	@CrossOrigin(origins = "http://localhost:4200/ordini")
+	public String rimuoviOrdine(@PathVariable(value = "id") Long id) {
+		Ordine ordine = ordineService.cercaOrdine(id);
 		ordineService.rimuoviOrdine(ordine);
 		ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);

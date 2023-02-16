@@ -78,13 +78,12 @@ export class OrdiniComponent implements OnInit {
     })
   }
 
-/*
-  onSubmit(rimuoviOrdineForm: NgForm) {
-    this.api.rimuoviOrdine(rimuoviOrdineForm.value.id)
+  rimuovi(id: number) {
+    this.api.rimuoviOrdine(id)
     .subscribe((data: any) => {
       console.log(data);
       this.router.navigate(['/ordini']);
     })
   }
-*/
+
 }

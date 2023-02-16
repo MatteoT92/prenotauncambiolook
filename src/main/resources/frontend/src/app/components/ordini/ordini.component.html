@@ -15,16 +15,7 @@
           <td>{{ordine.orario}}</td>
           <td>{{ordine.quantita}}</td>
           <td>{{catalogo.get(ordine.servizio)}}</td>
-        <!--
-        <form #rimuoviOrdineForm="ngForm" (ngSubmit)="onSubmit(rimuoviOrdineForm)">
-          <td><input type="number" name="id" value="{{ordine.id}}" readonly ngModel/></td>
-          <td><input type="date" name="data" value="{{ordine.data}}" readonly/></td>
-          <td><input type="time" name="orario" value="{{ordine.orario}}" readonly/></td>
-          <td><input type="number" name="quantita" value="{{ordine.quantita}}" readonly/></td>
-          <td>Descrizione servizio ph</td>
-          <td><input type="submit" value="Rimuovi" class="btn btn-danger"></td>
-        </form>
-        -->
+          <td><input type="button" value="Rimuovi" class="btn btn-danger" (click)="rimuovi(ordine.id)"></td>
       </tr>
     </table>
   </div>
