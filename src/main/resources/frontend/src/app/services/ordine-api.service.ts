@@ -28,4 +28,12 @@ export class OrdineApiService {
     return this.http.delete(this.ordiniUrl+'/'+id);
   }
 
+  modificaOrdine(id: number, data: Date, orario: Date) {
+    return this.http.patch(this.ordiniUrl+'/'+id, {"data": data, "orario": orario});
+  }
+
+  pagaOrdine(id: number) {
+    return this.http.post<Ordine>(this.ordiniUrl+'/'+id+'/pagamento', {"id": id});
+  }
+
 }

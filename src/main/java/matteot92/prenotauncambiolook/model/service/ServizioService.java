@@ -1,13 +1,11 @@
 package matteot92.prenotauncambiolook.model.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import matteot92.prenotauncambiolook.model.entities.Servizio;
-import matteot92.prenotauncambiolook.model.entities.Utente;
 import matteot92.prenotauncambiolook.model.repository.ServizioRepository;
 
 @Service

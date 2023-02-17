@@ -18,6 +18,8 @@ import { ChatComponent } from './components/chat/chat.component';
 import { RightMenuComponent } from './components/right-menu/right-menu.component';
 import { PasswordComponent } from './components/password/password.component';
 import { ClientiComponent } from './components/clienti/clienti.component';
+import { PagamentoComponent } from './components/pagamento/pagamento.component';
+import { OrdineComponent } from './components/ordine/ordine.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import { ClientiComponent } from './components/clienti/clienti.component';
         ChatComponent,
         RightMenuComponent,
         PasswordComponent,
-        ClientiComponent
+        ClientiComponent,
+        PagamentoComponent,
+        OrdineComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

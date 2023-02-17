@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import matteot92.prenotauncambiolook.model.entities.Ordine;
 import matteot92.prenotauncambiolook.model.entities.Servizio;
 import matteot92.prenotauncambiolook.model.entities.Utente;
@@ -77,8 +76,12 @@ public class OrdineController {
 	public String effettuaOrdine(@RequestBody Ordine ordine) {
 		Utente utente = utenteService.cercaUtenteDaId(ordine.getUtente());
 		Servizio servizio = servizioService.cercaServizio(ordine.getServizio());
-		if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) < 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
-			ordineService.salvaOrdine(ordine.getData(), ordine.getOrario(), ordine.getQuantita(), utente, servizio);
+		LocalDateTime oggi = LocalDateTime.now();
+		LocalDateTime prenotazione = LocalDateTime.of(ordine.getData(), ordine.getOrario());
+		if (oggi.compareTo(prenotazione) <= 0) { // verifica che la data della prenotazione non sia precedente ad oggi
+			if (ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) < 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
+				ordineService.salvaOrdine(ordine.getData(), ordine.getOrario(), ordine.getQuantita(), utente, servizio);
+			}
 		}
 		ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -118,10 +121,52 @@ public class OrdineController {
 		return json;
 	}
 	
-	// Metodo che reindirizza alla pagina per effettuare il pagamento di un ordine
-	@GetMapping("/pagamento")
-	public String pagamento() {
-		return "pagamento";
+	/**
+	 * Metodo che consente ad un utente cliente di poter modificare un ordine
+	 * da lui precedentemente effettuato.
+	 */
+	@PatchMapping("/ordini/{id}")
+	@CrossOrigin(origins = "http://localhost:4200/ordini/:id")
+	public String modificaOrdine(@PathVariable(value = "id") Long id, @RequestBody Ordine ordine) {
+		Ordine vecchioOrdine = ordineService.cercaOrdine(id);
+		LocalDateTime oggi = LocalDateTime.now();
+		LocalDateTime prenotazione = LocalDateTime.of(vecchioOrdine.getData(), vecchioOrdine.getOrario());
+		if (oggi.compareTo(prenotazione) <= 0) { // verifica che la data della prenotazione non sia già passata
+			if (LocalDateTime.of(ordine.getData(), ordine.getOrario()).compareTo(oggi) >= 0 && // viene verificato che la nuova data e orario non siano antecedenti ad oggi
+				ordineService.prenotazioniPerGiornata(ordine.getData(), ordine.getOrario()) < 3) { // viene verificato che per quella data e orario non ci siano già più di 3 prenotazioni
+				ordineService.modificaAppuntamentoOrdine(vecchioOrdine, ordine.getData(), ordine.getOrario()); // se deve ancora avvenire permette al cliente di modificare l'ordine
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(vecchioOrdine);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	// Metodo che effettua il pagamento di un ordine
+	@PostMapping("/ordine/{idOrdine}/pagamento")
+	@CrossOrigin(origins = "http://localhost:4200/ordini/:id/pagamento")
+	public String pagamento(@RequestParam(name = "idOrdine") Long id, @RequestBody Ordine ordine) {
+		System.err.print(id);
+		ordine = ordineService.cercaOrdine(ordine.getId());
+		// Inserire poi la logica del pagamento quando verrà creata entità adatta
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
+        String json = null;
+		try {
+			json = mapper.writeValueAsString(ordine);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.err.print(json);
+		return json;
 	}
 	
 	// Metodo che effettua il pagamento di un ordine e reindirizza alla pagina dei servizi disponibili

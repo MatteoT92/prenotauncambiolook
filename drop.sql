@@ -4324,3 +4324,75 @@
     drop table servizi;
 
     drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
+
+    drop table ordini;
+
+    drop table servizi;
+
+    drop table utenti;
