@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Servizio } from 'src/app/models/servizio';
 import { OrdineApiService } from 'src/app/services/ordine-api.service';
@@ -10,7 +10,7 @@ import { UtenteApiService } from 'src/app/services/utente-api.service';
   templateUrl: './servizi.component.html',
   styleUrls: ['./servizi.component.css']
 })
-export class ServiziComponent implements OnInit, AfterViewInit {
+export class ServiziComponent implements OnInit {
 
   isAdmin = sessionStorage.getItem('tipo');
   user: any;
@@ -28,12 +28,6 @@ export class ServiziComponent implements OnInit, AfterViewInit {
    this.serviziDisponibili();
    this.utentiRegistrati();
    this.user = sessionStorage.getItem('utente');
-   console.log(this.ordinaForm);
-  }
-
-  ngAfterViewInit(): void {
-    console.log("AFTER");
-    console.log(this.ordinaForm);
   }
 
   serviziDisponibili(): void {

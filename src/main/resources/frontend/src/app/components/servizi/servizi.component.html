@@ -31,4 +31,24 @@
 			    <input type="submit" value="Aggiungi"/>
 			</form>
 		</div>
+  </div>
+  <div *ngSwitchDefault>
+    <mat-card class="card" *ngFor="let servizio of servizi">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>{{servizio.descrizione}}</mat-card-title>
+          <mat-card-subtitle>{{servizio.prezzo}} EURO</mat-card-subtitle>
+          <img mat-card-md-image src="/assets/img/ph.png"  alt="Servizio Estetico">
+          <form>
+            <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
+            <span>Orario : </span><input type="time" name="orario" ngModel required/><br><br>
+            <span>Quantità : </span><input type="number" name="quantita" ngModel required/><br><br>
+            <input type="hidden" ngModel={{servizio.id}} name="servizio" required/>
+            <input type="hidden" ngModel={{utenti.get(user)}} name="utente" required/>
+            <input type="button" value="Ordina" class="btn btn-success" routerLink="/login">
+          </form>
+        </mat-card-title-group>
+      </mat-card-header>
+    </mat-card>
+  </div>
 </div>
