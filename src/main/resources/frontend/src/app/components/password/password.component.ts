@@ -10,6 +10,8 @@ import { UtenteApiService } from 'src/app/services/utente-api.service';
 })
 export class PasswordComponent {
 
+  isAdmin = sessionStorage.getItem('tipo');
+
   constructor(private api: UtenteApiService, private router: Router) {
 
   }

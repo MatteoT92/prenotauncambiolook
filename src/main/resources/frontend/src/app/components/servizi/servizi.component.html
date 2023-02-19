@@ -25,7 +25,7 @@
     <div class="crea-servizio">
 			<form #aggiungiServizioForm="ngForm" (ngSubmit)="onSubmitAdmin(aggiungiServizioForm)">
 				<span>Descrizione</span><br>
-				<input type="text" name="descrizione" ngModel required/><br>
+				<textarea name="descrizione" ngModel required rows="5" cols="50"></textarea><br>
 				<span>Prezzo</span><br>
 			    <input type="number" name="prezzo" ngModel required/><br>
 			    <br>
@@ -53,3 +53,4 @@
     </div>
   </div>
 </div>
+<app-right-menu *ngIf="isAdmin == 'admin'"></app-right-menu>

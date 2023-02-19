@@ -1,12 +1,13 @@
 package matteot92.prenotauncambiolook.controller;
 
+import static matteot92.prenotauncambiolook.Json.parseJsonWithDateTime;
+
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import matteot92.prenotauncambiolook.model.entities.Ordine;
 import matteot92.prenotauncambiolook.model.entities.Servizio;
@@ -51,16 +47,7 @@ public class OrdineController {
 	@CrossOrigin(origins = "http://localhost:4200/ordini")
 	public String iMieiOrdini(@RequestParam(name = "username") String username) {
 		Utente utente = utenteService.cercaUtenteDaUsername(username);
-		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(ordineService.prenotazioniPerCliente(utente));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJsonWithDateTime(ordineService.prenotazioniPerCliente(utente));
 	}
 	
 	/**
@@ -83,16 +70,7 @@ public class OrdineController {
 				ordineService.salvaOrdine(ordine.getData(), ordine.getOrario(), ordine.getQuantita(), utente, servizio);
 			}
 		}
-		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(ordine);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJsonWithDateTime(ordine);
 	}
 	
 	/**
@@ -109,16 +87,7 @@ public class OrdineController {
 		if (oggi.compareTo(prenotazione) <= 0) { // verifica che la data della prenotazione non sia già passata
 			ordineService.rimuoviOrdine(ordine); // se deve ancora avvenire permette al cliente di disdire appuntamento
 		}
-		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(ordine);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJsonWithDateTime(ordine);
 	}
 	
 	/**
@@ -137,36 +106,16 @@ public class OrdineController {
 				ordineService.modificaAppuntamentoOrdine(vecchioOrdine, ordine.getData(), ordine.getOrario()); // se deve ancora avvenire permette al cliente di modificare l'ordine
 			}
 		}
-		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(vecchioOrdine);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJsonWithDateTime(vecchioOrdine);
 	}
 	
 	// Metodo che effettua il pagamento di un ordine
 	@PostMapping("/ordine/{idOrdine}/pagamento")
 	@CrossOrigin(origins = "http://localhost:4200/ordini/:id/pagamento")
 	public String pagamento(@RequestParam(name = "idOrdine") Long id, @RequestBody Ordine ordine) {
-		System.err.print(id);
 		ordine = ordineService.cercaOrdine(ordine.getId());
 		// Inserire poi la logica del pagamento quando verrà creata entità adatta
-		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(ordine);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		System.err.print(json);
-		return json;
+		return parseJsonWithDateTime(ordine);
 	}
 	
 	/**
@@ -176,16 +125,7 @@ public class OrdineController {
 	@RequestMapping(value = "/prenotazioni", method = {RequestMethod.GET, RequestMethod.POST})
 	@CrossOrigin(origins = "http://localhost:4200/ordini")
 	public String listaPrenotazioni() {
-		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(ordineService.listaOrdini());
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJsonWithDateTime(ordineService.listaOrdini());
 	}
 	
 }

@@ -1,9 +1,13 @@
-<form class="col log-container">
-  <div class="row">
-    <span>Nome e Cognome: <input type="text"/></span>
-      <span>N. Carta di credito: <input type="text"/></span>
-      <span>Mese/Anno scadenza carta: <input type="text"/> / <input type="text"/></span>
-      <span>CVV: <input type="text"/></span>
-      <input type="submit" value="Paga" class="btn btn-success" (click)="pagaOrdine(idOrdine)">
-  </div>
-</form>
+<app-navbar></app-navbar>
+<div class="log-container">
+  <form>
+    <span><strong>Ordine ID: #{{idOrdine}}</strong></span><br><br>
+    <span>Nome: <input type="text"/></span><span> Cognome: <input type="text"/></span><br><br>
+    <span>Numero carta: <input type="text" minLength="13" maxLength="16"/></span><br><br>
+    <span>Mese/Anno scadenza carta: <input type="text" minLength="1" maxLength="2"/> / <input type="text" minLength="2" maxLength="2"/></span><br><br>
+    <span>CVV: <input type="text" minLength="3" maxLength="3"/></span><br><br>
+    <input type="submit" value="Paga" class="btn btn-success" (click)="pagaOrdine(idOrdine)" style="margin-right: 10px;">
+    <input type="button" value="Annulla" class="btn btn-danger" routerLink="/ordini">
+  </form>
+</div>
+<app-right-menu></app-right-menu>

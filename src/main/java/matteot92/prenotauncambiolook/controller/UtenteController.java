@@ -1,5 +1,7 @@
 package matteot92.prenotauncambiolook.controller;
 
+import static matteot92.prenotauncambiolook.Json.parseJson;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import matteot92.prenotauncambiolook.model.entities.Utente;
 import matteot92.prenotauncambiolook.model.service.OrdineService;
@@ -40,19 +38,11 @@ public class UtenteController {
 	@PostMapping("/login")
 	@CrossOrigin(origins = "http://localhost:4200/login")
 	public String login(@RequestBody Utente utenteDaForm) {
-		ObjectMapper mapper = new ObjectMapper();
 		Utente utente = null;
 		if (utenteService.isRegistrato(utenteDaForm)) { // verifica se l'utente è già registrato
 			utente = utenteService.cercaUtente(utenteDaForm.getUsername(), utenteDaForm.getEmail(), utenteDaForm.getPassword());
 		}
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(utente);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJson(utente);
 	}
 
 	/**
@@ -63,17 +53,9 @@ public class UtenteController {
 	@PostMapping("/sign")
 	@CrossOrigin(origins = "http://localhost:4200/sign")
 	public String registraUtente(@RequestBody Utente utenteDaForm) {
-		ObjectMapper mapper = new ObjectMapper();
 		utenteService.registraUtente(utenteDaForm);
 		Utente utente = utenteService.cercaUtente(utenteDaForm.getUsername(), utenteDaForm.getEmail());
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(utente);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJson(utente);
 	}
 
 	/**
@@ -88,36 +70,19 @@ public class UtenteController {
 		if (utenteCercato != null) {
 			utenteService.modificaPassword(utenteCercato, utente.getPassword());
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(utenteCercato);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJson(utenteCercato);
 	}
 	
 	/**
 	 * Metodo che consente ad un utente in sessione di potersi disiscrivere dal sito
-	 * rimuovendone i dati dal database
-	 * e reindirizzandolo sulla home del sito
+	 * rimuovendone i dati dal database e reindirizzandolo sulla pagina di login
 	 */
 	@PostMapping("/disiscriviti")
 	@CrossOrigin(origins = "http://localhost:4200/disiscriviti")
 	public String disiscriviti(@RequestBody Utente utenteDaRimuovere) {
 		Utente utente = utenteService.cercaUtenteDaUsername(utenteDaRimuovere.getUsername());
 		utenteService.rimuoviUtente(utente);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(utente);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJson(utente);
 	}
 	
 	/**
@@ -126,15 +91,7 @@ public class UtenteController {
 	@RequestMapping(value = "/clienti", method = {RequestMethod.GET, RequestMethod.POST})
 	@CrossOrigin(origins = "http://localhost:4200/clienti")
 	public String utentiRegistrati() {
-		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = null;
-		try {
-			json = mapper.writeValueAsString(utenteService.utentiRegistrati());
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
+		return parseJson(utenteService.utentiRegistrati());
 	}
 	
 }

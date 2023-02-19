@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div [ngSwitch]="isAdmin">
+<div [ngSwitch]="isAdmin" class="left">
   <div *ngSwitchCase="['cliente']">
     <table>
       <tr>
@@ -42,3 +42,4 @@
     </table>
   </div>
 </div>
+<app-right-menu></app-right-menu>
