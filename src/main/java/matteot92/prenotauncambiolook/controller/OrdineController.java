@@ -169,12 +169,6 @@ public class OrdineController {
 		return json;
 	}
 	
-	// Metodo che effettua il pagamento di un ordine e reindirizza alla pagina dei servizi disponibili
-	@PostMapping("/pagamento")
-	public String effettuaPagamento(@ModelAttribute("ordine") Ordine ordine) {
-		return "redirect:/servizi";
-	}
-	
 	/**
 	 * Metodo che mostra ad un utente admin la lista degli ordini
 	 * effettuati da tutti i suoi clienti

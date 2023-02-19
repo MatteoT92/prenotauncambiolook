@@ -13,6 +13,8 @@ a {
   color: black;
   text-align: center;
   font-size: medium;
+  font-weight: bold;
+  font-style: oblique;
   padding: 10px;
   border-radius: 50%;
 }

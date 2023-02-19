@@ -95,4 +95,10 @@ export class OrdiniComponent implements OnInit {
     this.router.navigate(['/ordini/'+id]);
   }
 
+  statusButton(dataOrdine: any): boolean {
+    let oggi = new Date();
+    let data = new Date(dataOrdine);
+    return oggi.getTime() > data.getTime();
+  }
+
 }

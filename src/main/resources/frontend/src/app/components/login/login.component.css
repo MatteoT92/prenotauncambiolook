@@ -7,14 +7,28 @@
 }
 
 .ask {
+  background-color: grey;
 	text-align: center;
 	margin: 0;
+  padding: 10px;
 	position: absolute;
 	bottom: 10%;
 	left: 50%;
 	transform: translateX(-50%);
+  border-radius: 10px;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
 }
 
-.ask > span, a {
+.ask > span {
+  color: black;
 	font-weight: bold;
+}
+
+.ask > a {
+	font-weight: bold;
+  text-decoration: none;
+  color: blue;
+  font-weight: bold;
 }

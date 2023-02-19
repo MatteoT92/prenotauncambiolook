@@ -15,8 +15,8 @@
           <td>{{ordine.orario}}</td>
           <td>{{ordine.quantita}}</td>
           <td>{{catalogo.get(ordine.servizio)}}</td>
-          <td><input type="button" value="Rimuovi" class="btn btn-danger" (click)="rimuovi(ordine.id)"></td>
-          <td><input type="button" value="Modifica" class="btn btn-warning" (click)="modifica(ordine.id)"></td>
+          <td><input type="button" value="Rimuovi" class="btn btn-danger" (click)="rimuovi(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
+          <td><input type="button" value="Modifica" class="btn btn-warning" (click)="modifica(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
           <td><input type="button" value="Paga" class="btn btn-success" (click)="paga(ordine.id)"></td>
       </tr>
     </table>
@@ -34,7 +34,7 @@
       <tr *ngFor="let ordine of prenotazioni">
           <td>{{ordine.id}}</td>
           <td>{{utenti.get(ordine.utente)}}</td>
-          <td>{{ordine.data}}</td>
+          <td>{{ordine.data | date:'dd/MM/yyyy'}}</td>
           <td>{{ordine.orario}}</td>
           <td>{{ordine.quantita}}</td>
           <td>{{catalogo.get(ordine.servizio)}}</td>

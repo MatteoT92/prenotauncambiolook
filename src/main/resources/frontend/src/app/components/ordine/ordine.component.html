@@ -1,8 +1,11 @@
+<app-navbar></app-navbar>
 <div class="log-container">
   <form #cambiaAppuntamentoForm="ngForm" (ngSubmit)="onSubmit(cambiaAppuntamentoForm)">
-    <span>ID Ordine : {{idOrdine}}</span><input type="hidden" ngModel={{idOrdine}} name="id" required/><br><br>
+    <span><strong>ID Ordine : #{{idOrdine}}</strong></span><input type="hidden" ngModel={{idOrdine}} name="id" required/><br><br>
     <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
     <span>Orario : </span><input type="time" name="orario" ngModel required/><br><br>
     <input type="submit" value="Modifica" class="btn btn-warning">
+    <input type="button" value="Annulla" class="btn btn-danger" routerLink="/ordini">
   </form>
 </div>
+<app-right-menu></app-right-menu>
