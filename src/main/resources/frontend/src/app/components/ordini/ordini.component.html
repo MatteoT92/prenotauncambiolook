@@ -17,7 +17,7 @@
           <td>{{catalogo.get(ordine.servizio)}}</td>
           <td><input type="button" value="Rimuovi" class="btn btn-danger" (click)="rimuovi(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
           <td><input type="button" value="Modifica" class="btn btn-warning" (click)="modifica(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
-          <td><input type="button" value="Paga" class="btn btn-success" (click)="paga(ordine.id)"></td>
+          <td><input type="button" value="Paga" class="btn btn-success" (click)="paga(ordine.id, ordine.servizio)"></td>
       </tr>
     </table>
   </div>

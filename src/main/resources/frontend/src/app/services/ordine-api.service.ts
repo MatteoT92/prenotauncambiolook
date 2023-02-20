@@ -32,8 +32,8 @@ export class OrdineApiService {
     return this.http.patch(this.ordiniUrl+'/'+id, {"data": data, "orario": orario});
   }
 
-  pagaOrdine(id: number) {
-    return this.http.post<Ordine>(this.ordiniUrl+'/'+id+'/pagamento', {"id": id});
+  pagaOrdine(idOrdine: number, idServizio: number) {
+    return this.http.post<Ordine>(this.ordiniUrl+'/'+idOrdine+'/pagamento', {"id": idOrdine});
   }
 
 }

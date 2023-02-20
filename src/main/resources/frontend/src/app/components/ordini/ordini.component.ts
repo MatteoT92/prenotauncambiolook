@@ -85,9 +85,10 @@ export class OrdiniComponent implements OnInit {
     })
   }
 
-  paga(id: number) {
-    sessionStorage.setItem('idOrdine', id.toString());
-    this.router.navigate(['/ordini/'+id+'/pagamento']);
+  paga(idOrdine: number, idServizio: number) {
+    sessionStorage.setItem('idOrdine', idOrdine.toString());
+    sessionStorage.setItem('idServizio', idServizio.toString());
+    this.router.navigate(['/ordini/'+idOrdine+'/pagamento']);
   }
 
   modifica(id: number) {
