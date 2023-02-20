@@ -1,13 +1,20 @@
 .card {
-  max-width: 500px;
-  margin: 8px;
-  padding: 16px;
+  max-width: 525px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 20px;
+  border-style: dotted;
+  border-width: 3px;
+  border-color: black;
+  background-color: pink;
+  font-size: small;
+  font-weight: bold;
 }
 
 .crea-servizio {
-	position: absolute;
+	position: fixed;
 	top: 60%;
-	left: 50%;
+	left: 60%;
 	transform: translate(-50%, -50%);
 	display: inline-flex;
   background-color: grey;
@@ -18,4 +25,30 @@
   text-align: center;
   font-size: medium;
   font-weight: bold;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 40%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
+
+tr:nth-child(even) {
+	background-color: white;
+}
+
+tr {
+	text-align: center;
+  background-color: pink;
 }

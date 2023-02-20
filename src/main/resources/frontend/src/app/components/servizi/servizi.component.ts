@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Servizio } from 'src/app/models/servizio';
 import { OrdineApiService } from 'src/app/services/ordine-api.service';
 import { ServizioApiService } from 'src/app/services/servizio-api.service';
@@ -20,8 +21,8 @@ export class ServiziComponent implements OnInit {
 
   constructor(private api: ServizioApiService,
               private apiUtenti: UtenteApiService,
-              private apiOrdini: OrdineApiService) {
-
+              private apiOrdini: OrdineApiService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -57,6 +58,7 @@ export class ServiziComponent implements OnInit {
     this.api.aggiungiServizio(aggiungiServizioForm.value.descrizione,
                               aggiungiServizioForm.value.prezzo)
                               .subscribe();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/servizi'])); // fa il refresh della tabella dei servizi offerti dopo l'aggiunta
   }
 
   onSubmit(ordinaForm: NgForm) {
@@ -66,6 +68,7 @@ export class ServiziComponent implements OnInit {
                                   ordinaForm.value.servizio,
                                   ordinaForm.value.utente)
                                   .subscribe();
+    this.router.navigate(['/ordini']);
   }
 
 }

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="log-container">
   <form>
-    <span>Ordine ID: #{{idOrdine}}</span><span> - Importo: {{prezzario.get(idServizio)}} EURO</span><br><br>
+    <span>Ordine ID: #{{idOrdine}}</span><span> - {{prezzario.get(idServizio) | currency:'EUR'}}</span><br><br>
     <span>Nome: <input type="text"/></span><span> Cognome: <input type="text"/></span><br><br>
     <span>Numero carta: <input type="text" minLength="13" maxLength="16"/></span><br><br>
     <span>Mese/Anno scadenza carta: <input type="text" minLength="1" maxLength="2"/> / <input type="text" minLength="2" maxLength="2"/></span><br><br>

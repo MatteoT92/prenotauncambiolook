@@ -3,7 +3,7 @@ let stompClient = null;
 // Crea una connessione WebSocket ad un client
 function connect() {
   /*
-  Crea un WebSocket sull'endpoint chat-websocket, 
+  Crea un WebSocket sull'endpoint chat-websocket,
   gestito dal metodo registerStompEndpoints della classe java WebSocketConfiguration,
   con cui comunicheranno il client col server
   */

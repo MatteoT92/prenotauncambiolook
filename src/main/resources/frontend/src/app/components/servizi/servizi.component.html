@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 <div [ngSwitch]="isAdmin">
   <div *ngSwitchCase="['cliente']">
-    <div class="d-flex">
+    <div class="row" style="margin-left: 5px;">
       <mat-card class="card" *ngFor="let servizio of servizi">
         <mat-card-header>
           <mat-card-title-group>
             <mat-card-title>{{servizio.descrizione}}</mat-card-title>
-            <mat-card-subtitle>{{servizio.prezzo}} EURO</mat-card-subtitle>
+            <mat-card-subtitle>{{servizio.prezzo | currency:'EUR'}}</mat-card-subtitle>
             <img mat-card-md-image src="/assets/img/ph.png"  alt="Servizio Estetico">
             <form #ordinaForm="ngForm" (ngSubmit)="onSubmit(ordinaForm)">
               <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
@@ -32,14 +32,28 @@
 			    <input type="submit" value="Aggiungi" class="btn btn-success"/>
 			</form>
 		</div>
+    <div>
+      <table>
+        <tr>
+            <th>ID Servizio</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+        </tr>
+        <tr *ngFor="let servizio of servizi">
+            <td>{{servizio.id}}</td>
+            <td>{{servizio.descrizione}}</td>
+            <td>{{servizio.prezzo | currency:'EUR'}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
   <div *ngSwitchDefault>
-    <div class="d-flex">
+    <div class="row" style="margin-left: 5px;">
       <mat-card class="card" *ngFor="let servizio of servizi">
         <mat-card-header>
           <mat-card-title-group>
             <mat-card-title>{{servizio.descrizione}}</mat-card-title>
-            <mat-card-subtitle>{{servizio.prezzo}} EURO</mat-card-subtitle>
+            <mat-card-subtitle>{{servizio.prezzo | currency:'EUR'}}</mat-card-subtitle>
             <img mat-card-md-image src="/assets/img/ph.png"  alt="Servizio Estetico">
             <form>
               <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
@@ -53,4 +67,4 @@
     </div>
   </div>
 </div>
-<app-right-menu *ngIf="isAdmin == 'admin'"></app-right-menu>
+<app-right-menu></app-right-menu>

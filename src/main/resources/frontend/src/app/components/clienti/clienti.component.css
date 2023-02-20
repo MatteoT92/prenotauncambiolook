@@ -1,7 +1,7 @@
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
-	width: 100%;
+	width: 80%;
 }
 
 td, th {
@@ -16,13 +16,10 @@ th {
 }
 
 tr:nth-child(even) {
-	background-color: #dddddd;
+	background-color: white;
 }
 
 tr {
 	text-align: center;
-}
-
-.left {
-  float: left;
+  background-color: pink;
 }
