@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OrdineApiService } from 'src/app/services/ordine-api.service';
 import { ServizioApiService } from 'src/app/services/servizio-api.service';
@@ -14,8 +15,9 @@ export class PagamentoComponent implements OnInit {
   prezzario!: Map<number, number>;
   idServizio!: number;
 
-  constructor(private api: OrdineApiService, private apiServizi: ServizioApiService, private router: Router) {
-
+  constructor(private api: OrdineApiService,
+              private apiServizi: ServizioApiService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -24,8 +26,9 @@ export class PagamentoComponent implements OnInit {
     this.prezziServizi();
   }
 
-  pagaOrdine(idOrdine: number, idServizio: number) {
-    this.api.pagaOrdine(idOrdine, idServizio).subscribe();
+  pagaOrdine(pagamentoForm: NgForm) {
+    this.api.pagaOrdine(pagamentoForm.value.idOrdine, pagamentoForm.value.importo)
+    .subscribe();
     this.router.navigate(['/ordini']);
   }
 

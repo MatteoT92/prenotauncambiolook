@@ -2,6 +2,7 @@ package matteot92.prenotauncambiolook.controller;
 
 import static matteot92.prenotauncambiolook.Json.parseJsonWithDateTime;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import matteot92.prenotauncambiolook.model.entities.Ordine;
+import matteot92.prenotauncambiolook.model.entities.Pagamento;
 import matteot92.prenotauncambiolook.model.entities.Servizio;
 import matteot92.prenotauncambiolook.model.entities.Utente;
 import matteot92.prenotauncambiolook.model.service.OrdineService;
+import matteot92.prenotauncambiolook.model.service.PagamentoService;
 import matteot92.prenotauncambiolook.model.service.ServizioService;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
 
@@ -31,12 +34,18 @@ public class OrdineController {
 	private OrdineService ordineService;
 	private UtenteService utenteService;
 	private ServizioService servizioService;
+	private PagamentoService pagamentoService;
+	
 	
 	@Autowired
-	public OrdineController(OrdineService ordineService, UtenteService utenteService, ServizioService servizioService) {
+	public OrdineController(OrdineService ordineService, 
+							UtenteService utenteService, 
+							ServizioService servizioService,
+							PagamentoService pagamentoService) {
 		this.ordineService = ordineService;
 		this.utenteService = utenteService;
 		this.servizioService = servizioService;
+		this.pagamentoService = pagamentoService;
 	}
 
 	/**
@@ -110,12 +119,16 @@ public class OrdineController {
 	}
 	
 	// Metodo che effettua il pagamento di un ordine
-	@PostMapping("/ordine/{idOrdine}/pagamento")
+	@PostMapping("/ordini/{idOrdine}/pagamento")
 	@CrossOrigin(origins = "http://localhost:4200/ordini/:id/pagamento")
-	public String pagamento(@RequestParam(name = "idOrdine") Long id, @RequestBody Ordine ordine) {
-		ordine = ordineService.cercaOrdine(ordine.getId());
-		// Inserire poi la logica del pagamento quando verrà creata entità adatta
-		return parseJsonWithDateTime(ordine);
+	public String pagamento(@PathVariable(name = "idOrdine") Long id, @RequestBody Pagamento pagamento) {
+		System.err.println(pagamento);
+		Ordine ordine = ordineService.cercaOrdine(pagamento.getOrdine());
+		pagamento.setData(LocalDate.now());
+		pagamento.setUtente(ordine.getUtente());
+		pagamentoService.effettuaPagamento(pagamento);
+		System.err.println(parseJsonWithDateTime(pagamentoService.effettuaPagamento(pagamento)));
+		return parseJsonWithDateTime(pagamentoService.effettuaPagamento(pagamento));
 	}
 	
 	/**

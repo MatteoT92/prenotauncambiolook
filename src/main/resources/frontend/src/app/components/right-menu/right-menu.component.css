@@ -1,5 +1,5 @@
 .right-menu {
-  position: absolute;
+  position: fixed;
 	top: 31%;
 	left: 80%;
   padding-top: 40px;

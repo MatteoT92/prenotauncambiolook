@@ -1,12 +1,14 @@
 <app-navbar></app-navbar>
 <div class="log-container">
-  <form>
+  <form #pagamentoForm="ngForm" (ngSubmit)="pagaOrdine(pagamentoForm)">
     <span>Ordine ID: #{{idOrdine}}</span><span> - {{prezzario.get(idServizio) | currency:'EUR'}}</span><br><br>
     <span>Nome: <input type="text"/></span><span> Cognome: <input type="text"/></span><br><br>
     <span>Numero carta: <input type="text" minLength="13" maxLength="16"/></span><br><br>
     <span>Mese/Anno scadenza carta: <input type="text" minLength="1" maxLength="2"/> / <input type="text" minLength="2" maxLength="2"/></span><br><br>
     <span>CVV: <input type="text" minLength="3" maxLength="3"/></span><br><br>
-    <input type="submit" value="Paga" class="btn btn-success" (click)="pagaOrdine(idOrdine, idServizio)" style="margin-right: 10px;">
+    <input type="hidden" name="idOrdine" ngModel={{idOrdine}}/>
+    <input type="hidden" name="importo" ngModel={{prezzario.get(idServizio)}}/>
+    <input type="submit" value="Paga" class="btn btn-success" style="margin-right: 10px;">
     <input type="button" value="Annulla" class="btn btn-danger" routerLink="/ordini">
   </form>
 </div>
