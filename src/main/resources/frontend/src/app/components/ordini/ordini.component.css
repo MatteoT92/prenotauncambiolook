@@ -22,7 +22,3 @@ tr:nth-child(even) {
 tr {
 	text-align: center;
 }
-
-.left {
-  float: left;
-}

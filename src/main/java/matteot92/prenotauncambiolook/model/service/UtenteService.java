@@ -105,5 +105,12 @@ public class UtenteService {
 	public Utente cercaUtenteDaId(Long id) {
 		return repository.findById(id).get();
 	}
+	
+	/**
+	 * Metodo che recupera la password di un utente attraverso il suo username e email
+	 */
+	public String recuperaPassword(String username, String email) {
+		return repository.getPasswordByUsernameAndEmail(username, email);
+	}
 
 }

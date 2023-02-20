@@ -34,6 +34,10 @@ export class UtenteApiService {
     return this.http.post(this.passwordUrl, {"username": sessionStorage.getItem('utente'), "password": nuovaPassword});
   }
 
+  recuperaPassword(username: string, email: string) {
+    return this.http.get<Utente>(this.passwordUrl+'?username='+username+'&email='+email);
+  }
+
   disiscrizione() {
     return this.http.post(this.disiscrizioneUrl, {"username": sessionStorage.getItem('utente')});
   }

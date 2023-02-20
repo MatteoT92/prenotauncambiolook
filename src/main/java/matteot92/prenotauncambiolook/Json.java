@@ -8,11 +8,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public class Json {
 	
 	private static ObjectMapper mapper;
+	private static String json;
 	
 	public static String parseJson(Object obj) {
 		mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = null;
+        json = null;
 		try {
 			json = mapper.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
@@ -25,7 +26,7 @@ public class Json {
 		mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.registerModule(new JavaTimeModule()); // serializza la data con Jackson JSON
-        String json = null;
+        json = null;
 		try {
 			json = mapper.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {

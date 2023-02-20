@@ -22,4 +22,9 @@ export class PasswordComponent {
     this.router.navigate(['/home']);
   }
 
+  onSubmitRecupera(recuperaPasswordForm: NgForm) {
+    this.api.recuperaPassword(recuperaPasswordForm.value.username, recuperaPasswordForm.value.email)
+    .subscribe();
+  }
+
 }

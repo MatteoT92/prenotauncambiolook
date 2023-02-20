@@ -4,10 +4,12 @@ import static matteot92.prenotauncambiolook.Json.parseJson;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import matteot92.prenotauncambiolook.model.entities.Utente;
@@ -92,6 +94,20 @@ public class UtenteController {
 	@CrossOrigin(origins = "http://localhost:4200/clienti")
 	public String utentiRegistrati() {
 		return parseJson(utenteService.utentiRegistrati());
+	}
+	
+	/**
+	 * Metodo che effettua il recupero della password attraverso l'username e password
+	 * forniti nel form Angular
+	 */
+	@GetMapping("/password")
+	@CrossOrigin(origins = "http://localhost:4200/password")
+	public String recuperaPassword(@RequestParam(name = "username") String username, @RequestParam(name = "email") String email) {
+		Utente utenteCercato = utenteService.cercaUtente(username, email);
+		if (utenteCercato != null) {
+			utenteService.recuperaPassword(username, email);
+		}
+		return parseJson(utenteService.recuperaPassword(username, email));
 	}
 	
 }

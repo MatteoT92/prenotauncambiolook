@@ -1,45 +1,47 @@
 <app-navbar></app-navbar>
-<div [ngSwitch]="isAdmin" class="left">
-  <div *ngSwitchCase="['cliente']">
-    <table>
-      <tr>
-          <th>ID Ordine</th>
-          <th>Data</th>
-          <th>Orario</th>
-          <th>Quantità</th>
-          <th>Servizio</th>
-      </tr>
-      <tr *ngFor="let ordine of ordini">
-          <td>{{ordine.id}}</td>
-          <td>{{ordine.data | date:'dd/MM/yyyy'}}</td>
-          <td>{{ordine.orario}}</td>
-          <td>{{ordine.quantita}}</td>
-          <td>{{catalogo.get(ordine.servizio)}}</td>
-          <td><input type="button" value="Rimuovi" class="btn btn-danger" (click)="rimuovi(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
-          <td><input type="button" value="Modifica" class="btn btn-warning" (click)="modifica(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
-          <td><input type="button" value="Paga" class="btn btn-success" (click)="paga(ordine.id, ordine.servizio)"></td>
-      </tr>
-    </table>
+<div class="d-flex">
+  <div [ngSwitch]="isAdmin" class="col">
+    <div *ngSwitchCase="['cliente']">
+      <table>
+        <tr>
+            <th>ID Ordine</th>
+            <th>Data</th>
+            <th>Orario</th>
+            <th>Quantità</th>
+            <th>Servizio</th>
+        </tr>
+        <tr *ngFor="let ordine of ordini">
+            <td>{{ordine.id}}</td>
+            <td>{{ordine.data | date:'dd/MM/yyyy'}}</td>
+            <td>{{ordine.orario}}</td>
+            <td>{{ordine.quantita}}</td>
+            <td>{{catalogo.get(ordine.servizio)}}</td>
+            <td><input type="button" value="Rimuovi" class="btn btn-danger" (click)="rimuovi(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
+            <td><input type="button" value="Modifica" class="btn btn-warning" (click)="modifica(ordine.id)" [disabled]="statusButton(ordine.data)"></td>
+            <td><input type="button" value="Paga" class="btn btn-success" (click)="paga(ordine.id, ordine.servizio)"></td>
+        </tr>
+      </table>
+    </div>
+    <div *ngSwitchCase="['admin']">
+      <table>
+        <tr>
+            <th>ID Ordine</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Orario</th>
+            <th>Quantità</th>
+            <th>Servizio</th>
+        </tr>
+        <tr *ngFor="let ordine of prenotazioni">
+            <td>{{ordine.id}}</td>
+            <td>{{utenti.get(ordine.utente)}}</td>
+            <td>{{ordine.data | date:'dd/MM/yyyy'}}</td>
+            <td>{{ordine.orario}}</td>
+            <td>{{ordine.quantita}}</td>
+            <td>{{catalogo.get(ordine.servizio)}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
-  <div *ngSwitchCase="['admin']">
-    <table>
-      <tr>
-          <th>ID Ordine</th>
-          <th>Cliente</th>
-          <th>Data</th>
-          <th>Orario</th>
-          <th>Quantità</th>
-          <th>Servizio</th>
-      </tr>
-      <tr *ngFor="let ordine of prenotazioni">
-          <td>{{ordine.id}}</td>
-          <td>{{utenti.get(ordine.utente)}}</td>
-          <td>{{ordine.data | date:'dd/MM/yyyy'}}</td>
-          <td>{{ordine.orario}}</td>
-          <td>{{ordine.quantita}}</td>
-          <td>{{catalogo.get(ordine.servizio)}}</td>
-      </tr>
-    </table>
-  </div>
+  <app-right-menu class="col"></app-right-menu>
 </div>
-<app-right-menu></app-right-menu>
