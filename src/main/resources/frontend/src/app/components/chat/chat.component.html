@@ -1,28 +1,24 @@
 <app-navbar></app-navbar>
 <div class="container2">
-  <div class="connect-container">
-      <div class="input-container">
-          <input type="text" id="sender" value="{{username}}" />
-      </div>
-      <div>
-          <button id="button-connect" onclick="connect();">
-              CONNETTI
-          </button>
-          <button id="button-disconnect" onclick="disconnect();">
-              DISCONNETTI
-          </button>
-      </div>
-  </div>
   <div id="chat-container">
       <div id="messages-container"></div>
       <div class="send-message-container">
           <div class="input-container">
-              <input type="text" id="text" placeholder="Scrivi un messaggio"/>
+              <input class="form-control" type="text" id="text" placeholder="Scrivi un messaggio" [(ngModel)]="input">
           </div>
           <div>
-              <button id="button-sendmessage" onclick="sendMessage();">INVIA</button>
+              <button id="button-sendmessage" class="btn btn-success" (click)="sendMessage()">Invia</button>
           </div>
       </div>
   </div>
 </div>
+<!--
+<input class="form-control" type="text" placeholder="message" [(ngModel)]="input">
+<button class="btn btn-success" (click)="sendMessage()">Invia</button>
+<div class="content">
+  <div *ngFor="let msg of ws.msg">
+    {{msg}}
+  </div>
+</div>
+-->
 <app-right-menu></app-right-menu>

@@ -1,32 +1,27 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-
-declare function connect(): void;
-declare function disconnect(): void;
-declare function setConnected(connected: any): void;
-declare function addMessageReceived(newMessageReceived: any): void;
-declare function sendMessage(): void;
+import { Component, OnInit } from '@angular/core';
+import { ChatWsService } from 'src/app/services/chat-ws.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit, AfterViewInit {
+export class ChatComponent implements OnInit {
 
   username = sessionStorage.getItem('utente');
-  scriptElement!: HTMLScriptElement;
+  input: any;
 
-  constructor() {}
-
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-    this.scriptElement = document.createElement("script");
-    this.scriptElement.src = "/assets/js/script.js";
-    document.body.appendChild(this.scriptElement);
+  constructor(public ws: ChatWsService) {
   }
 
   ngOnInit(): void {
 
+  }
+  sendMessage() {
+    if (this.input) {
+      this.ws.sendMessage(this.input);
+      this.input = '';
+    }
   }
 
 }

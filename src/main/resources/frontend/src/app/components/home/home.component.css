@@ -1,1 +1,51 @@
+.google-maps {
+  position: relative;
+  padding-bottom: 100%; /* Definisco l'aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
 
+.google-maps > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80% !important;
+  height: 80% !important;
+}
+
+.orari {
+  text-align: center;
+  color: black;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: oblique;
+  background-color: pink;
+  width: 20%;
+  height: 35%;
+  border-radius: 20%;
+  padding: 10px;
+  display: inline-block;
+  margin-top: 70px;
+  margin-left: 20px;
+}
+
+.claim {
+  text-align: justify;
+  background-color: white;
+  color: black;
+  border-style: dashed;
+  padding: 20px;
+  margin-top: 70px;
+  margin-left: 20px;
+  width: 30%;
+  height: 35%;
+}
+
+.mappa {
+  text-align: justify;
+  align-content: stretch;
+  padding: 20px;
+  margin-left: 20px;
+  width: 30%;
+  height: 35%;
+}

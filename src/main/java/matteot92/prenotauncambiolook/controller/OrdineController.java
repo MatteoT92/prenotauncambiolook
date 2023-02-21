@@ -122,12 +122,10 @@ public class OrdineController {
 	@PostMapping("/ordini/{idOrdine}/pagamento")
 	@CrossOrigin(origins = "http://localhost:4200/ordini/:id/pagamento")
 	public String pagamento(@PathVariable(name = "idOrdine") Long id, @RequestBody Pagamento pagamento) {
-		System.err.println(pagamento);
 		Ordine ordine = ordineService.cercaOrdine(pagamento.getOrdine());
 		pagamento.setData(LocalDate.now());
 		pagamento.setUtente(ordine.getUtente());
 		pagamentoService.effettuaPagamento(pagamento);
-		System.err.println(parseJsonWithDateTime(pagamentoService.effettuaPagamento(pagamento)));
 		return parseJsonWithDateTime(pagamentoService.effettuaPagamento(pagamento));
 	}
 	
