@@ -29,10 +29,10 @@
           <input type="text" id="sender" value={{username}} />
       </div>
       <div>
-          <button id="button-connect" (click)="connect()">
+          <button *ngIf="username == null || username == undefined" id="button-connect" (click)="connect()">
               CONNETTI
           </button>
-          <button id="button-disconnect" (click)="disconnect()">
+          <button *ngIf="username != null || username != undefined" id="button-disconnect" (click)="disconnect()">
               DISCONNETTI
           </button>
       </div>

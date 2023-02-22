@@ -3,6 +3,8 @@ package matteot92.prenotauncambiolook.controller;
 import static matteot92.prenotauncambiolook.Json.parseJson;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import matteot92.prenotauncambiolook.model.entities.Utente;
+import matteot92.prenotauncambiolook.model.service.EmailServiceImpl;
 import matteot92.prenotauncambiolook.model.service.OrdineService;
 import matteot92.prenotauncambiolook.model.service.ServizioService;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
@@ -24,9 +27,12 @@ public class UtenteController {
 	private UtenteService utenteService;
 	private ServizioService servizioService;
 	private OrdineService ordineService;
+	@Autowired @Lazy private EmailServiceImpl emailService;
 
 	@Autowired
-	public UtenteController(UtenteService utenteService, ServizioService servizioService, OrdineService ordineService) {
+	public UtenteController(UtenteService utenteService, 
+							ServizioService servizioService, 
+							OrdineService ordineService) {
 		this.utenteService = utenteService;
 		this.servizioService = servizioService;
 		this.ordineService = ordineService;
@@ -105,7 +111,10 @@ public class UtenteController {
 	public String recuperaPassword(@RequestParam(name = "username") String username, @RequestParam(name = "email") String email) {
 		Utente utenteCercato = utenteService.cercaUtente(username, email);
 		if (utenteCercato != null) {
-			utenteService.recuperaPassword(username, email);
+			String password = utenteService.recuperaPassword(username, email);
+			emailService.sendEmail(email,
+									"Ripristino Password PRENOTA UN CAMBIO LOOK",
+									"Gent.le "+ username + "la sua password è " + password + " .");
 		}
 		return parseJson(utenteService.recuperaPassword(username, email));
 	}

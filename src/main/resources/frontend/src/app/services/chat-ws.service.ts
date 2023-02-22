@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs';
+
+declare var SockJS: any;
+declare var Stomp: any;
 
 @Injectable({
   providedIn: 'root'
