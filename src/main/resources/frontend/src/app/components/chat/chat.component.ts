@@ -17,11 +17,17 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  connect() {
+    this.ws.connect();
+  }
+
+  disconnect() {
+    this.ws.disconnect();
+  }
+
   sendMessage() {
-    if (this.input) {
-      this.ws.sendMessage(this.input);
-      this.input = '';
-    }
+    this.ws.sendMessage();
   }
 
 }

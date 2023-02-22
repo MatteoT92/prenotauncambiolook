@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<!--
 <div class="container2">
   <div id="chat-container">
       <div id="messages-container"></div>
@@ -12,6 +13,7 @@
       </div>
   </div>
 </div>
+-->
 <!--
 <input class="form-control" type="text" placeholder="message" [(ngModel)]="input">
 <button class="btn btn-success" (click)="sendMessage()">Invia</button>
@@ -21,4 +23,31 @@
   </div>
 </div>
 -->
+<div class="container2">
+  <div class="connect-container">
+      <div class="input-container">
+          <input type="text" id="sender" value={{username}} />
+      </div>
+      <div>
+          <button id="button-connect" (click)="connect()">
+              CONNETTI
+          </button>
+          <button id="button-disconnect" (click)="disconnect()">
+              DISCONNETTI
+          </button>
+      </div>
+  </div>
+  <div id="chat-container">
+      <div id="messages-container"></div>
+      <div class="send-message-container">
+          <div class="input-container">
+              <input type="text" placeholder="Scrivi un messaggio" [(ngModel)]="input">
+              <!--<input type="text" id="text" placeholder="Scrivi un messaggio"/>-->
+          </div>
+          <div>
+              <button id="button-sendmessage" (click)="sendMessage()">INVIA</button>
+          </div>
+      </div>
+  </div>
+</div>
 <app-right-menu></app-right-menu>
