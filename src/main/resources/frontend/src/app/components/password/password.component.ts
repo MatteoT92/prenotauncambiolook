@@ -18,13 +18,16 @@ export class PasswordComponent {
 
   onSubmit(passwordForm: NgForm) {
     this.api.modificaPassword(passwordForm.value.password)
-    .subscribe();
-    this.router.navigate(['/home']);
+    .subscribe((data) => {
+      window.alert("Password modificata con successo");
+      this.router.navigate(['/home']);
+    });
   }
 
   onSubmitRecupera(recuperaPasswordForm: NgForm) {
     this.api.recuperaPassword(recuperaPasswordForm.value.username, recuperaPasswordForm.value.email)
     .subscribe((data) => {
+      window.alert("Password di ripristino inviata al tuo indirizzo email");
       this.router.navigate(['/login']);
     });
   }

@@ -112,5 +112,29 @@ public class UtenteService {
 	public String recuperaPassword(String username, String email) {
 		return repository.getPasswordByUsernameAndEmail(username, email);
 	}
+	
+	/**
+	 * Metodo che genera una password random per l'utente che richiede il recupero nel form Angular
+	 */
+	public String generaPassword() {
+	    //alphabet contiene tutti i possibili caratteri che comporranno la Password
+		String alphabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!<>-*[]{}/";
+		int alphabetLength = alphabet.length();
+		String password = "";
+		for (int i = 0; i < 8; i++) { // la password provvisoria sarà di 8 caratteri
+		    // Scelgo una delle lettere dell'alfabeto
+		    int randomIndexCharInAlphabet = (int)(Math.random()*alphabetLength);
+		    password += alphabet.charAt(randomIndexCharInAlphabet);
+		}
+		return password;
+	}
+	
+	/**
+	 * Metodo che altera il flag del database che indica se deve o non deve cambiare password
+	 */
+	public Utente deviCambiarePassword(Utente utente, Boolean flag) {
+		utente.setCambiaPassword(flag);
+		return repository.save(utente);
+	}
 
 }

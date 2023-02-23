@@ -7,34 +7,10 @@ declare var Stomp: any;
   providedIn: 'root'
 })
 export class ChatWsService {
-/*
-  public stompClient: any;
-  public msg = Array();
-
-  constructor() {
-    this.initializeWebSocketConnection();
-  }
-
-  initializeWebSocketConnection() {
-    const serverUrl = 'http://localhost:8081/chat-websocket';
-    const ws = new SockJS(serverUrl);
-    this.stompClient = Stomp.over(ws);
-    const that = this;
-    this.stompClient.connect({}, function(frame: any) {
-      that.stompClient.subscribe('/topic/chat', (message: any) => {
-        if (message.body) {
-          that.msg.push(message.body);
-        }
-      });
-    });
-  }
-
-  sendMessage(message: any) {
-    this.stompClient.send('/chat-app/chat' , {}, message);
-  }
-*/
 
   public stompClient: any;
+  username = sessionStorage.getItem('utente');
+  messaggi: any[] = [];
 
   constructor() {
     this.connect();
@@ -91,6 +67,7 @@ export class ChatWsService {
   }
 
   addMessageReceived(newMessageReceived: any): void {
+    /*
     const sender = (document.getElementById("sender") as HTMLInputElement).value;
 
     const messagesContainer = document.getElementById("messages-container");
@@ -113,6 +90,17 @@ export class ChatWsService {
     `;
 
     messagesContainer!.appendChild(newMessage);
+    */
+
+      const sender = this.username;
+      const newMessagePosition = newMessageReceived.sender === sender ? "right" : "left";
+      const newMessage = {
+        text: newMessageReceived.text,
+        sender: newMessageReceived.sender,
+        time: newMessageReceived.time,
+        position: newMessagePosition
+      };
+      this.messaggi.push(newMessage);
   }
 
   sendMessage(): void {

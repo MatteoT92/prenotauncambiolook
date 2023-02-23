@@ -19,7 +19,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@JsonPropertyOrder({ "id", "username", "email", "password", "isAdmin"})
+@JsonPropertyOrder({ "id", "username", "email", "password", "isAdmin", "cambiaPassword"})
 public class Utente {
 	
 	@Id
@@ -36,5 +36,6 @@ public class Utente {
 	private String password;
 	@Column(nullable=false)
 	private Boolean isAdmin;
+	private Boolean cambiaPassword;
 
 }

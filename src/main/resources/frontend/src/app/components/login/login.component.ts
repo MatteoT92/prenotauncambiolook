@@ -28,7 +28,12 @@ export class LoginComponent {
         } else {
           sessionStorage.setItem('tipo', 'cliente');
         }
-        this.router.navigate(['/home']);
+        if (this.utente.cambiaPassword) {
+          this.router.navigate(['/password']);
+          window.alert("Devi reimpostare la password per la tua sicurezza!");
+        } else {
+          this.router.navigate(['/home']);
+        }
       } else {
         this.router.navigate(['/sign']);
       }

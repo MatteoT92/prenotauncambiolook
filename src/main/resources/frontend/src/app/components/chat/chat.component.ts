@@ -10,12 +10,13 @@ export class ChatComponent implements OnInit {
 
   username = sessionStorage.getItem('utente');
   input: any;
+  messaggi: any[] = [];
 
   constructor(public ws: ChatWsService) {
   }
 
   ngOnInit(): void {
-
+    this.messaggi = this.ws.messaggi;
   }
 
   connect() {

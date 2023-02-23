@@ -1,5 +1,3 @@
-import { Ordine } from "./ordine";
-
 export class Servizio {
 
   id: number;

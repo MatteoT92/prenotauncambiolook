@@ -27,7 +27,9 @@ public class UtenteController {
 	private UtenteService utenteService;
 	private ServizioService servizioService;
 	private OrdineService ordineService;
-	@Autowired @Lazy private EmailServiceImpl emailService;
+	@Autowired
+	@Lazy
+	private EmailServiceImpl emailService;
 
 	@Autowired
 	public UtenteController(UtenteService utenteService, 
@@ -77,6 +79,9 @@ public class UtenteController {
 		Utente utenteCercato = utenteService.cercaUtenteDaUsername(utente.getUsername());
 		if (utenteCercato != null) {
 			utenteService.modificaPassword(utenteCercato, utente.getPassword());
+			if (utenteCercato.getCambiaPassword()) {
+				utenteService.deviCambiarePassword(utenteCercato, false);
+			}
 		}
 		return parseJson(utenteCercato);
 	}
@@ -111,10 +116,12 @@ public class UtenteController {
 	public String recuperaPassword(@RequestParam(name = "username") String username, @RequestParam(name = "email") String email) {
 		Utente utenteCercato = utenteService.cercaUtente(username, email);
 		if (utenteCercato != null) {
-			String password = utenteService.recuperaPassword(username, email);
+			utenteService.deviCambiarePassword(utenteCercato, true);
+			String password = utenteService.generaPassword();
+			utenteService.modificaPassword(utenteCercato, password);
 			emailService.sendEmail(email,
 									"Ripristino Password PRENOTA UN CAMBIO LOOK",
-									"Gent.le "+ username + "la sua password è " + password + " .");
+									"Gent.le "+ username + " la sua password è " + password + " .");
 		}
 		return parseJson(utenteService.recuperaPassword(username, email));
 	}
