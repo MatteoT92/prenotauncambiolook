@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <div class="container2">
-  <!--
   <div class="connect-container">
       <div class="input-container">
           <input type="text" id="sender" value={{username}} />
@@ -14,8 +13,6 @@
           </button>
       </div>
   </div>
-  -->
-  <!--
   <div id="chat-container">
       <div id="messages-container"></div>
       <div class="send-message-container">
@@ -26,26 +23,6 @@
               <button id="button-sendmessage" (click)="sendMessage()">INVIA</button>
           </div>
       </div>
-  </div>
-  -->
-  <div id="chat-container">
-    <input type="text" [(ngModel)]="username" id="sender">
-    <div id="messages-container">
-      <div *ngFor="let message of messaggi" class="new-message {{ message.position }}">
-        <div class="new-message-box">
-          <div class="text">{{ message.text }}</div>
-          <div class="details-container">{{ message.sender }} - {{ message.time }}</div>
-        </div>
-      </div>
-    </div>
-    <div class="send-message-container">
-      <div class="input-container">
-          <input type="text" id="text" placeholder="Scrivi un messaggio" [(ngModel)]="input">
-      </div>
-      <div>
-          <button id="button-sendmessage" (click)="sendMessage()">INVIA</button>
-      </div>
-    </div>
   </div>
 </div>
 <app-right-menu></app-right-menu>

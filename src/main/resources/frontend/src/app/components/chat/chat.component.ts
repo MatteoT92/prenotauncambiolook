@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChatWsService } from 'src/app/services/chat-ws.service';
 
 @Component({
@@ -6,17 +6,29 @@ import { ChatWsService } from 'src/app/services/chat-ws.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterContentInit, AfterViewInit, AfterContentChecked, AfterViewChecked {
 
   username = sessionStorage.getItem('utente');
   input: any;
-  messaggi: any[] = [];
 
   constructor(public ws: ChatWsService) {
   }
 
   ngOnInit(): void {
-    this.messaggi = this.ws.messaggi;
+    this.ws.connect();
+  }
+
+  ngAfterContentInit(): void {
+    //this.ws.connect()
+  }
+  ngAfterViewInit(): void {
+    this.ws.connect()
+  }
+  ngAfterContentChecked(): void {
+    //this.ws.connect()
+  }
+  ngAfterViewChecked(): void {
+    //this.ws.connect()
   }
 
   connect() {

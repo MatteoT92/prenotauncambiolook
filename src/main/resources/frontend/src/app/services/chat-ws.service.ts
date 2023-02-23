@@ -9,11 +9,8 @@ declare var Stomp: any;
 export class ChatWsService {
 
   public stompClient: any;
-  username = sessionStorage.getItem('utente');
-  messaggi: any[] = [];
 
   constructor() {
-    this.connect();
   }
 
   connect(): void {
@@ -67,7 +64,7 @@ export class ChatWsService {
   }
 
   addMessageReceived(newMessageReceived: any): void {
-    /*
+
     const sender = (document.getElementById("sender") as HTMLInputElement).value;
 
     const messagesContainer = document.getElementById("messages-container");
@@ -90,8 +87,8 @@ export class ChatWsService {
     `;
 
     messagesContainer!.appendChild(newMessage);
-    */
 
+    /*
       const sender = this.username;
       const newMessagePosition = newMessageReceived.sender === sender ? "right" : "left";
       const newMessage = {
@@ -101,6 +98,7 @@ export class ChatWsService {
         position: newMessagePosition
       };
       this.messaggi.push(newMessage);
+    */
   }
 
   sendMessage(): void {
@@ -115,6 +113,13 @@ export class ChatWsService {
         text: text,
       })
     );
+
+    const newMessageReceived = {
+      sender: sender,
+      text: text,
+      time: new Date().toLocaleTimeString()
+    };
+    this.addMessageReceived(newMessageReceived);
 
     (document.getElementById("text") as HTMLInputElement).value = "";
   }
