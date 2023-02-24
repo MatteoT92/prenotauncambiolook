@@ -54,6 +54,7 @@
         <th>Orario</th>
         <th>Quantità</th>
         <th>Servizio</th>
+        <th>Stato pagamento</th>
       </tr>
       <tr *ngFor="let ordine of prenotazioni">
         <td>{{ ordine.id }}</td>
@@ -62,6 +63,7 @@
         <td>{{ ordine.orario }}</td>
         <td>{{ ordine.quantita }}</td>
         <td>{{ catalogo.get(ordine.servizio) }}</td>
+        <td [ngStyle]="{ 'background-color': ordine.isPagato === true ? 'green' : 'red', 'border-radius': '100%', 'display': 'inline-block' }"></td>
       </tr>
     </table>
   </div>

@@ -58,6 +58,7 @@ export class ServiziComponent implements OnInit {
     this.api.aggiungiServizio(aggiungiServizioForm.value.descrizione,
                               aggiungiServizioForm.value.prezzo)
                               .subscribe((data) => {
+                                window.alert('Servizio aggiunto con successo!');
                                 this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/servizi'])); // fa il refresh della tabella dei servizi offerti dopo l'aggiunta
                               });
   }
@@ -69,6 +70,7 @@ export class ServiziComponent implements OnInit {
                                   ordinaForm.value.servizio,
                                   ordinaForm.value.utente)
                                   .subscribe((data) => {
+                                    window.alert("Ordine aggiunto con successo!");
                                     this.router.navigate(['/ordini']);
                                   });
   }
