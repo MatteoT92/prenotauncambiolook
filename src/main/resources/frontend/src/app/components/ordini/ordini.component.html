@@ -21,7 +21,7 @@
             value="Rimuovi"
             class="btn btn-danger"
             (click)="rimuovi(ordine.id)"
-            [disabled]="statusButton(ordine.data)"
+            [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
           />
         </td>
         <td>
@@ -30,7 +30,7 @@
             value="Modifica"
             class="btn btn-warning"
             (click)="modifica(ordine.id)"
-            [disabled]="statusButton(ordine.data)"
+            [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
           />
         </td>
         <td>
