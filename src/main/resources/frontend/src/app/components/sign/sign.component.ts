@@ -21,9 +21,8 @@ export class SignComponent {
     this.api.sign(signForm.value.username, signForm.value.email, signForm.value.password)
     .subscribe((data: any) => {
       this.utente = data;
-      console.log(this.utente);
       this.router.navigate(['/login']);
     })
   }
-  
+
 }

@@ -1,3 +1,4 @@
+import { Pagamento } from './../../models/pagamento';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine';

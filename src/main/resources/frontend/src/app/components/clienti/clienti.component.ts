@@ -24,7 +24,6 @@ export class ClientiComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.utenti = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });
