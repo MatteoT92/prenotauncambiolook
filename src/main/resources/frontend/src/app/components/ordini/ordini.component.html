@@ -39,6 +39,7 @@
             value="Paga"
             class="btn btn-success"
             (click)="paga(ordine.id, ordine.servizio)"
+            [disabled]="statusButtonPaga(ordine.id)"
           />
         </td>
       </tr>

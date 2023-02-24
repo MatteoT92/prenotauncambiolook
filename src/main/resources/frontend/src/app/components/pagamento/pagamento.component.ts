@@ -28,8 +28,11 @@ export class PagamentoComponent implements OnInit {
 
   pagaOrdine(pagamentoForm: NgForm) {
     this.api.pagaOrdine(pagamentoForm.value.idOrdine, pagamentoForm.value.importo)
-    .subscribe();
-    this.router.navigate(['/ordini']);
+    .subscribe(
+      (data: any) => {
+        this.router.navigate(['/ordini']);
+      }
+    );
   }
 
   prezziServizi() {

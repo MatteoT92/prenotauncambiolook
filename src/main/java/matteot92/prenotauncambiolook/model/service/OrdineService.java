@@ -127,5 +127,13 @@ public class OrdineService {
 	public List<Ordine> prenotazioniPerCliente(Utente cliente) {
 		return repository.findByUtente(cliente.getId());
 	}
+	
+	/**
+	 * Metodo che dichiara l'ordine come pagato
+	 */
+	public Ordine registraPagamento(Ordine ordine) {
+		ordine.setIsPagato(true);
+		return repository.save(ordine);
+	}
 
 }

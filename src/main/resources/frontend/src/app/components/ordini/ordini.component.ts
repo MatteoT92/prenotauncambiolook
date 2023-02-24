@@ -103,4 +103,9 @@ export class OrdiniComponent implements OnInit {
     return oggi.getTime() > data.getTime();
   }
 
+  statusButtonPaga(idOrdine: number): boolean {
+    let ordine = this.ordini.find(element => element.id === idOrdine);
+    return (ordine!.isPagato) ? true : false;
+  }
+
 }

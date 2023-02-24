@@ -126,6 +126,7 @@ public class OrdineController {
 		pagamento.setData(LocalDate.now());
 		pagamento.setUtente(ordine.getUtente());
 		pagamentoService.effettuaPagamento(pagamento);
+		ordineService.registraPagamento(ordine);
 		return parseJsonWithDateTime(pagamentoService.effettuaPagamento(pagamento));
 	}
 	

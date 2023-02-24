@@ -22,7 +22,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@JsonPropertyOrder({ "id", "data", "orario", "quantita", "servizio", "utente"})
+@JsonPropertyOrder({ "id", "data", "orario", "quantita", "servizio", "utente", "isPagato"})
 public class Ordine {
 	
 	@Id
@@ -39,5 +39,6 @@ public class Ordine {
 	private Long servizio;
 	@Column(name="id_utente")
 	private Long utente;
+	private Boolean isPagato;
 	
 }
