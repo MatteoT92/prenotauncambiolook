@@ -1,6 +1,10 @@
 <app-navbar></app-navbar>
 <div [ngSwitch]="isAdmin">
   <div *ngSwitchCase="['cliente']">
+   <div>
+    <input type="text" (input)="search($event)" placeholder="Cerca servizio..." style="width: 500px; margin: 10px; background-color: transparent;">
+    <i class="fa fa-fw fa-search"></i>
+   </div>
     <div class="row" style="margin-left: 5px;">
       <mat-card class="card" *ngFor="let servizio of servizi">
         <mat-card-header>
@@ -14,7 +18,7 @@
               <span>Quantità : </span><input type="number" name="quantita" ngModel required/><br><br>
               <input type="hidden" ngModel={{servizio.id}} name="servizio" required/>
               <input type="hidden" ngModel={{utenti.get(user)}} name="utente" required/>
-              <input type="submit" value="Ordina" class="btn btn-success">
+              <input type="submit" value="Ordina" class="btn btn-primary">
             </form>
           </mat-card-title-group>
         </mat-card-header>

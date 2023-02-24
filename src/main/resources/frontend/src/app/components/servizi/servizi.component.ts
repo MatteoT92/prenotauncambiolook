@@ -75,4 +75,20 @@ export class ServiziComponent implements OnInit {
                                   });
   }
 
+  search(term: Event) {
+    let serviziCercati: Servizio[] = [];
+    let servizio = (term.target as HTMLInputElement).value;
+    this.servizi.forEach(element => {
+      if (element.descrizione.toLowerCase().includes(servizio.toLowerCase())) {
+        serviziCercati.push(element);
+      }
+    });
+    if (servizio.length > 0) {
+      this.servizi = serviziCercati;
+    } else {
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/servizi']));
+    }
+    console.log(this.servizi);
+  }
+
 }

@@ -5,7 +5,6 @@
   padding-top: 40px;
   padding-left: 50px;
   padding-right: 60px;
-  background-color: grey;
 }
 
 a {
@@ -19,6 +18,7 @@ a {
   font-style: oblique;
   padding: 10px;
   border-radius: 50%;
+  background-color: grey;
 }
 
 a:hover {
