@@ -90,7 +90,7 @@ Le tecnologie utilizzate per creare questa web-app sono:
    Per la password, invece, bisogna abilitarne una tramite account Google per l'applicazione (https://www.youtube.com/watch?v=IWxwWFTlTUQ) e copiare questa nella proprietà **spring.email.password**.
 
 Il progetto inizialmente era stato pensato come un MVC avente la parte view gestita tramite JSP.
-Successivamente si è deciso di effettuare il porting dello stesso su Angular per la parte view e di trasformare i controller presenti nell'applicazione Spring in RestController.
+Successivamente si è deciso, dopo averne iniziato un percorso di studio, di effettuare il porting dello stesso su Angular per la parte view e di trasformare i controller presenti nell'applicazione Spring in RestController.
 
 Se si vuol utilizzare il progetto con uno stato più avanzato dal punto di vista delle funzionalità si consiglia di scaricare dal repository il branch "second" e da terminale eseguire i seguenti comandi:
 

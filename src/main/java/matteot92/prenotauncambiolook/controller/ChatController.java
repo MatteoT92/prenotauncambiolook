@@ -28,7 +28,6 @@ public class ChatController {
         outMessage.setSender(message.getSender());
         outMessage.setText(message.getText());
         outMessage.setTime(new SimpleDateFormat("HH:mm dd-MM-yyyy").format(new Date()));
-        System.err.println(parseJsonWithDateTime(outMessage));
         return parseJsonWithDateTime(outMessage);
     }
 
