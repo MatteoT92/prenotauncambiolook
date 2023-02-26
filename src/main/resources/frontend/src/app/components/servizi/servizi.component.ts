@@ -78,12 +78,12 @@ export class ServiziComponent implements OnInit {
     let serviziCercati: Servizio[] = [];
     let servizio = (term.target as HTMLInputElement).value;
     this.servizi.forEach(element => {
-      if (element.descrizione.toLowerCase().includes(servizio.toLowerCase())) {
-        serviziCercati.push(element);
+      if (element.descrizione.toLowerCase().includes(servizio.toLowerCase())) { // cerca nel servizio è presente la stringa della barra cerca
+        serviziCercati.push(element); // aggiunge il servizio alla lista dei servizi cercati
       }
     });
-    if (servizio.length > 0) {
-      this.servizi = serviziCercati;
+    if (servizio.length > 0) { // se la barra cerca non è vuota
+      this.servizi = serviziCercati; // aggiunge la lista dei servizi cercati alla lista dei servizi disponibili
     } else {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/servizi']));
     }
