@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import matteot92.prenotauncambiolook.model.entities.ChatMessage;
 import matteot92.prenotauncambiolook.model.entities.MessageToSend;
+import static matteot92.prenotauncambiolook.Json.parseJsonWithDateTime;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -22,13 +23,13 @@ public class ChatController {
     @MessageMapping("/chat")
     @SendTo("/topic/chat")
     @CrossOrigin(origins = "http://localhost:4200/chat")
-    public MessageToSend send(ChatMessage message) throws Exception {
-
+    public String send(ChatMessage message) throws Exception {
         MessageToSend outMessage = new MessageToSend();
         outMessage.setSender(message.getSender());
         outMessage.setText(message.getText());
         outMessage.setTime(new SimpleDateFormat("HH:mm dd-MM-yyyy").format(new Date()));
-        return outMessage;
+        System.err.println(parseJsonWithDateTime(outMessage));
+        return parseJsonWithDateTime(outMessage);
     }
 
 }
