@@ -2,7 +2,7 @@
 <div class="container2">
   <div class="connect-container">
       <div class="input-container">
-          <input type="text" id="sender" value={{username}} />
+          <input type="hidden" id="sender" value={{username}} />
       </div>
       <!--
       <div>
@@ -16,14 +16,10 @@
       -->
   </div>
   <div id="chat-container">
-      <div id="messages-container">
-          <div *ngFor="let message of messages">
-            <span>{{message.sender}}</span>: <span>{{message.text}}</span>
-          </div>
-      </div>
+      <div id="messages-container"></div>
       <div class="send-message-container">
           <div class="input-container">
-              <input type="text" id="text" placeholder="Scrivi un messaggio" [(ngModel)]="input">
+              <input type="text" id="text" placeholder="Scrivi un messaggio ...">
           </div>
           <div>
               <button id="button-sendmessage" (click)="sendMessage()">INVIA</button>

@@ -20,7 +20,6 @@ export class ChatWsService {
     con cui comunicheranno il client col server
     */
     const socket = new SockJS("http://localhost:8081/chat-websocket");
-
     this.stompClient = Stomp.over(socket);
 
     /*
@@ -87,18 +86,6 @@ export class ChatWsService {
     `;
 
     messagesContainer!.appendChild(newMessage);
-
-    /*
-      const sender = this.username;
-      const newMessagePosition = newMessageReceived.sender === sender ? "right" : "left";
-      const newMessage = {
-        text: newMessageReceived.text,
-        sender: newMessageReceived.sender,
-        time: newMessageReceived.time,
-        position: newMessagePosition
-      };
-      this.messaggi.push(newMessage);
-    */
   }
 
   sendMessage(): void {
