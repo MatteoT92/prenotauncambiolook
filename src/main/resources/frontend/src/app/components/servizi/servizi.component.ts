@@ -70,8 +70,7 @@ export class ServiziComponent implements OnInit {
                                   ordinaForm.value.servizio,
                                   ordinaForm.value.utente)
                                   .subscribe((data) => {
-                                    window.alert("Ordine aggiunto con successo!");
-                                    this.router.navigate(['/ordini']);
+                                    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/ordini'])); // fa il refresh della tabella dei miei ordini dopo l'aggiunta
                                   });
   }
 

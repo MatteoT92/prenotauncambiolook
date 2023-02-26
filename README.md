@@ -72,7 +72,7 @@ Le tecnologie utilizzate per creare questa web-app sono:
 		,'admin'
 		,'Admin');
 		
-4. Aprire il file "**application.properties**" e modificare i valori delle seguenti proprietà: 
+4. Aprire il file "**application.properties**", presente al path **prenotauncambiolook/src/main/resources**, e modificare i valori delle seguenti proprietà: 
 
    1) ***Microsoft SQL Server*:**
    **spring.datasource.username** = *Inserisci il tuo username*
@@ -101,4 +101,5 @@ mvnw spring-boot:run
 cd prenotauncambiolook/src/main/resources/frontend
 npm install
 npm start
-		
+
+Una volta eseguiti questi comandi dirigersi sul browser e andare sull'indirizzo **http://localhost:4200/** .

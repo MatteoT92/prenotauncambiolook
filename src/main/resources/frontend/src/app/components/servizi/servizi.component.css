@@ -52,3 +52,25 @@ tr {
 	text-align: center;
   background-color: pink;
 }
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+  width: 78.5%;
+}
+
+.input-container input {
+  flex: 1;
+  border: none;
+  outline: none;
+}
+
+.input-container span {
+  color: black;
+  margin-left: 5px;
+  font-size: 16px;
+}

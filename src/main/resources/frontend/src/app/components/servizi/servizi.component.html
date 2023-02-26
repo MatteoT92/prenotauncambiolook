@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 <div [ngSwitch]="isAdmin">
   <div *ngSwitchCase="['cliente']">
-   <div>
-    <input type="text" (input)="search($event)" placeholder="Cerca servizio..." style="width: 500px; margin: 10px; background-color: white;">
-    <i class="fa fa-fw fa-search"></i>
-   </div>
+    <div class="input-container">
+      <input type="text" (input)="search($event)" placeholder="Cerca servizio ...">
+      <span class="fa fa-search"></span>
+    </div>
     <div class="row" style="margin-left: 5px;">
       <mat-card class="card" *ngFor="let servizio of servizi">
         <mat-card-header>
