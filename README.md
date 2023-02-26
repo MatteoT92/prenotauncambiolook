@@ -96,10 +96,13 @@ Se si vuol utilizzare il progetto con uno stato più avanzato dal punto di vista
 
 ##### per avviare il progetto Spring Boot e relativo back-end
 cd prenotauncambiolook
+
 mvnw spring-boot:run
 ##### per avviare il front-end con Angular
 cd prenotauncambiolook/src/main/resources/frontend
+
 npm install
+
 npm start
 
 Una volta eseguiti questi comandi dirigersi sul browser e andare sull'indirizzo **http://localhost:4200/** .
