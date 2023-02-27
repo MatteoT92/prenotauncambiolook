@@ -14,20 +14,10 @@ export class ChatWsService {
   }
 
   connect(): void {
-    /*
-    Crea un WebSocket sull'endpoint chat-websocket,
-    gestito dal metodo registerStompEndpoints della classe java WebSocketConfiguration,
-    con cui comunicheranno il client col server
-    */
     const socket = new SockJS("http://localhost:8081/chat-websocket");
     this.stompClient = Stomp.over(socket);
-
-    /*
-    Il client creato si connette e resta in ascolto sul canale
-    di sottoscrizione topic/chat, sul quale arriveranno i messaggi
-    */
     this.stompClient.connect({},  (frame: any) => {
-      this.stompClient.subscribe("http://localhost:8081/topic/chat",  (newMessageReceived: any) => {
+      this.stompClient.subscribe("/topic/chat", (newMessageReceived: any) => {
         this.addMessageReceived(JSON.parse(newMessageReceived.body));
       });
       this.setConnected(true);
@@ -65,7 +55,6 @@ export class ChatWsService {
   addMessageReceived(newMessageReceived: any): void {
 
     const sender = (document.getElementById("sender") as HTMLInputElement).value;
-
     const messagesContainer = document.getElementById("messages-container");
 
     let newMessagePosition = "left";
@@ -93,20 +82,13 @@ export class ChatWsService {
     const text = (document.getElementById("text") as HTMLInputElement).value;
 
     this.stompClient.send(
-      "http://localhost:8081/chat-app/chat",
+      "/chat-app/chat",
       {},
       JSON.stringify({
         sender: sender,
         text: text,
       })
     );
-
-    const newMessageReceived = {
-      sender: sender,
-      text: text,
-      time: new Date().toLocaleTimeString()
-    };
-    this.addMessageReceived(newMessageReceived);
 
     (document.getElementById("text") as HTMLInputElement).value = "";
   }
