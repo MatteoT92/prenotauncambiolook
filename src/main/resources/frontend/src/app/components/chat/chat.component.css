@@ -44,6 +44,7 @@
 	margin-right: 5px;
 	border: 1px solid #000000;
 	background-color: #ffffff;
+  border-radius: 10px;
 }
 
 .new-message {
@@ -62,19 +63,19 @@
 	text-align: right;
 }
 
-.new-message.left {
+.new-message .left {
 	justify-content: flex-start;
 }
 
-.new-message.left .new-message-box {
+.new-message .left .new-message-box {
 	background-color: #ffccbc;
 }
 
-.new-message.right .new-message-box {
+.new-message .right .new-message-box {
 	background-color: #b2dfdb;
 }
 
-.new-message.right {
+.new-message .right {
 	justify-content: flex-end;
 }
 
@@ -93,11 +94,4 @@
 
 .connect-container>div, .send-message-container>div {
 	padding: 5px;
-}
-
-#button-sendmessage {
-	background-color: green;
-	color: white;
-	border: none;
-	cursor: pointer;
 }

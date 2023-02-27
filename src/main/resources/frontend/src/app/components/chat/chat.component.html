@@ -4,25 +4,15 @@
       <div class="input-container">
           <input type="hidden" id="sender" value={{username}} />
       </div>
-      <!--
-      <div>
-          <button *ngIf="username == null || username == undefined" id="button-connect" (click)="connect()">
-              CONNETTI
-          </button>
-          <button *ngIf="username != null || username != undefined" id="button-disconnect" (click)="disconnect()">
-              DISCONNETTI
-          </button>
-      </div>
-      -->
   </div>
   <div id="chat-container">
       <div id="messages-container"></div>
       <div class="send-message-container">
           <div class="input-container">
-              <input type="text" id="text" placeholder="Scrivi un messaggio ...">
+              <input type="text" id="text" placeholder="Scrivi un messaggio ..."/>
           </div>
           <div>
-              <button id="button-sendmessage" (click)="sendMessage()">INVIA</button>
+              <button class="btn btn-success" (click)="sendMessage()">INVIA</button>
           </div>
       </div>
   </div>

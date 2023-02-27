@@ -9,6 +9,7 @@ declare var Stomp: any;
 export class ChatWsService {
 
   public stompClient: any;
+  isLogged: boolean = (sessionStorage.getItem('utente') != null && sessionStorage.getItem('utente') != undefined);
 
   constructor() {
   }

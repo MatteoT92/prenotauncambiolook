@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 import { ChatComponent } from './components/chat/chat.component';
 import { ClientiComponent } from './components/clienti/clienti.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,12 +17,12 @@ const routes: Routes = [
   {path: "servizi", component: ServiziComponent},
   {path: "login", component: LoginComponent},
   {path: "sign", component: SignComponent},
-  {path: "chat", component: ChatComponent},
+  {path: "chat", component: ChatComponent, canActivate: [AuthGuard]},
   {path: "ordini", component: OrdiniComponent},
-  {path: "ordini/:id", component: OrdineComponent},
+  {path: "ordini/:id", component: OrdineComponent, canActivate: [AuthGuard]},
   {path: "clienti", component: ClientiComponent},
   {path: "password", component: PasswordComponent},
-  {path: "ordini/:id/pagamento", component: PagamentoComponent},
+  {path: "ordini/:id/pagamento", component: PagamentoComponent, canActivate: [AuthGuard]},
   {path: "", component: HomeComponent, pathMatch: 'full'},
   {path: "**", component: HomeComponent}
 ];
