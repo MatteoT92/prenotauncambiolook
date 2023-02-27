@@ -18,11 +18,11 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "sign", component: SignComponent},
   {path: "chat", component: ChatComponent, canActivate: [AuthGuard]},
-  {path: "ordini", component: OrdiniComponent},
-  {path: "ordini/:id", component: OrdineComponent, canActivate: [AuthGuard]},
-  {path: "clienti", component: ClientiComponent},
+  {path: "ordini", component: OrdiniComponent, canActivate: [AuthGuard]},
+  {path: "ordini/:id", component: OrdineComponent},
+  {path: "clienti", component: ClientiComponent, canActivate: [AuthGuard]},
   {path: "password", component: PasswordComponent},
-  {path: "ordini/:id/pagamento", component: PagamentoComponent, canActivate: [AuthGuard]},
+  {path: "ordini/:id/pagamento", component: PagamentoComponent},
   {path: "", component: HomeComponent, pathMatch: 'full'},
   {path: "**", component: HomeComponent}
 ];
