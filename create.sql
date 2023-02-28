@@ -1,4 +1,4 @@
-	create table ordini (
+    create table ordini (
        id_ordine bigint identity not null,
         data date not null,
         is_pagato bit,
