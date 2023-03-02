@@ -7,7 +7,7 @@
       <span>Password</span><br>
       <input type="password" name="password" required ngModel/><br>
       <br>
-      <input type="submit" value="Accedi" class="btn btn-success"/>
+      <input type="submit" value="Accedi" class="btn btn-success" [disabled]="!loginForm.valid"/>
   </form>
   <div class="col">
     <div class="row">
