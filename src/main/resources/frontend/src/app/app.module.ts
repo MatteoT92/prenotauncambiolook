@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,7 +50,10 @@ import { OrdineComponent } from './components/ordine/ordine.component';
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        MatCardModule
+        MatCardModule,
+        MatButtonModule,
+        MatInputModule,
+        MatIconModule
     ]
 })
 export class AppModule { }
