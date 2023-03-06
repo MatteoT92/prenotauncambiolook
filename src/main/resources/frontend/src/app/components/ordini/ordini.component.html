@@ -12,7 +12,7 @@
       <tr *ngFor="let ordine of ordini">
         <td>{{ ordine.id }}</td>
         <td>{{ ordine.data | date : "dd/MM/yyyy" }}</td>
-        <td>{{ ordine.orario }}</td>
+        <td>{{ ordine.orario | time}}</td>
         <td>{{ ordine.quantita }}</td>
         <td>{{ catalogo.get(ordine.servizio) }}</td>
         <td>
@@ -60,7 +60,7 @@
         <td>{{ ordine.id }}</td>
         <td>{{ utenti.get(ordine.utente) }}</td>
         <td>{{ ordine.data | date : "dd/MM/yyyy" }}</td>
-        <td>{{ ordine.orario }}</td>
+        <td>{{ ordine.orario | time}}</td>
         <td>{{ ordine.quantita }}</td>
         <td>{{ catalogo.get(ordine.servizio) }}</td>
         <td [ngStyle]="{ 'background-color': ordine.isPagato === true ? 'green' : 'red', 'border-radius': '100%', 'display': 'inline-block' }"></td>

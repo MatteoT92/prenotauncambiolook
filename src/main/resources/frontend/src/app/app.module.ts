@@ -23,6 +23,7 @@ import { PasswordComponent } from './components/password/password.component';
 import { ClientiComponent } from './components/clienti/clienti.component';
 import { PagamentoComponent } from './components/pagamento/pagamento.component';
 import { OrdineComponent } from './components/ordine/ordine.component';
+import { TimePipe } from './pipe/time.pipe';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { OrdineComponent } from './components/ordine/ordine.component';
         PasswordComponent,
         ClientiComponent,
         PagamentoComponent,
-        OrdineComponent
+        OrdineComponent,
+        TimePipe
     ],
     providers: [],
     bootstrap: [AppComponent],
