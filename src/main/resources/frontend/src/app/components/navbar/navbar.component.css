@@ -1,28 +1,40 @@
 .navbar {
-	width: 100%;
-	background-color: #555;
-	overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+  position: fixed;
+  z-index: 1;
 }
 
 .navbar a {
-	float: left;
-	padding: 12px;
-	color: white;
-	text-decoration: none;
-	font-size: 17px;
-	width: 25%; /* Four links of equal widths */
-	text-align: center;
+  flex-grow: 1;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.navbar a:hover {
-	background-color: #555;
+.navbar app-header {
+  width: 25%
 }
 
 @media screen and (max-width: 500px) {
-	.navbar a {
-		float: none;
-		display: block;
-		width: 100%;
-		text-align: left;
-	}
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .navbar a {
+    flex-grow: initial;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.user-menu {
+  position: relative;
 }

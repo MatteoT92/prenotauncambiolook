@@ -1,5 +1,9 @@
 h1 {
   font-family: cursive;
 	text-align: center;
-  font-size: 50px;
+  text-decoration: none;
+	font-size: 30px;
+  float: left;
+	padding: 12px;
+  color: black;
 }

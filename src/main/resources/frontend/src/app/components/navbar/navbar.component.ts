@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
     username = sessionStorage.getItem('utente');
     isAdmin = sessionStorage.getItem('tipo');
+    showUserMenu = false;
+
+    toggleUserMenu() {
+      this.showUserMenu = !this.showUserMenu;
+    }
 }

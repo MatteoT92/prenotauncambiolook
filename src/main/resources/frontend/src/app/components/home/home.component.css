@@ -25,7 +25,7 @@
   border-radius: 20%;
   padding: 10px;
   display: inline-block;
-  margin-top: 70px;
+  margin-top: 150px;
   margin-left: 20px;
 }
 
@@ -35,7 +35,7 @@
   color: black;
   border-style: dashed;
   padding: 20px;
-  margin-top: 70px;
+  margin-top: 150px;
   margin-left: 20px;
   width: 30%;
   height: 35%;
@@ -45,6 +45,7 @@
   text-align: justify;
   align-content: stretch;
   padding: 20px;
+  margin-top: 140px;
   margin-left: 20px;
   width: 30%;
   height: 35%;

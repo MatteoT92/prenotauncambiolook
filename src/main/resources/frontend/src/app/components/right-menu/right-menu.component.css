@@ -1,14 +1,15 @@
 .right-menu {
   position: fixed;
-	top: 31%;
-	left: 80%;
-  padding-top: 40px;
-  padding-left: 50px;
-  padding-right: 60px;
+	margin-top: 50px;
+	left: 85%;
+  background-color: #555;
 }
 
 a {
-  margin-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 35px;
+  padding-right: 35px;
   display: block;
   text-decoration: none;
   color: black;
@@ -16,9 +17,8 @@ a {
   font-size: medium;
   font-weight: bold;
   font-style: oblique;
-  padding: 10px;
-  border-radius: 50%;
-  background-color: pink;
+  background-color: #555;
+  cursor: pointer;
 }
 
 a:hover {

@@ -2,6 +2,10 @@ table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
 	width: 80%;
+  margin-top: 130px;
+  margin-left: 20px;
+  overflow-y: auto;
+  z-index: 0;
 }
 
 td, th {
@@ -22,4 +26,14 @@ tr:nth-child(even) {
 tr {
 	text-align: center;
   background-color: pink;
+}
+
+.pagination{
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 500px;
+}
+
+.previous {
+  margin-right: 20px;
 }

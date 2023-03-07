@@ -1,4 +1,3 @@
-import { Pagamento } from './../../models/pagamento';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine';
@@ -18,6 +17,11 @@ export class OrdiniComponent implements OnInit {
   prenotazioni!: Ordine[];
   catalogo!: Map<number, string>;
   utenti!: Map<number, string>;
+  itemsPerPage: number = 7;
+  currentPage: number = 1;
+  totalPages!: number;
+  itemsPerPageAdmin: number = 10;
+  totalPagesAdmin!: number;
 
   constructor(private api: OrdineApiService,
               private apiServizi: ServizioApiService,
@@ -31,6 +35,8 @@ export class OrdiniComponent implements OnInit {
    this.listaPrenotazioni();
    this.serviziCatalogo();
    this.utentiRegistrati();
+   this.totalPages = Math.ceil(this.ordini.length / this.itemsPerPage);
+   this.totalPagesAdmin = Math.ceil(this.prenotazioni.length / this.itemsPerPage);
   }
 
   iMieiOrdini(): void {
@@ -106,6 +112,14 @@ export class OrdiniComponent implements OnInit {
   statusButtonPaga(idOrdine: number): boolean {
     let ordine = this.ordini.find(element => element.id === idOrdine);
     return (ordine!.isPagato) ? true : false;
+  }
+
+  onPrevClick() {
+    this.currentPage = this.currentPage - 1;
+  }
+
+  onNextClick() {
+    this.currentPage = this.currentPage + 1;
   }
 
 }

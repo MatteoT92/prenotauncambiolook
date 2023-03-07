@@ -1,9 +1,12 @@
 package matteot92.prenotauncambiolook.model.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import matteot92.prenotauncambiolook.model.entities.Utente;
@@ -32,7 +35,12 @@ public class UtenteService {
 	 * è registrato sul sito oppure no.
 	 */
 	public Boolean isRegistrato(Utente utenteDaVerificare) {
-		Optional<Utente> utente = repository.findByUsernameAndEmailAndPassword(utenteDaVerificare.getUsername(), utenteDaVerificare.getEmail(), utenteDaVerificare.getPassword());
+		Optional<Utente> utente = Optional.empty();
+		try {
+			utente = repository.findByUsernameAndEmailAndPassword(utenteDaVerificare.getUsername(), utenteDaVerificare.getEmail(), utenteDaVerificare.getPassword());
+		} catch (NullPointerException | NoSuchElementException e) {
+			
+		}
 		return (!utente.isEmpty()) ? true : false;
 	}
 	
@@ -41,8 +49,21 @@ public class UtenteService {
 	 * la sua password con una nuova, salvandola sul database
 	 */
 	public Utente modificaPassword(Utente utente, String nuovaPassword) {
-		utente.setPassword(nuovaPassword);
-		return repository.save(utente);
+		Utente utentePasswordDaModificare = null;
+		Boolean check = this.isRegistrato(utente); // verifica se è già registrato
+		try {
+			if (nuovaPassword != null && check == true) { // se il risultato è true procede alla modifica della password
+				utente.setPassword(nuovaPassword);
+				utentePasswordDaModificare = repository.save(utente);
+			} else if (nuovaPassword == null && check == true) {
+				utentePasswordDaModificare = utente; // altrimenti lascia invariati i dati
+			} else {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException | IllegalArgumentException e) {
+			
+		}
+		return utentePasswordDaModificare;
 	}
 	
 	/**
@@ -50,8 +71,19 @@ public class UtenteService {
 	 * salvando i suoi dati sul database
 	 */
 	public Utente registraUtente(Utente utente) {
-		utente.setIsAdmin(false);
-		return repository.save(utente);
+		Utente nuovoUtente = null;
+		Boolean check = this.isRegistrato(utente); // verifica se è già registrato
+		try {
+			if (check == false) { // se non lo è allora lo registra
+				utente.setIsAdmin(false);
+				nuovoUtente = repository.save(utente);
+			} else {
+				nuovoUtente = utente; // altrimenti non fa nulla
+			}
+		} catch (NullPointerException | IllegalArgumentException | DataIntegrityViolationException e) {
+			
+		}
+		return nuovoUtente;
 	}
 	
 	/**
@@ -59,7 +91,11 @@ public class UtenteService {
 	 * cancellandosi dal database del sito
 	 */
 	public void rimuoviUtente(Utente utente) {
-		repository.delete(utente);
+		try {
+			repository.delete(utente);
+		} catch (InvalidDataAccessApiUsageException | IllegalArgumentException e) {
+			
+		}
 	}
 	
 	/**
@@ -67,7 +103,12 @@ public class UtenteService {
 	 * recuperandone l'informazione attraverso username e email dal database
 	 */
 	public Boolean isAdmin(Utente utenteDaVerificare) {
-		Optional<Utente> utente = repository.findByUsernameAndEmail(utenteDaVerificare.getUsername(), utenteDaVerificare.getEmail());
+		Optional<Utente> utente = Optional.empty();
+		try {
+			utente = repository.findByUsernameAndEmail(utenteDaVerificare.getUsername(), utenteDaVerificare.getEmail());
+		} catch (NullPointerException | NoSuchElementException e) {
+			
+		}
 		return (!utente.isEmpty()) ? utente.get().getIsAdmin() : null;
 	}
 	
@@ -75,35 +116,65 @@ public class UtenteService {
 	 * Metodo che recupera un utente dal database in base all'username e email
 	 */
 	public Utente cercaUtente(String username, String email) {
-		return repository.findByUsernameAndEmail(username, email).get();
+		Utente utente = null;
+		try {
+			utente = repository.findByUsernameAndEmail(username, email).get();
+		} catch (NullPointerException | NoSuchElementException e) {
+			
+		}
+		return utente;
 	}
 	
 	/**
 	 * Metodo che recupera un utente dal database in base all'username, email e password
 	 */
 	public Utente cercaUtente(String username, String email, String password) {
-		return repository.findByUsernameAndEmailAndPassword(username, email, password).get();
+		Utente utente = null;
+		try {
+			utente = repository.findByUsernameAndEmailAndPassword(username, email, password).get(); 
+		} catch (NullPointerException | NoSuchElementException e) {
+			
+		}
+		return utente;
 	}
 	
 	/**
 	 * Metodo che recupera un utente dal database in base all'username
 	 */
 	public Utente cercaUtenteDaUsername(String username) {
-		return repository.findByUsername(username).get();
+		Utente utente = null;
+		try {
+			utente = repository.findByUsername(username).get();
+		} catch (NullPointerException | NoSuchElementException e) {
+			
+		}
+		return utente;
 	}
 	
 	/**
 	 * Metodo che recupera un utente dal database in base all'email
 	 */
 	public Utente cercaUtenteDaEmail(String email) {
-		return repository.findByEmail(email).get();
+		Utente utente = null;
+		try {
+			utente = repository.findByEmail(email).get();
+		} catch (NullPointerException | NoSuchElementException e) {
+			
+		}
+		return utente;
 	}
 	
 	/**
 	 * Metodo che recupera un utente dal database in base all'id
 	 */
 	public Utente cercaUtenteDaId(Long id) {
-		return repository.findById(id).get();
+		Utente utente = null;
+		try {
+			utente = repository.findById(id).get();
+		} catch (NullPointerException | NoSuchElementException | IllegalArgumentException | InvalidDataAccessApiUsageException e) {
+			
+		}
+		return utente;
 	}
 	
 	/**
@@ -133,8 +204,21 @@ public class UtenteService {
 	 * Metodo che altera il flag del database che indica se deve o non deve cambiare password
 	 */
 	public Utente deviCambiarePassword(Utente utente, Boolean flag) {
-		utente.setCambiaPassword(flag);
-		return repository.save(utente);
+		Utente utenteDaCambiarePassword = null;
+		Boolean check = this.isRegistrato(utente); // verifica se è già registrato
+		try {
+			if (flag != null && check == true) { // se il risultato è true allora inserisce un flag che segna che deve cambiare password in una più sicura
+				utente.setCambiaPassword(flag);
+				utenteDaCambiarePassword = repository.save(utente);
+			} else if (flag == null && check == true) { // altrimenti non fa nulla
+				utenteDaCambiarePassword = utente;
+			} else {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException | IllegalArgumentException e) {
+			
+		}
+		return utenteDaCambiarePassword;
 	}
 
 }
