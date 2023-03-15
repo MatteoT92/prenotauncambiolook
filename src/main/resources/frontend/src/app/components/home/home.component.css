@@ -1,6 +1,6 @@
 .google-maps {
   position: relative;
-  padding-bottom: 100%; /* Definisco l'aspect ratio */
+  padding-bottom: 100%;
   height: 0;
   overflow: hidden;
 }
@@ -9,8 +9,22 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 80% !important;
-  height: 80% !important;
+}
+
+.mappa {
+  text-align: justify;
+  align-content: stretch;
+  padding: 20px;
+  background-color: white;
+  margin-top: 20px;
+}
+
+.about {
+  text-align: justify;
+  align-content: stretch;
+  padding: 20px;
+  background-color: white;
+  margin-top: 20px;
 }
 
 .orari {
@@ -20,33 +34,50 @@
   font-weight: 500;
   font-style: oblique;
   background-color: pink;
-  width: 20%;
-  height: 35%;
-  border-radius: 20%;
+  border-radius: 30%;
   padding: 10px;
-  display: inline-block;
-  margin-top: 150px;
+  margin-top: 20px;
+}
+
+.contatti {
+  text-align: center;
+  color: black;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: oblique;
+  background-color: purple;
+  border-radius: 30%;
+  padding: 10px;
   margin-left: 20px;
+  margin-top: 20px;
 }
 
 .claim {
-  text-align: justify;
-  background-color: white;
-  color: black;
-  border-style: dashed;
-  padding: 20px;
   margin-top: 150px;
-  margin-left: 20px;
-  width: 30%;
-  height: 35%;
 }
 
-.mappa {
+.claim-text {
   text-align: justify;
   align-content: stretch;
   padding: 20px;
-  margin-top: 140px;
-  margin-left: 20px;
-  width: 30%;
-  height: 35%;
+  background-color: white;
+}
+
+.claim-text h2 {
+  font-family: cursive;
+	text-align: center;
+  text-decoration: none;
+	font-size: 30px;
+  font-weight: bold
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.sede {
+  text-align: center;
+  font-size: 15px;
+  background-color: white;
 }

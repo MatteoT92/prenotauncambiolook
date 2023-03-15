@@ -24,6 +24,7 @@ import { ClientiComponent } from './components/clienti/clienti.component';
 import { PagamentoComponent } from './components/pagamento/pagamento.component';
 import { OrdineComponent } from './components/ordine/ordine.component';
 import { TimePipe } from './pipe/time.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { TimePipe } from './pipe/time.pipe';
         ClientiComponent,
         PagamentoComponent,
         OrdineComponent,
-        TimePipe
+        TimePipe,
+        FooterComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
