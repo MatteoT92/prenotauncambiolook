@@ -87,7 +87,6 @@ export class ServiziComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/servizi']));
     }
-    console.log(this.servizi);
   }
 
 }

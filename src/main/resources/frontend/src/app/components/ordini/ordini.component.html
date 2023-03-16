@@ -8,6 +8,7 @@
         <th>Orario</th>
         <th>Quantità</th>
         <th>Servizio</th>
+        <th>Tot. Ordine</th>
       </tr>
       <tr *ngFor="let ordine of ordini | slice:(currentPage-1)*itemsPerPage:currentPage*itemsPerPage">
         <td>{{ ordine.id }}</td>
@@ -15,7 +16,8 @@
         <td>{{ ordine.orario | time}}</td>
         <td>{{ ordine.quantita }}</td>
         <td>{{ catalogo.get(ordine.servizio) }}</td>
-        <td>
+        <td>{{ amountToPay(ordine.quantita, prezzario.get(ordine.servizio)) | currency: 'EUR' }}</td>
+        <td class="opzioni">
           <input
             type="button"
             value="Rimuovi"
@@ -23,8 +25,6 @@
             (click)="rimuovi(ordine.id)"
             [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
           />
-        </td>
-        <td>
           <input
             type="button"
             value="Modifica"
@@ -32,8 +32,6 @@
             (click)="modifica(ordine.id)"
             [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
           />
-        </td>
-        <td>
           <input
             type="button"
             value="Paga"
@@ -58,6 +56,7 @@
         <th>Orario</th>
         <th>Quantità</th>
         <th>Servizio</th>
+        <th>Tot. Ordine</th>
         <th>Stato pagamento</th>
       </tr>
       <tr *ngFor="let ordine of prenotazioni | slice:(currentPage-1)*itemsPerPageAdmin:currentPage*itemsPerPageAdmin">
@@ -67,6 +66,7 @@
         <td>{{ ordine.orario | time}}</td>
         <td>{{ ordine.quantita }}</td>
         <td>{{ catalogo.get(ordine.servizio) }}</td>
+        <td>{{ amountToPay(ordine.quantita, prezzario.get(ordine.servizio)) | currency: 'EUR' }}</td>
         <td [ngStyle]="{ 'background-color': ordine.isPagato === true ? 'green' : 'red', 'border-radius': '100%', 'display': 'inline-block' }"></td>
       </tr>
     </table>
@@ -76,3 +76,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

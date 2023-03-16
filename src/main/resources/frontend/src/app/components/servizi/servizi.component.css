@@ -1,5 +1,5 @@
 .card {
-  max-width: 400px;
+  max-width: 300px;
   border-radius: 20px;
   border-style: dotted;
   border-width: 3px;
@@ -7,6 +7,12 @@
   background-color: pink;
   font-size: small;
   font-weight: bold;
+  margin: 10px;
+}
+
+.ordina {
+  margin-left: 35%;
+  margin-right: 35%;
 }
 
 .crea-servizio {
@@ -71,4 +77,10 @@ tr {
   color: black;
   margin-left: 5px;
   font-size: 16px;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

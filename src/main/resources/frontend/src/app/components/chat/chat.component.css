@@ -1,28 +1,11 @@
-#disconnect {
-	display: none;
-}
-
-#button-connect, #button-disconnect {
-	color: #ffffff;
-	border: none;
-	cursor: pointer;
-}
-
-#button-connect {
-	background-color: green;
-}
-
-#button-disconnect {
-	background-color: #d32f2f;
-}
-
-.container2 {
+.main-chat-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 100vh;
-	max-width: 600px;
-	margin: 0 auto;
+	height: 80vh;
+	margin-top: 150px;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 .connect-container {
@@ -94,4 +77,14 @@
 
 .connect-container>div, .send-message-container>div {
 	padding: 5px;
+}
+
+textarea {
+  resize: none;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

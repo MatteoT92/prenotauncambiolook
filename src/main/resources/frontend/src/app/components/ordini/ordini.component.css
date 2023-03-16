@@ -1,9 +1,9 @@
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
-	width: 80%;
+	width: 90%;
   margin-top: 130px;
-  margin-left: 20px;
+  margin-left: 60px;
   overflow-y: auto;
   z-index: 0;
 }
@@ -31,9 +31,24 @@ tr {
 .pagination{
   display: inline-block;
   margin-top: 10px;
-  margin-left: 500px;
+  margin-left: 40%;
+  margin-right: 40%;
 }
 
 .previous {
   margin-right: 20px;
+}
+
+.opzioni input {
+  margin-right: 10px;
+}
+
+.opzioni {
+  width: 25%;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

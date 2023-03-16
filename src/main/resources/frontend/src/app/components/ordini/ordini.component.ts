@@ -16,8 +16,9 @@ export class OrdiniComponent implements OnInit {
   ordini!: Ordine[];
   prenotazioni!: Ordine[];
   catalogo!: Map<number, string>;
+  prezzario!: Map<number, number>;
   utenti!: Map<number, string>;
-  itemsPerPage: number = 7;
+  itemsPerPage: number = 5;
   currentPage: number = 1;
   totalPages!: number;
   itemsPerPageAdmin: number = 10;
@@ -35,6 +36,7 @@ export class OrdiniComponent implements OnInit {
    this.listaPrenotazioni();
    this.serviziCatalogo();
    this.utentiRegistrati();
+   this.prezziServizi();
    this.totalPages = Math.ceil(this.ordini.length / this.itemsPerPage);
    this.totalPagesAdmin = Math.ceil(this.prenotazioni.length / this.itemsPerPage);
   }
@@ -85,6 +87,16 @@ export class OrdiniComponent implements OnInit {
     })
   }
 
+  prezziServizi() {
+    this.apiServizi.serviziDisponibili()
+    .subscribe(data => {
+      this.prezzario = new Map<number, number>();
+      data.forEach(element => {
+        this.prezzario.set(element.id, element.prezzo);
+      })
+    })
+  }
+
   rimuovi(id: number) {
     this.api.rimuoviOrdine(id)
     .subscribe((data: any) => {
@@ -120,6 +132,10 @@ export class OrdiniComponent implements OnInit {
 
   onNextClick() {
     this.currentPage = this.currentPage + 1;
+  }
+
+  amountToPay(quantita: number, prezzoServizio: any): number {
+    return quantita * prezzoServizio;
   }
 
 }

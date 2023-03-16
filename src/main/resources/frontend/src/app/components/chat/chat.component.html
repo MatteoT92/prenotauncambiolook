@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container2">
+<div class="main-chat-container">
   <div class="connect-container">
       <div class="input-container">
           <input type="hidden" id="sender" value={{username}} />
@@ -9,11 +9,12 @@
       <div id="messages-container"></div>
       <div class="send-message-container">
           <div class="input-container">
-              <input type="text" id="text" placeholder="Scrivi un messaggio ..."/>
+              <textarea type="text" id="text" placeholder="Scrivi un messaggio ..." rows="3" cols="65"></textarea>
           </div>
           <div>
-              <button class="btn btn-success" (click)="sendMessage()">INVIA</button>
+              <button class="btn btn-success" (click)="sendMessage()"><i class="fa fa-paper-plane"></i></button>
           </div>
       </div>
   </div>
 </div>
+<app-footer></app-footer>
