@@ -1,17 +1,20 @@
 <app-navbar></app-navbar>
 <div class="login-container">
   <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="col">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="fill">
       <mat-label>Username</mat-label>
       <input matInput type="text" name="username" required ngModel />
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput type="email" name="email" required email ngModel />
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
-      <input matInput type="password" name="password" required ngModel />
+      <input matInput [type]="showPassword ? 'text' : 'password'" name="password" ngModel required />
+      <mat-icon matSuffix (click)="togglePasswordVisibility()">
+        {{showPassword ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
     </mat-form-field>
     <br />
     <button

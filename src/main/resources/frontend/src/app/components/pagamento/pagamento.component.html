@@ -1,14 +1,39 @@
 <app-navbar></app-navbar>
-<div class="log-container">
+<div class="pagamento-container">
   <form #pagamentoForm="ngForm" (ngSubmit)="pagaOrdine(pagamentoForm)">
-    <span>Ordine ID: #{{idOrdine}}</span><span> - {{prezzario.get(idServizio) | currency:'EUR'}}</span><br><br>
-    <span>Nome: <input type="text" required name="nome" ngModel/></span><span> Cognome: <input type="text" required name="cognome" ngModel/></span><br><br>
-    <span>Numero carta: <input type="text" minLength="13" maxLength="16" required name="carta" ngModel/></span><br><br>
-    <span>Mese/Anno scadenza carta: <input type="text" minLength="1" maxLength="2" required name="mese" ngModel/> / <input type="text" minLength="2" maxLength="2" required name="anno" ngModel/></span><br><br>
-    <span>CVV: <input type="text" minLength="3" maxLength="3" required name="cvv" ngModel/></span><br><br>
+    <span>Ordine ID: #{{idOrdine}}</span><span> - {{prezzario.get(idServizio) | currency:'EUR'}}</span><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" name="nome" required ngModel />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Cognome</mat-label>
+      <input matInput type="text" name="cognome" required ngModel />
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Numero carta</mat-label>
+      <input matInput type="text" minLength="13" maxLength="16" required name="carta" ngModel />
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Mese carta</mat-label>
+      <input matInput type="text" minLength="1" maxLength="2" required name="mese" ngModel/>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Anno carta</mat-label>
+      <input matInput type="text" minLength="2" maxLength="2" required name="anno" ngModel/>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>CVV</mat-label>
+      <input matInput type="text" minLength="3" maxLength="3" required name="cvv" ngModel />
+    </mat-form-field><br>
     <input type="hidden" name="idOrdine" ngModel={{idOrdine}}/>
     <input type="hidden" name="importo" ngModel={{prezzario.get(idServizio)}}/>
-    <input type="submit" value="Paga" class="btn btn-success" style="margin-right: 10px;" [disabled]="!pagamentoForm.valid">
-    <input type="button" value="Annulla" class="btn btn-danger" routerLink="/ordini">
+    <button type="submit" class="btn btn-success" style="margin-right: 10px;" [disabled]="!pagamentoForm.valid">
+      <i class="fa fa-money"></i> Paga
+    </button>
+    <button type="button" class="btn btn-danger" routerLink="/ordini">
+      <i class="fa fa-close"></i> Annulla
+    </button>
   </form>
 </div>
+<app-footer></app-footer>

@@ -1,10 +1,21 @@
 <app-navbar></app-navbar>
-<div class="log-container">
+<div class="modifica-ordine-container">
   <form #cambiaAppuntamentoForm="ngForm" (ngSubmit)="onSubmit(cambiaAppuntamentoForm)">
     <span><strong>ID Ordine : #{{idOrdine}}</strong></span><input type="hidden" ngModel={{idOrdine}} name="id" required/><br><br>
-    <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
-    <span>Orario : </span><input type="time" name="orario" ngModel required/><br><br>
-    <input type="submit" value="Modifica" class="btn btn-warning" style="margin-right: 10px;">
-    <input type="button" value="Annulla" class="btn btn-danger" routerLink="/ordini">
+    <mat-form-field appearance="fill">
+      <mat-label>Data</mat-label>
+      <input matInput type="date" name="data" ngModel required />
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Orario</mat-label>
+      <input matInput type="time" name="orario" ngModel required />
+    </mat-form-field><br  >
+    <button type="submit" class="btn btn-warning" style="margin-right: 10px;">
+      <i class="fa fa-edit"></i> Modifica
+    </button>
+    <button type="button" class="btn btn-danger" routerLink="/ordini">
+      <i class="fa fa-close"></i> Annulla
+    </button>
   </form>
 </div>
+<app-footer></app-footer>

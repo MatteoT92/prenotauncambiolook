@@ -1,14 +1,12 @@
-.log-container {
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	display: inline-flex;
-  background-color: grey;
-  text-align: center;
-  margin: 0;
+.pagamento-container {
+	position: fixed;
+	top: 20%;
+	left: 30%;
+  right: 30%;
+  bottom: 15%;
+  background-color: white;
   padding: 10px;
-  bottom: 10%;
-  transform: translateX(-50%);
+  transform: translateX(-50%, -50%);
   border-radius: 10px;
   border-color: black;
   border-style: solid;
@@ -16,4 +14,10 @@
   text-align: center;
   font-size: medium;
   font-weight: bold;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

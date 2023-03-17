@@ -31,20 +31,24 @@ tr {
 .pagination{
   display: inline-block;
   margin-top: 10px;
-  margin-left: 40%;
-  margin-right: 40%;
+  margin-left: 41%;
+  margin-right: 41%;
 }
 
 .previous {
   margin-right: 20px;
 }
 
-.opzioni input {
+.opzioni button {
   margin-right: 10px;
 }
 
 .opzioni {
-  width: 25%;
+  width: 15%;
+}
+
+.status-pagamento {
+  width: 5%;
 }
 
 app-footer {

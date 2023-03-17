@@ -18,27 +18,24 @@
         <td>{{ catalogo.get(ordine.servizio) }}</td>
         <td>{{ amountToPay(ordine.quantita, prezzario.get(ordine.servizio)) | currency: 'EUR' }}</td>
         <td class="opzioni">
-          <input
+          <button
             type="button"
-            value="Rimuovi"
             class="btn btn-danger"
             (click)="rimuovi(ordine.id)"
             [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
-          />
-          <input
+          ><i class="fa fa-trash"></i></button>
+          <button
             type="button"
-            value="Modifica"
             class="btn btn-warning"
             (click)="modifica(ordine.id)"
             [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
-          />
-          <input
+          ><i class="fa fa-edit"></i></button>
+          <button
             type="button"
-            value="Paga"
             class="btn btn-success"
             (click)="paga(ordine.id, ordine.servizio)"
             [disabled]="statusButtonPaga(ordine.id)"
-          />
+          ><i class="fa fa-credit-card"></i></button>
         </td>
       </tr>
     </table>
@@ -57,7 +54,7 @@
         <th>Quantità</th>
         <th>Servizio</th>
         <th>Tot. Ordine</th>
-        <th>Stato pagamento</th>
+        <th class="status-pagamento">Stato pagamento</th>
       </tr>
       <tr *ngFor="let ordine of prenotazioni | slice:(currentPage-1)*itemsPerPageAdmin:currentPage*itemsPerPageAdmin">
         <td>{{ ordine.id }}</td>

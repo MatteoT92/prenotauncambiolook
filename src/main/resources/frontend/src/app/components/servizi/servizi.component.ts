@@ -18,6 +18,9 @@ export class ServiziComponent implements OnInit {
   utenti!: Map<string, number>;
   servizi!: Servizio[];
   ordinaForm!: NgForm;
+  currentPage: number = 1;
+  itemsPerPageAdmin: number = 8;
+  totalPagesAdmin!: number;
 
   constructor(private api: ServizioApiService,
               private apiUtenti: UtenteApiService,
@@ -29,6 +32,7 @@ export class ServiziComponent implements OnInit {
    this.serviziDisponibili();
    this.utentiRegistrati();
    this.user = sessionStorage.getItem('utente');
+   this.totalPagesAdmin = Math.ceil(this.servizi.length / this.itemsPerPageAdmin);
   }
 
   serviziDisponibili(): void {
@@ -87,6 +91,14 @@ export class ServiziComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/servizi']));
     }
+  }
+
+  onPrevClick() {
+    this.currentPage = this.currentPage - 1;
+  }
+
+  onNextClick() {
+    this.currentPage = this.currentPage + 1;
   }
 
 }

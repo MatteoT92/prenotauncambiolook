@@ -21,7 +21,7 @@ export class OrdiniComponent implements OnInit {
   itemsPerPage: number = 5;
   currentPage: number = 1;
   totalPages!: number;
-  itemsPerPageAdmin: number = 10;
+  itemsPerPageAdmin: number = 8;
   totalPagesAdmin!: number;
 
   constructor(private api: OrdineApiService,
@@ -38,7 +38,7 @@ export class OrdiniComponent implements OnInit {
    this.utentiRegistrati();
    this.prezziServizi();
    this.totalPages = Math.ceil(this.ordini.length / this.itemsPerPage);
-   this.totalPagesAdmin = Math.ceil(this.prenotazioni.length / this.itemsPerPage);
+   this.totalPagesAdmin = Math.ceil(this.prenotazioni.length / this.itemsPerPageAdmin);
   }
 
   iMieiOrdini(): void {

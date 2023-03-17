@@ -11,17 +11,23 @@ import { UtenteApiService } from 'src/app/services/utente-api.service';
 export class PasswordComponent {
 
   isAdmin = sessionStorage.getItem('tipo');
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(private api: UtenteApiService, private router: Router) {
 
   }
 
   onSubmit(passwordForm: NgForm) {
-    this.api.modificaPassword(passwordForm.value.password)
-    .subscribe((data) => {
-      window.alert("Password modificata con successo");
-      this.router.navigate(['/home']);
-    });
+    if (passwordForm.value.password === passwordForm.value.confermaPassword) {
+      this.api.modificaPassword(passwordForm.value.password)
+      .subscribe((data) => {
+        window.alert("Password modificata con successo");
+        this.router.navigate(['/home']);
+      });
+    } else {
+      window.alert("Le password digitate non corrispondono");
+    }
   }
 
   onSubmitRecupera(recuperaPasswordForm: NgForm) {
@@ -30,6 +36,14 @@ export class PasswordComponent {
       window.alert("Password di ripristino inviata al tuo indirizzo email");
       this.router.navigate(['/login']);
     });
+  }
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  public toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
 }

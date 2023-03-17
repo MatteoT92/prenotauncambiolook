@@ -10,6 +10,9 @@ import { UtenteApiService } from 'src/app/services/utente-api.service';
 export class ClientiComponent implements OnInit {
 
   utenti?: Utente[];
+  currentPage: number = 1;
+  itemsPerPageAdmin: number = 8;
+  totalPagesAdmin!: number;
 
   constructor(private api: UtenteApiService) {
 
@@ -17,6 +20,7 @@ export class ClientiComponent implements OnInit {
 
   ngOnInit(): void {
    this.listaUtenti();
+   this.totalPagesAdmin = Math.ceil(this.utenti!.length / this.itemsPerPageAdmin);
   }
 
   listaUtenti(): void {
@@ -27,6 +31,14 @@ export class ClientiComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
+  }
+
+  onPrevClick() {
+    this.currentPage = this.currentPage - 1;
+  }
+
+  onNextClick() {
+    this.currentPage = this.currentPage + 1;
   }
 
 }

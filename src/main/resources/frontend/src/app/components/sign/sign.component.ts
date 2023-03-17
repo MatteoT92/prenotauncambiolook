@@ -12,6 +12,7 @@ import { UtenteApiService } from 'src/app/services/utente-api.service';
 export class SignComponent {
 
   utente?: Utente;
+  showPassword = false;
 
   constructor(private api: UtenteApiService, private router: Router) {
 
@@ -23,6 +24,10 @@ export class SignComponent {
       this.utente = data;
       this.router.navigate(['/login']);
     })
+  }
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
 }

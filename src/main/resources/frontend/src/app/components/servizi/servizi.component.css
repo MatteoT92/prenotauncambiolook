@@ -11,17 +11,17 @@
 }
 
 .ordina {
-  margin-left: 35%;
-  margin-right: 35%;
+  margin-left: 30%;
+  margin-right: 20%;
 }
 
 .crea-servizio {
 	position: fixed;
-	top: 60%;
-	left: 60%;
+  margin-top: 170px;
+  margin-left: 75%;
 	transform: translate(-50%, -50%);
 	display: inline-flex;
-  background-color: grey;
+  background-color: white;
   border-radius: 10px;
   border-style: solid;
   border-color: black;
@@ -31,10 +31,15 @@
   font-weight: bold;
 }
 
+textarea {
+  resize: none;
+}
+
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
-	width: 40%;
+	width: 50%;
+  margin-left: 100px;
 }
 
 td, th {
@@ -57,26 +62,24 @@ tr {
   background-color: pink;
 }
 
-.input-container {
-  display: flex;
-  align-items: center;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 10px;
-  width: 78.5%;
+.search-container {
+  margin-left: 40%;
+  margin-right: 40%;
 }
 
-.input-container input {
-  flex: 1;
-  border: none;
-  outline: none;
+.pagination{
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 41%;
+  margin-right: 41%;
 }
 
-.input-container span {
-  color: black;
-  margin-left: 5px;
-  font-size: 16px;
+.previous {
+  margin-right: 20px;
+}
+
+.opzioni button {
+  margin-right: 10px;
 }
 
 app-footer {

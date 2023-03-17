@@ -88,7 +88,7 @@ public class UtenteController {
 	
 	/**
 	 * Metodo che consente ad un utente in sessione di potersi disiscrivere dal sito
-	 * rimuovendone i dati dal database e reindirizzandolo sulla pagina di login
+	 * rimuovendone i dati dal database e reindirizzandolo sulla pagina home
 	 */
 	@PostMapping("/disiscriviti")
 	@CrossOrigin(origins = "http://localhost:4200/disiscriviti")

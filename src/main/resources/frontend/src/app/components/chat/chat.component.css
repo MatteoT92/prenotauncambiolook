@@ -83,6 +83,10 @@ textarea {
   resize: none;
 }
 
+#text {
+  border-radius: 10px;
+}
+
 app-footer {
   position: absolute;
   bottom: 0;

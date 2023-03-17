@@ -6,10 +6,15 @@
         <th>Username</th>
         <th>Email</th>
     </tr>
-    <tr *ngFor="let utente of utenti">
+    <tr *ngFor="let utente of utenti | slice:(currentPage-1)*itemsPerPageAdmin:currentPage*itemsPerPageAdmin">
       <td>{{utente.id}}</td>
       <td>{{utente.username}}</td>
       <td>{{utente.email}}</td>
     </tr>
   </table>
+  <div class="pagination">
+    <button class="previous" mat-raised-button color="primary" [disabled]="currentPage == 1" (click)="currentPage = currentPage - 1">Indietro</button>
+    <button class="next" mat-raised-button color="primary" [disabled]="currentPage == totalPagesAdmin" (click)="currentPage = currentPage + 1">Avanti</button>
+  </div>
 </div>
+<app-footer></app-footer>
