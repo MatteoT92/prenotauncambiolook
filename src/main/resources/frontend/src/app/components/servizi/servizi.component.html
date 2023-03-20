@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div [ngSwitch]="isAdmin" style="margin-top: 130px; margin-left: 20px;">
+<div [ngSwitch]="isAdmin">
   <div *ngSwitchCase="['cliente']">
     <div class="search-container">
       <mat-form-field appearance="fill">
@@ -8,7 +8,7 @@
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </div>
-    <div class="row" style="margin-left: 15px;">
+    <div class="row">
       <mat-card class="card" *ngFor="let servizio of servizi">
         <mat-card-header>
           <mat-card-title-group>
@@ -19,9 +19,20 @@
         </mat-card-header>
         <mat-card-content>
           <form #ordinaForm="ngForm" (ngSubmit)="onSubmit(ordinaForm)">
-            <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
-            <span>Orario : </span><input type="time" name="orario" ngModel required/><br><br>
-            <span>Quantità : </span><input type="number" name="quantita" ngModel required/><br><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Data</mat-label>
+              <input matInput type="date" name="data" ngModel required/>
+              <mat-icon matSuffix>calendar_today</mat-icon>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Orario</mat-label>
+              <input matInput type="time" name="orario" ngModel required min="09:00" max="19:00" step="1800"/>
+              <mat-icon matSuffix>timer</mat-icon>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Quantità</mat-label>
+              <input matInput type="number" name="quantita" ngModel required min="1"/>
+            </mat-form-field><br>
             <input type="hidden" ngModel={{servizio.id}} name="servizio" required/>
             <input type="hidden" ngModel={{utenti.get(user)}} name="utente" required/>
             <button type="submit" class="btn btn-primary ordina" [disabled]="!ordinaForm.valid">
@@ -75,7 +86,14 @@
     </div>
   </div>
   <div *ngSwitchDefault>
-    <div class="row" style="margin-left: 15px;">
+    <div class="search-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Cerca</mat-label>
+        <input matInput type="text" (input)="search($event)" placeholder="Cerca servizio ..."/>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="row">
       <mat-card class="card" *ngFor="let servizio of servizi">
         <mat-card-header>
           <mat-card-title-group>
@@ -86,10 +104,21 @@
         </mat-card-header>
         <mat-card-content>
           <form>
-            <span>Data : </span><input type="date" name="data" ngModel required/><br><br>
-            <span>Orario : </span><input type="time" name="orario" ngModel required/><br><br>
-            <span>Quantità : </span><input type="number" name="quantita" ngModel required/><br><br>
-            <button type="button" class="btn btn-primary ordina" routerLink="/login">
+            <mat-form-field appearance="fill">
+              <mat-label>Data</mat-label>
+              <input matInput type="date" name="data" ngModel required />
+              <mat-icon matSuffix>calendar_today</mat-icon>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Orario</mat-label>
+              <input matInput type="time" name="orario" ngModel required min="09:00" max="19:00" step="1800"/>
+              <mat-icon matSuffix>timer</mat-icon>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Quantità</mat-label>
+              <input matInput type="number" name="quantita" ngModel required min="1"/>
+            </mat-form-field><br>
+            <button type="submit" class="btn btn-primary ordina" routerLink="/login">
               <i class="fa fa-shopping-cart"></i> Prenota
             </button>
           </form>

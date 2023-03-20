@@ -36,7 +36,8 @@ export class LoginComponent {
           this.router.navigate(['/home']);
         }
       } else {
-        this.router.navigate(['/sign']);
+        window.alert("Credenziali non valide!");
+        this.router.navigate(['/login']);
       }
     })
   }
