@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,7 +47,9 @@ import { FooterComponent } from './components/footer/footer.component';
         TimePipe,
         FooterComponent
     ],
-    providers: [],
+    providers: [
+      {provide: MAT_DATE_LOCALE, useValue: 'it-IT'}
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -57,7 +61,9 @@ import { FooterComponent } from './components/footer/footer.component';
         MatCardModule,
         MatButtonModule,
         MatInputModule,
-        MatIconModule
+        MatIconModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 })
 export class AppModule { }

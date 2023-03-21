@@ -21,6 +21,7 @@ export class ServiziComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPageAdmin: number = 8;
   totalPagesAdmin!: number;
+  today = new Date();
 
   constructor(private api: ServizioApiService,
               private apiUtenti: UtenteApiService,
@@ -68,7 +69,12 @@ export class ServiziComponent implements OnInit {
   }
 
   onSubmit(ordinaForm: NgForm) {
-    this.apiOrdini.aggiungiOrdine(ordinaForm.value.data,
+    if (this.isDayClosed(ordinaForm.value.data)) { // verifica se la data ricade di domenica o lunedì (giorni in cui il salone è chiuso)
+      window.alert('Ci dispiace, ma in questa data selezionata il salone è chiuso');
+      this.today = new Date(); // reimposta la data al giorno attuale
+    } else {
+    let utcDate = new Date(ordinaForm.value.data.getTime() - ordinaForm.value.data.getTimezoneOffset() * 60000); // imposta il fuso orario su UTC
+    this.apiOrdini.aggiungiOrdine(utcDate,
                                   ordinaForm.value.orario,
                                   ordinaForm.value.quantita,
                                   ordinaForm.value.servizio,
@@ -76,6 +82,7 @@ export class ServiziComponent implements OnInit {
                                   .subscribe((data) => {
                                     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/ordini'])); // fa il refresh della tabella dei miei ordini dopo l'aggiunta
                                   });
+    }
   }
 
   search(term: Event) {
@@ -99,6 +106,10 @@ export class ServiziComponent implements OnInit {
 
   onNextClick() {
     this.currentPage = this.currentPage + 1;
+  }
+
+  isDayClosed(day: Date): boolean {
+    return day.getDay() === 0 || day.getDay() === 1;
   }
 
 }

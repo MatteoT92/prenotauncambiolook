@@ -4,14 +4,15 @@
     <span><strong>ID Ordine : #{{idOrdine}}</strong></span><input type="hidden" ngModel={{idOrdine}} name="id" required/><br><br>
     <mat-form-field appearance="fill">
       <mat-label>Data</mat-label>
-      <input matInput type="date" name="data" ngModel required />
-      <mat-icon matSuffix>calendar_today</mat-icon>
+      <input matInput [matDatepicker]="picker" name="data" [(ngModel)]="today" [min]="today" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field><br>
     <mat-form-field appearance="fill">
       <mat-label>Orario</mat-label>
       <input matInput type="time" name="orario" ngModel required min="09:00" max="19:00" step="1800"/>
       <mat-icon matSuffix>timer</mat-icon>
-    </mat-form-field><br  >
+    </mat-form-field><br>
     <button type="submit" class="btn btn-warning" style="margin-right: 10px;">
       <i class="fa fa-edit"></i> Modifica
     </button>

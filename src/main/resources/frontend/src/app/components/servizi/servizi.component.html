@@ -21,8 +21,9 @@
           <form #ordinaForm="ngForm" (ngSubmit)="onSubmit(ordinaForm)">
             <mat-form-field appearance="fill">
               <mat-label>Data</mat-label>
-              <input matInput type="date" name="data" ngModel required/>
-              <mat-icon matSuffix>calendar_today</mat-icon>
+              <input matInput [matDatepicker]="picker" name="data" [(ngModel)]="today" [min]="today" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field><br>
             <mat-form-field appearance="fill">
               <mat-label>Orario</mat-label>
@@ -106,8 +107,9 @@
           <form>
             <mat-form-field appearance="fill">
               <mat-label>Data</mat-label>
-              <input matInput type="date" name="data" ngModel required />
-              <mat-icon matSuffix>calendar_today</mat-icon>
+              <input matInput [matDatepicker]="picker" name="data" [(ngModel)]="today" [min]="today" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field><br>
             <mat-form-field appearance="fill">
               <mat-label>Orario</mat-label>
