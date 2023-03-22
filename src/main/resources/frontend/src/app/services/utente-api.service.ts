@@ -27,7 +27,7 @@ export class UtenteApiService {
   logout() {
     sessionStorage.removeItem('utente');
     sessionStorage.removeItem('tipo');
-    this.router.navigate(['/home']);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/home']));
   }
 
   modificaPassword(nuovaPassword: string) {

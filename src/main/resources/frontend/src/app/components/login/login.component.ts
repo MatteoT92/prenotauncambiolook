@@ -33,13 +33,13 @@ export class LoginComponent {
           this.router.navigate(['/password']);
           window.alert("Devi reimpostare la password per la tua sicurezza!");
         } else {
-          this.router.navigate(['/home']);
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/home']));
         }
       } else {
         window.alert("Credenziali non valide!");
         this.router.navigate(['/login']);
       }
-    })
+    });
   }
 
   public togglePasswordVisibility(): void {
