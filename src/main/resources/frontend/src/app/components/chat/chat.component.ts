@@ -8,10 +8,10 @@ import { ChatWsService } from 'src/app/services/chat-ws.service';
 })
 export class ChatComponent implements OnInit {
 
-  username = sessionStorage.getItem('utente');
+  username!: string;
 
   constructor(public ws: ChatWsService) {
-
+    this.username = sessionStorage.getItem('utente') as string;
   }
 
   ngOnInit(): void {

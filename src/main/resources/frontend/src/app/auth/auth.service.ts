@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  isLogged: boolean = (sessionStorage.getItem('utente') != null && sessionStorage.getItem('utente') != undefined);
+  isLogged!: boolean;
 
   constructor() {
-    
+    this.isLogged = (sessionStorage.getItem('utente') != null && sessionStorage.getItem('utente') != undefined);
   }
 
 }
