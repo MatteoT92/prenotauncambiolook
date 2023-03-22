@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatWsService } from 'src/app/services/chat-ws.service';
 
-declare var SockJS: any;
-declare var Stomp: any;
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',

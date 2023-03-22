@@ -6,7 +6,21 @@
       </div>
   </div>
   <div id="chat-container">
-      <div id="messages-container"></div>
+      <div id="messages-container">
+        <div class="new-message"
+              *ngFor="let message of ws.messages"
+              [ngStyle]="message.sender === username ?
+              {'justify-content': 'flex-end'} :
+              {'justify-content': 'flex-start'}">
+          <div class="new-message-box"
+              [ngStyle]="message.sender === username ?
+              {'background-color': 'lightpink'} :
+              {'background-color': 'lightgreen'}">
+            <div class="text-message">{{message.text}}</div>
+            <div class="details-container">{{message.sender}} - {{message.time}}</div>
+          </div>
+        </div>
+      </div>
       <div class="send-message-container">
           <div class="input-container">
               <textarea type="text" id="text" placeholder="Scrivi un messaggio ..." rows="3" cols="65"></textarea>

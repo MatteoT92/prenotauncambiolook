@@ -41,25 +41,15 @@
 	border-radius: 3px;
 }
 
-.new-message-box .details-container {
-	font-size: 12px;
+.text-message {
+  font-size: 15px;
 	text-align: right;
 }
 
-.new-message .left {
-	justify-content: flex-start;
-}
-
-.new-message .left .new-message-box {
-	background-color: #ffccbc;
-}
-
-.new-message .right .new-message-box {
-	background-color: #b2dfdb;
-}
-
-.new-message .right {
-	justify-content: flex-end;
+.details-container {
+  font-size: 12px;
+	text-align: right;
+  font-weight: bold;
 }
 
 .send-message-container {
