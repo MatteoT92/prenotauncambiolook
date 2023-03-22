@@ -30,26 +30,32 @@
 .orari {
   text-align: center;
   color: black;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   font-style: oblique;
   background-color: pink;
-  border-radius: 30%;
-  padding: 10px;
-  margin-top: 20px;
+  border-radius: 10%;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 25px;
+  border-image-source: url("/assets/img/pin.png");
+  border-image-width: 25px;
 }
 
 .contatti {
   text-align: center;
   color: black;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   font-style: oblique;
   background-color: pink;
-  border-radius: 30%;
-  padding: 10px;
-  margin-left: 20px;
-  margin-top: 20px;
+  border-radius: 10%;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 25px;
+  border-image-source: url("/assets/img/pin.png");
+  border-image-width: 25px;
 }
 
 .claim {
@@ -59,8 +65,11 @@
 .claim-text {
   text-align: justify;
   align-content: stretch;
-  padding: 20px;
   background-color: white;
+  border-style: solid;
+  border-width: 25px;
+  border-image-source: url("/assets/img/pettine_forbice.png");
+  border-image-width: 25px;
 }
 
 .claim-text h2 {
