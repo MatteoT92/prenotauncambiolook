@@ -6,7 +6,7 @@ Le tecnologie utilizzate per creare questa web-app sono:
 
 - **Spring / Spring Boot** (lato back-end);
 - **MySQL** + **HeidiSQL** (lato database);
-- **Angular** (lato front-end),
+- **Angular** (lato front-end);
 - **Git** (per il versionamento del codice).
 
 Il progetto è stato realizzato come **single-page application (SPA)** col **pattern MVC**, in cui i controller presenti sono di tipo **RestController (Rest API)**.
