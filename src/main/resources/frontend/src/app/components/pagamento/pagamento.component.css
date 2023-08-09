@@ -1,0 +1,23 @@
+.pagamento-container {
+	position: fixed;
+	top: 20%;
+	left: 30%;
+  right: 30%;
+  bottom: 15%;
+  background-color: white;
+  padding: 10px;
+  transform: translateX(-50%, -50%);
+  border-radius: 10px;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

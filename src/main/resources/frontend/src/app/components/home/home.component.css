@@ -1,0 +1,92 @@
+.google-maps {
+  position: relative;
+  padding-bottom: 70%;
+  height: 0;
+  overflow: hidden;
+}
+
+.google-maps > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.mappa {
+  text-align: justify;
+  align-content: stretch;
+  padding: 20px;
+  background-color: white;
+  margin-top: 20px;
+}
+
+.about {
+  text-align: justify;
+  align-content: stretch;
+  padding: 20px;
+  background-color: white;
+  margin-top: 20px;
+}
+
+.orari {
+  text-align: center;
+  color: black;
+  font-size: 13px;
+  font-weight: 500;
+  font-style: oblique;
+  background-color: pink;
+  border-radius: 10%;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 25px;
+  border-image-source: url("/assets/img/pin.png");
+  border-image-width: 25px;
+}
+
+.contatti {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: oblique;
+  background-color: pink;
+  border-radius: 10%;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 25px;
+  border-image-source: url("/assets/img/pin.png");
+  border-image-width: 25px;
+}
+
+.claim {
+  margin-top: 150px;
+}
+
+.claim-text {
+  text-align: justify;
+  align-content: stretch;
+  background-color: white;
+  border-style: solid;
+  border-width: 25px;
+  border-image-source: url("/assets/img/pettine_forbice.png");
+  border-image-width: 25px;
+}
+
+.claim-text h2 {
+  font-family: cursive;
+	text-align: center;
+  text-decoration: none;
+	font-size: 30px;
+  font-weight: bold
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.sede {
+  text-align: center;
+  font-size: 15px;
+  background-color: white;
+}

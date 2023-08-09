@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="pagamento-container">
+  <form #pagamentoForm="ngForm" (ngSubmit)="pagaOrdine(pagamentoForm)">
+    <span>Ordine ID: #{{idOrdine}}</span><span> - {{prezzario.get(idServizio) | currency:'EUR'}}</span><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" name="nome" required ngModel />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Cognome</mat-label>
+      <input matInput type="text" name="cognome" required ngModel />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Numero carta</mat-label>
+      <input matInput type="text" minLength="13" maxLength="16" required name="carta" ngModel />
+      <mat-icon matSuffix>credit_card</mat-icon>
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Mese carta</mat-label>
+      <input matInput type="text" minLength="1" maxLength="2" required name="mese" ngModel/>
+      <mat-icon matSuffix>calendar_today</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Anno carta</mat-label>
+      <input matInput type="text" minLength="2" maxLength="2" required name="anno" ngModel/>
+      <mat-icon matSuffix>calendar_today</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>CVV</mat-label>
+      <input matInput type="text" minLength="3" maxLength="3" required name="cvv" ngModel />
+      <mat-icon matSuffix>credit_card</mat-icon>
+    </mat-form-field><br>
+    <input type="hidden" name="idOrdine" ngModel={{idOrdine}}/>
+    <input type="hidden" name="importo" ngModel={{prezzario.get(idServizio)}}/>
+    <button type="submit" class="btn btn-success" style="margin-right: 10px;" [disabled]="!pagamentoForm.valid">
+      <i class="fa fa-money"></i> Paga
+    </button>
+    <button type="button" class="btn btn-danger" routerLink="/ordini">
+      <i class="fa fa-close"></i> Annulla
+    </button>
+  </form>
+</div>
+<app-footer></app-footer>

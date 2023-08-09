@@ -1,0 +1,46 @@
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 90%;
+  margin-top: 130px;
+  margin-left: 60px;
+  overflow-y: auto;
+  z-index: 0;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
+
+tr:nth-child(even) {
+	background-color: white;
+}
+
+tr {
+	text-align: center;
+  background-color: pink;
+}
+
+.pagination{
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 41%;
+  margin-right: 41%;
+}
+
+.previous {
+  margin-right: 20px;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

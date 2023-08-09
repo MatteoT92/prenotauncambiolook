@@ -19,5 +19,6 @@ public interface OrdineRepository extends CrudRepository<Ordine, Long> {
 	@Query("SELECT COUNT(ordine) FROM Ordine ordine WHERE ordine.data = ?1 AND cast(ordine.orario as time) = cast(?2 as time)")
 	public Integer getPrenotazioniByDataAndOrario(LocalDate data, LocalTime orario);
 	public List<Ordine> findByUtente(Utente utente);
+	public List<Ordine> findByUtente(Long utente);
 	
 }

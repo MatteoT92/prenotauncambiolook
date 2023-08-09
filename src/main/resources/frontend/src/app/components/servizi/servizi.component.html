@@ -1,0 +1,132 @@
+<app-navbar></app-navbar>
+<div [ngSwitch]="isAdmin">
+  <div *ngSwitchCase="['cliente']">
+    <div class="search-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Cerca</mat-label>
+        <input matInput type="text" (input)="search($event)" placeholder="Cerca servizio ..."/>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-card class="card" *ngFor="let servizio of servizi">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{servizio.descrizione}}</mat-card-title>
+            <mat-card-subtitle>{{servizio.prezzo | currency:'EUR'}}</mat-card-subtitle>
+            <img mat-card-sm-image src="/assets/img/logo.png"  alt="Servizio Estetico">
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <form #ordinaForm="ngForm" (ngSubmit)="onSubmit(ordinaForm)">
+            <mat-form-field appearance="fill">
+              <mat-label>Data</mat-label>
+              <input matInput [matDatepicker]="picker" name="data" [(ngModel)]="today" [min]="today" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Orario</mat-label>
+              <input matInput type="time" name="orario" ngModel required min="09:00" max="19:00" step="1800"/>
+              <mat-icon matSuffix>timer</mat-icon>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Quantità</mat-label>
+              <input matInput type="number" name="quantita" ngModel required min="1"/>
+            </mat-form-field><br>
+            <input type="hidden" ngModel={{servizio.id}} name="servizio" required/>
+            <input type="hidden" ngModel={{utenti.get(user)}} name="utente" required/>
+            <button type="submit" class="btn btn-primary ordina" [disabled]="!ordinaForm.valid">
+              <i class="fa fa-shopping-cart"></i> Prenota
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngSwitchCase="['admin']">
+    <div class="crea-servizio">
+			<form #aggiungiServizioForm="ngForm" (ngSubmit)="onSubmitAdmin(aggiungiServizioForm)">
+        <mat-form-field appearance="outline">
+          <mat-label>Descrizione</mat-label>
+          <textarea matInput name="descrizione" rows="4" required ngModel></textarea>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Prezzo</mat-label>
+          <input matInput type="number" name="prezzo" required ngModel />
+        </mat-form-field>
+			  <br>
+			  <div class="opzioni">
+          <button type="submit" class="btn btn-success" [disabled]="!aggiungiServizioForm.valid">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button type="reset" class="btn btn-primary" [disabled]="!aggiungiServizioForm.valid">
+            <i class="fa fa-eraser"></i>
+          </button>
+        </div>
+			</form>
+		</div>
+    <div>
+      <table>
+        <tr>
+            <th>ID Servizio</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+        </tr>
+        <tr *ngFor="let servizio of servizi | slice:(currentPage-1)*itemsPerPageAdmin:currentPage*itemsPerPageAdmin">
+            <td>{{servizio.id}}</td>
+            <td>{{servizio.descrizione}}</td>
+            <td>{{servizio.prezzo | currency:'EUR'}}</td>
+        </tr>
+      </table>
+      <div class="pagination">
+        <button class="previous" mat-raised-button color="primary" [disabled]="currentPage == 1" (click)="currentPage = currentPage - 1">Indietro</button>
+        <button class="next" mat-raised-button color="primary" [disabled]="currentPage == totalPagesAdmin" (click)="currentPage = currentPage + 1">Avanti</button>
+      </div>
+    </div>
+  </div>
+  <div *ngSwitchDefault>
+    <div class="search-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Cerca</mat-label>
+        <input matInput type="text" (input)="search($event)" placeholder="Cerca servizio ..."/>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-card class="card" *ngFor="let servizio of servizi">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{servizio.descrizione}}</mat-card-title>
+            <mat-card-subtitle>{{servizio.prezzo | currency:'EUR'}}</mat-card-subtitle>
+            <img mat-card-sm-image src="/assets/img/logo.png"  alt="Servizio Estetico">
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <form>
+            <mat-form-field appearance="fill">
+              <mat-label>Data</mat-label>
+              <input matInput [matDatepicker]="picker" name="data" [(ngModel)]="today" [min]="today" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Orario</mat-label>
+              <input matInput type="time" name="orario" ngModel required min="09:00" max="19:00" step="1800"/>
+              <mat-icon matSuffix>timer</mat-icon>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Quantità</mat-label>
+              <input matInput type="number" name="quantita" ngModel required min="1"/>
+            </mat-form-field><br>
+            <button type="submit" class="btn btn-primary ordina" routerLink="/login">
+              <i class="fa fa-shopping-cart"></i> Prenota
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

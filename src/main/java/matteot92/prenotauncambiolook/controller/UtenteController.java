@@ -1,106 +1,58 @@
 package matteot92.prenotauncambiolook.controller;
 
-import java.util.List;
+import static matteot92.prenotauncambiolook.Json.parseJson;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import matteot92.prenotauncambiolook.model.entities.Utente;
+import matteot92.prenotauncambiolook.model.service.EmailServiceImpl;
 import matteot92.prenotauncambiolook.model.service.OrdineService;
 import matteot92.prenotauncambiolook.model.service.ServizioService;
 import matteot92.prenotauncambiolook.model.service.UtenteService;
 
-@Controller
-@SessionAttributes({"username", "utenti"})
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class UtenteController {
 
 	private UtenteService utenteService;
 	private ServizioService servizioService;
 	private OrdineService ordineService;
+	@Autowired
+	@Lazy
+	private EmailServiceImpl emailService;
 
 	@Autowired
-	public UtenteController(UtenteService utenteService, ServizioService servizioService, OrdineService ordineService) {
+	public UtenteController(UtenteService utenteService, 
+							ServizioService servizioService, 
+							OrdineService ordineService) {
 		this.utenteService = utenteService;
 		this.servizioService = servizioService;
 		this.ordineService = ordineService;
 	}
-	
-	// UTENTE CLIENTE
 
-	/**
-	 * Metodo che reindirizza sulla pagina index
-	 */
-	@RequestMapping(value="/", method = {RequestMethod.GET, RequestMethod.POST})
-	public String index() {
-		return "index";
-	}
-
-	/**
-	 * Metodo che reindirizza sulla pagina login
-	 */
-	@GetMapping("/login")
-	public String loginGet() {
-		return "login";
-	}
-	
 	/**
 	 * Metodo che presi in input i dati del form
 	 * verifica se l'utente è registrato
-	 * poi verifica se è un utente cliente o admin
-	 * e reindirizza sulla home page corrispondente allo status
+	 * e reindirizza l'utente sulla home del sito come utente registrato
 	 */
 	@PostMapping("/login")
-	public String loginPost(@ModelAttribute("utente") Utente utente, Model model) {
-		String view = "redirect:/home";
-		if (utenteService.isRegistrato(utente)) { // verifica se l'utente è già registrato
-			if (utenteService.isAdmin(utente)) { // poi controlla se ha il ruolo di amministratore
-				model.addAttribute("username", utente.getUsername());
-				view = "redirect:/admin/pannello";
-			} else {
-				model.addAttribute("username", utente.getUsername());
-			}
-		} else {
-			view = "redirect:/sign"; // reindirizzamento alla pagina per registrarsi per un utente nuovo
+	@CrossOrigin(origins = "http://localhost:4200/login")
+	public String login(@RequestBody Utente utenteDaForm) {
+		Utente utente = null;
+		if (utenteService.isRegistrato(utenteDaForm)) { // verifica se l'utente è già registrato
+			utente = utenteService.cercaUtente(utenteDaForm.getUsername(), utenteDaForm.getEmail(), utenteDaForm.getPassword());
 		}
-		return view;
-	}
-	
-	/**
-	 * Metodo che reindirizza sulla pagina home per un utente cliente
-	 */
-	@RequestMapping(value="/home", method={RequestMethod.GET, RequestMethod.POST})
-	public String home() {
-		return "home";
-	}
-	
-	/**
-	 * Metodo che effettua il logout dell'utente
-	 * e cancella la sessione ricreandone una nuova
-	 */
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.invalidate();
-		session = request.getSession();
-		return "index";
-	}
-
-	/**
-	 * Metodo che reindirizza sulla pagina per registrarsi
-	 */
-	@GetMapping("/sign")
-	public String sign() {
-		return "sign";
+		return parseJson(utente);
 	}
 
 	/**
@@ -109,107 +61,69 @@ public class UtenteController {
 	 * e reindirizzandolo sulla pagina per il login
 	 */
 	@PostMapping("/sign")
-	public String registraUtente(@ModelAttribute("utente") Utente utente, Model model) {
-		utenteService.registraUtente(utente);
-		model.addAttribute("username", utente.getUsername());
-		return "redirect:/login";
-	}
-
-	/**
-	 * Metodo che reindirizza sulla pagina per modificare la password
-	 */
-	@GetMapping("/password")
-	public String password() {
-		return "password";
+	@CrossOrigin(origins = "http://localhost:4200/sign")
+	public String registraUtente(@RequestBody Utente utenteDaForm) {
+		utenteService.registraUtente(utenteDaForm);
+		Utente utente = utenteService.cercaUtente(utenteDaForm.getUsername(), utenteDaForm.getEmail());
+		return parseJson(utente);
 	}
 
 	/**
 	 * Metodo che effettua la modifica della password dell'utente in sessione
 	 * salvandone la modifica su database
-	 * e reindirizzando l'utente sulla home page
+	 * e reindirizzando l'utente sulla home del sito
 	 */
 	@PostMapping("/password")
-	public String modificaPassword(@ModelAttribute("utente") Utente utente, Model model) {
-		Utente utenteCercato = utenteService.cercaUtente(utente.getUsername(), utente.getEmail());
+	@CrossOrigin(origins = "http://localhost:4200/password")
+	public String modificaPassword(@RequestBody Utente utente) {
+		Utente utenteCercato = utenteService.cercaUtenteDaUsername(utente.getUsername());
 		if (utenteCercato != null) {
 			utenteService.modificaPassword(utenteCercato, utente.getPassword());
-			model.addAttribute("username", utente.getUsername());
+			if (utenteCercato.getCambiaPassword()) {
+				utenteService.deviCambiarePassword(utenteCercato, false);
+			}
 		}
-		return "redirect:/home";
+		return parseJson(utenteCercato);
 	}
 	
 	/**
 	 * Metodo che consente ad un utente in sessione di potersi disiscrivere dal sito
-	 * rimuovendone i dati dal database
-	 * e reindirizzandolo sulla pagina index
+	 * rimuovendone i dati dal database e reindirizzandolo sulla pagina home
 	 */
-	@GetMapping("/cancellati")
-	public String disiscriviti(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		Utente utente = utenteService.cercaUtenteDaUsername(username);
+	@PostMapping("/disiscriviti")
+	@CrossOrigin(origins = "http://localhost:4200/disiscriviti")
+	public String disiscriviti(@RequestBody Utente utenteDaRimuovere) {
+		Utente utente = utenteService.cercaUtenteDaUsername(utenteDaRimuovere.getUsername());
 		utenteService.rimuoviUtente(utente);
-		return "index";
+		return parseJson(utente);
 	}
 	
-	/**
-	 * Metodo che reindirizza un utente sulla pagina della chet
-	 * gestita tramite WebSocket
-	 */
-	@RequestMapping("/chat")
-	public String chat() {
-		return "chat";
-	}
-	
-	// UTENTE ADMIN
-
-	/**
-	 * Metodo che reindirizza sulla pagina per modificare la password di un utente admin
-	 */
-	@GetMapping("/admin/password")
-	public String passwordAdmin() {
-		return "admin/password";
-	}
-
-	/**
-	 * Metodo che effettua la modifica della password dell'utente admin in sessione
-	 * salvandone la modifica su database
-	 * e reindirizzando l'utente sulla pagina del pannello di controllo
-	 */
-	@PostMapping("/admin/password")
-	public String modificaPasswordAdmin(@ModelAttribute("utente") Utente utente, Model model) {
-		Utente utenteCercato = utenteService.cercaUtente(utente.getUsername(), utente.getEmail());
-		if (utenteCercato != null && utenteService.isAdmin(utenteCercato)) {
-			utenteService.modificaPassword(utenteCercato, utente.getPassword());
-			model.addAttribute("username", utente.getUsername());
-		}
-		return "redirect:/admin/pannello";
-	}
-
 	/**
 	 * Metodo che mostra per l'utente admin tutti gli utenti cliente registrati
 	 */
-	@GetMapping("/admin/clienti")
-	public List<Utente> utentiRegistrati(Model model) {
-		model.addAttribute("utenti", utenteService.utentiRegistrati());
-		return utenteService.utentiRegistrati();
-	}
-
-	/**
-	 * Metodo che reindirizza l'utente admin sulla pagina pannello di controllo
-	 */
-	@RequestMapping(value="/admin/pannello", method={RequestMethod.GET, RequestMethod.POST})
-	public String pannelloAdmin() {
-		return "admin/pannello";
+	@RequestMapping(value = "/clienti", method = {RequestMethod.GET, RequestMethod.POST})
+	@CrossOrigin(origins = "http://localhost:4200/clienti")
+	public String utentiRegistrati() {
+		return parseJson(utenteService.utentiRegistrati());
 	}
 	
 	/**
-	 * Metodo che reindirizza un utente admin sulla pagina della chet
-	 * gestita tramite WebSocket
+	 * Metodo che effettua il recupero della password attraverso l'username e password
+	 * forniti nel form Angular
 	 */
-	@RequestMapping("/admin/chat")
-	public String chatAdmin() {
-		return "admin/chat";
+	@GetMapping("/password")
+	@CrossOrigin(origins = "http://localhost:4200/password")
+	public String recuperaPassword(@RequestParam(name = "username") String username, @RequestParam(name = "email") String email) {
+		Utente utenteCercato = utenteService.cercaUtente(username, email);
+		if (utenteCercato != null) {
+			utenteService.deviCambiarePassword(utenteCercato, true);
+			String password = utenteService.generaPassword();
+			utenteService.modificaPassword(utenteCercato, password);
+			emailService.sendEmail(email,
+									"Ripristino Password PRENOTA UN CAMBIO LOOK",
+									"Gent.le "+ username + " la sua password è " + password + " .");
+		}
+		return parseJson(utenteService.recuperaPassword(username, email));
 	}
 	
 }

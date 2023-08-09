@@ -2,7 +2,6 @@ package matteot92.prenotauncambiolook.model.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +45,8 @@ public class OrdineService {
 		ordine.setData(data);
 		ordine.setOrario(orario);
 		ordine.setQuantita(quantita);
-		ordine.setUtente(utente);
-		ordine.setServizio(servizio);
+		ordine.setUtente(utente.getId());
+		ordine.setServizio(servizio.getId());
 		return repository.save(ordine);
 	}
 	
@@ -66,7 +65,7 @@ public class OrdineService {
 	 * cambiandone il servizio scelto precedentemente
 	 */
 	public Ordine modificaServizioOrdine(Ordine ordine, Servizio servizio) {
-		ordine.setServizio(servizio);
+		ordine.setServizio(servizio.getId());
 		return repository.save(ordine);
 	}
 	
@@ -77,7 +76,7 @@ public class OrdineService {
 	public Ordine modificaOrdine(Ordine ordine, LocalDate data, LocalTime orario, Servizio servizio) {
 		ordine.setData(data);
 		ordine.setOrario(orario);
-		ordine.setServizio(servizio);
+		ordine.setServizio(servizio.getId());
 		return repository.save(ordine);
 	}
 	
@@ -126,7 +125,15 @@ public class OrdineService {
 	 * Metodo che ritorna una lista di ordini effettuati da un cliente specifico
 	 */
 	public List<Ordine> prenotazioniPerCliente(Utente cliente) {
-		return repository.findByUtente(cliente);
+		return repository.findByUtente(cliente.getId());
+	}
+	
+	/**
+	 * Metodo che dichiara l'ordine come pagato
+	 */
+	public Ordine registraPagamento(Ordine ordine) {
+		ordine.setIsPagato(true);
+		return repository.save(ordine);
 	}
 
 }

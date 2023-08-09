@@ -1,0 +1,14 @@
+<div [ngSwitch]="isAdmin">
+  <div class="right-menu" *ngSwitchCase="['cliente']">
+    <a routerLink="/ordini"><b>I miei ordini</b></a>
+    <a routerLink="/password"><b>Modifica Password</b></a>
+    <a (click)="disiscrizione()"><b>Disiscrizione</b></a>
+    <a (click)="logout()"><b>Logout</b></a>
+  </div>
+  <div class="right-menu" *ngSwitchCase="['admin']">
+    <a routerLink="/ordini"><b>Prenotazioni</b></a>
+    <a routerLink="/clienti"><b>Clienti</b></a>
+    <a routerLink="/password"><b>Modifica Password</b></a>
+    <a (click)="logout()"><b>Logout</b></a>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+  position: fixed;
+  z-index: 1;
+}
+
+.navbar a {
+  flex-grow: 1;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.navbar app-header {
+  width: 25%
+}
+
+@media screen and (max-width: 500px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .navbar a {
+    flex-grow: initial;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.user-menu {
+  position: relative;
+}

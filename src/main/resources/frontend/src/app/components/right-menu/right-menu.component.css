@@ -1,0 +1,26 @@
+.right-menu {
+  position: fixed;
+	margin-top: 50px;
+	left: 85%;
+  background-color: #555;
+}
+
+a {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 35px;
+  padding-right: 35px;
+  display: block;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+  font-style: oblique;
+  background-color: #555;
+  cursor: pointer;
+}
+
+a:hover {
+  background-color: yellow;
+}

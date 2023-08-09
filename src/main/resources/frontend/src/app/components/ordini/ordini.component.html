@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+<div [ngSwitch]="isAdmin">
+  <div *ngSwitchCase="['cliente']">
+    <table>
+      <tr>
+        <th>ID Ordine</th>
+        <th>Data</th>
+        <th>Orario</th>
+        <th>Quantità</th>
+        <th>Servizio</th>
+        <th>Tot. Ordine</th>
+      </tr>
+      <tr *ngFor="let ordine of ordini | slice:(currentPage-1)*itemsPerPage:currentPage*itemsPerPage">
+        <td>{{ ordine.id }}</td>
+        <td>{{ ordine.data | date : "dd/MM/yyyy" }}</td>
+        <td>{{ ordine.orario | time}}</td>
+        <td>{{ ordine.quantita }}</td>
+        <td>{{ catalogo.get(ordine.servizio) }}</td>
+        <td>{{ amountToPay(ordine.quantita, prezzario.get(ordine.servizio)) | currency: 'EUR' }}</td>
+        <td class="opzioni">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="rimuovi(ordine.id)"
+            [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
+          ><i class="fa fa-trash"></i></button>
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="modifica(ordine.id)"
+            [disabled]="statusButton(ordine.data) || statusButtonPaga(ordine.id)"
+          ><i class="fa fa-edit"></i></button>
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="paga(ordine.id, ordine.servizio)"
+            [disabled]="statusButtonPaga(ordine.id)"
+          ><i class="fa fa-credit-card"></i></button>
+        </td>
+      </tr>
+    </table>
+    <div class="pagination">
+      <button class="previous" mat-raised-button color="primary" [disabled]="currentPage == 1" (click)="currentPage = currentPage - 1">Indietro</button>
+      <button class="next" mat-raised-button color="primary" [disabled]="currentPage == totalPages" (click)="currentPage = currentPage + 1">Avanti</button>
+    </div>
+  </div>
+  <div *ngSwitchCase="['admin']">
+    <table>
+      <tr>
+        <th>ID Ordine</th>
+        <th>Cliente</th>
+        <th>Data</th>
+        <th>Orario</th>
+        <th>Quantità</th>
+        <th>Servizio</th>
+        <th>Tot. Ordine</th>
+        <th class="status-pagamento">Stato pagamento</th>
+      </tr>
+      <tr *ngFor="let ordine of prenotazioni | slice:(currentPage-1)*itemsPerPageAdmin:currentPage*itemsPerPageAdmin">
+        <td>{{ ordine.id }}</td>
+        <td>{{ utenti.get(ordine.utente) }}</td>
+        <td>{{ ordine.data | date : "dd/MM/yyyy" }}</td>
+        <td>{{ ordine.orario | time}}</td>
+        <td>{{ ordine.quantita }}</td>
+        <td>{{ catalogo.get(ordine.servizio) }}</td>
+        <td>{{ amountToPay(ordine.quantita, prezzario.get(ordine.servizio)) | currency: 'EUR' }}</td>
+        <td [ngStyle]="{ 'background-color': ordine.isPagato === true ? 'green' : 'red', 'border-radius': '100%', 'display': 'inline-block' }"></td>
+      </tr>
+    </table>
+    <div class="pagination">
+      <button class="previous" mat-raised-button color="primary" [disabled]="currentPage == 1" (click)="currentPage = currentPage - 1">Indietro</button>
+      <button class="next" mat-raised-button color="primary" [disabled]="currentPage == totalPagesAdmin" (click)="currentPage = currentPage + 1">Avanti</button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

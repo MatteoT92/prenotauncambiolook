@@ -1,0 +1,21 @@
+.modifica-ordine-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-flex;
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: black;
+  padding: 30px;
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

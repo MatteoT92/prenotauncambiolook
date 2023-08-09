@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+<div class="login-container">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="col">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" name="username" required ngModel />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" name="email" required email ngModel />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="showPassword ? 'text' : 'password'" name="password" ngModel required />
+      <mat-icon matSuffix (click)="togglePasswordVisibility()">
+        {{showPassword ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
+    </mat-form-field>
+    <br />
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >
+      Accedi
+    </button>
+  </form>
+  <div class="col">
+    <div class="row">
+      <button
+        mat-raised-button
+        color="primary"
+        style="background-color: blue; color: white"
+        class="social"
+      >
+        <mat-icon class="fa fa-facebook fa-fw"></mat-icon> Accedi con Facebook
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        style="background-color: #007fff; color: white"
+        class="social"
+      >
+        <mat-icon class="fa fa-twitter fa-fw"></mat-icon> Accedi con Twitter
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        style="background-color: red; color: white"
+        class="social"
+      >
+        <mat-icon class="fa fa-google fa-fw"></mat-icon> Accedi con Google
+      </button>
+      <button mat-button>
+        Non sei registrato? <a routerLink="/sign">Registrati</a>
+      </button>
+      <button mat-button>
+        Password dimenticata? <a routerLink="/password">Recuperala</a>
+      </button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

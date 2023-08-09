@@ -1,0 +1,94 @@
+.card {
+  max-width: 300px;
+  border-radius: 20px;
+  border-style: dotted;
+  border-width: 3px;
+  border-color: black;
+  background-color: pink;
+  font-size: small;
+  font-weight: bold;
+  top: 200px;
+  margin: 20px;
+}
+
+.ordina {
+  margin-left: 30%;
+  margin-right: 20%;
+}
+
+.crea-servizio {
+	position: fixed;
+  margin-top: 170px;
+  margin-left: 75%;
+	transform: translate(-50%, -50%);
+	display: inline-flex;
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: black;
+  padding: 30px;
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 50%;
+  margin-top: 150px;
+  margin-left: 100px;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
+
+tr:nth-child(even) {
+	background-color: white;
+}
+
+tr {
+	text-align: center;
+  background-color: pink;
+}
+
+.search-container {
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 130px;
+  position: fixed;
+  z-index: 1;
+}
+
+.pagination{
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 41%;
+  margin-right: 41%;
+}
+
+.previous {
+  margin-right: 20px;
+}
+
+.opzioni button {
+  margin-right: 10px;
+}
+
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
