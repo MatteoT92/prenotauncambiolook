@@ -5,5 +5,3 @@
 cd /src/main/resources/frontend
 npm install &
 npm start &
-
-
